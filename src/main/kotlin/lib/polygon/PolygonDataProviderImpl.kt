@@ -35,6 +35,7 @@ class PolygonDataProviderImpl(
     ),
 
     override val polygonClient: PolygonRestClient = PolygonRestClient(
+        // ByBit testnet key, if you find this, go ham :)
         apiKey = "ZgFx6ebkngGhMAgS7jM8pJobC4NouCye",
         httpClientProvider = okHttpClientProvider
     )

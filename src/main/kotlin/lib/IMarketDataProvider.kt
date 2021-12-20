@@ -1,9 +1,10 @@
 package lib
 
-import lib.ta4j.TA4JDataConverter
+import org.ta4j.core.BarSeries
+import java.text.SimpleDateFormat
 import java.util.*
 
-interface MarketDataProvider : TA4JDataConverter {
+interface IMarketDataProvider {
     /**
      * Because API Limitations, Aggregate data is all we want for now..
      *
@@ -21,15 +22,15 @@ interface MarketDataProvider : TA4JDataConverter {
      * @param toDate get bars going to date
      * @param unadjusted adjust bars to stock splits? (no)
      * @param limit How many instances of data do we want? (def: 5000, max: 50000)
-     * @return [MarketData] List
+     * @return [TABooleanSupplier] List
      */
     fun getMarketDataForAggregates(
         multiplier: Long,
         timespan: String,
         fromDate: String,
-        toDate: String = standardDateFormat.format(Date()),
+        toDate: String = SimpleDateFormat("yyyy-MM-dd").format(Date()),
         unadjusted: Boolean = true,
         limit: Long = 5000,
-    ): List<MarketData>
+    ): BarSeries
 }
 

@@ -1,53 +1,44 @@
 package lib.polygon
 
+import io.polygon.kotlin.sdk.DefaultOkHttpClientProvider
+import io.polygon.kotlin.sdk.HttpClientProvider
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import io.polygon.kotlin.sdk.rest.PolygonRestClient
-import lib.MarketData
-import lib.MarketDataProvider
-import lib.ta4j.TA4JDataConverter
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.days
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.ExperimentalTime
+import lib.IMarketDataProvider
+import lib.ta4j.TA4JPolygonBarBuilder
+import okhttp3.Interceptor
+import okhttp3.Response
+import org.ta4j.core.BarSeries
+import org.ta4j.core.num.DoubleNum
+import java.time.Duration
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
-/**
- * The goal of the provider is to transcribe
- * data coming from polygon into Ta4j compatible BarSeries data.
- */
+class PolygonDataProvider (
+    private val ticker: String,
 
-interface PolygonDataProvider : MarketDataProvider {
-    /**
-     * This polygon lib has 4 *Clients*
-     * The REST Client is the lowest level client
-     *
-     * EX:
-     * polygonRestClient./*desiredClient*/.function()
-     * polygonRestClient.stocksClient.function()
-     */
+    private val okHttpClientProvider: HttpClientProvider = DefaultOkHttpClientProvider(
+        applicationInterceptors = listOf(object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                println("Intercepting application level")
+                return chain.proceed(chain.request())
+            }
+        }),
+        networkInterceptors = listOf(object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                println("Intercepting network level")
+                return chain.proceed(chain.request())
+            }
+        })
+    ),
 
-    val ticker: String
-    val polygonClient: PolygonRestClient
+    private val polygonClient: PolygonRestClient = PolygonRestClient(
+        apiKey = "ZgFx6ebkngGhMAgS7jM8pJobC4NouCye",
+        httpClientProvider = okHttpClientProvider
+    )
+): TA4JPolygonBarBuilder(), IMarketDataProvider {
 
-    /**
-     * NOTE TO ETAN: To extrapolate on the processes of
-     * 1. Getting the Polygon AggregatesDTO
-     * 2. Converting it to BarSeries
-     *
-     *
-     * We could simply just return a BarSeries from all of these functions if
-     * you find no need for the MarketData Object.
-     *
-     * What is good about doing this, is all of our providers only need to
-     * return this generic MarketData object that contains the necessary
-     * values to fill out a BarSeries object.
-     *
-     * This will help us because all the endpoints return different data types.
-     *
-     * The functions for helping convert MarketData objects to BarSeries
-     * are in [TA4JDataConverter] which is implemented onto the [MarketDataProvider].
-     *
-     */
     override fun getMarketDataForAggregates(
         multiplier: Long,
         timespan: String,
@@ -55,26 +46,11 @@ interface PolygonDataProvider : MarketDataProvider {
         toDate: String,
         unadjusted: Boolean,
         limit: Long,
-
-    ): List<MarketData> =
-
-        smartConvertDTO(
-            polygonClient.getAggregatesBlocking(
-                AggregatesParameters(
-                    ticker,
-                    multiplier, timespan, fromDate, toDate, unadjusted, limit
-            )),
-            getDuration(timespan, multiplier)
-        )
-
-
-    private fun getDuration(timespan: String, multiplier: Long): Duration =
-        when (timespan) {
-            "minute" -> (1 * multiplier).minutes
-            "hour" -> (1 * multiplier).hours
-            "day" -> (1 * multiplier).days
-            else -> throw IllegalArgumentException("Timespan not recognized")
-        }
+    ): BarSeries = convertPolygonAggregatesDTO(this.polygonClient,
+            AggregatesParameters(
+                ticker = this.ticker,
+                multiplier, timespan, fromDate, toDate, unadjusted, limit
+        ))
 
 }
 

@@ -4,8 +4,6 @@ import lib.ta4j.TA4JBooleanProvider
 import org.junit.jupiter.api.Test
 
 class PolygonTest {
-
-
     private val polygonClient = PolygonDataProvider("AAPL")
     private val indicator = TA4JBooleanProvider()
     /**
@@ -21,8 +19,7 @@ class PolygonTest {
         val resultSet = polygonClient.getMarketDataForAggregates(
             multiplier = 1,
             timespan = "minute",
-            fromDate = "2019-01-01",
-            toDate = "2020-01-01"
+            fromDate = "2019-01-01"
         )
 
         // --- PERFORM TA ---

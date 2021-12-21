@@ -1,5 +1,7 @@
 package lib.ta4j
 
+import lib.ta4j.indicators.MACD
+import lib.ta4j.indicators.MACDBooleanProvider
 import lib.ta4j.util.MovingAverageConditions
 import lib.ta4j.util.isOver
 import org.ta4j.core.BarSeries
@@ -10,8 +12,18 @@ import org.ta4j.core.num.DoubleNum
 import org.ta4j.core.num.Num
 import java.util.function.BooleanSupplier
 
+interface ITA4JBooleanProvider {
+    val macd: MACDBooleanProvider
+    val rsi: String /* NOT IMPLEMENTED */
+}
 
-class TA4JBooleanProvider {
+open class TA4JBooleanProvider(
+    override val macd: MACD = MACD(),
+    override val rsi: String = ""
+    /**
+     * Supply indicators
+     */
+): ITA4JBooleanProvider {
     fun macd(
         barSeries: BarSeries,
         condition: MovingAverageConditions,
@@ -22,8 +34,7 @@ class TA4JBooleanProvider {
         shortTimeFrame: Int = 13,
         longTimeFrame: Int = 26,
         smaLength: Int = 9,
-
-        ): BooleanSupplier {
+    ): BooleanSupplier {
 
         val macdIndicator = MACDIndicator(
             SMAIndicator(ClosePriceIndicator(barSeries), smaLength),

@@ -5,16 +5,14 @@ import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 import java.util.function.BooleanSupplier
 
 class Close(
-    barSeries: BarSeries
+    val barSeries: BarSeries?
 ) : CloseBooleanProvider {
-    override val indicator: ClosePriceIndicator
-        get() = TODO("Not yet implemented")
-    override val nodes: Unit
-        get() = TODO("Helper Indicators do not have nodes!")
 
-    override fun build(): ClosePriceIndicator {
-        TODO("Not yet implemented")
-    }
+    override val indicator: ClosePriceIndicator
+        get() =
+            if (barSeries !== null)
+                ClosePriceIndicator(barSeries)
+            else throw Error("Close Price Indicator is null!")
 
     override fun isOver(barSeries: BarSeries, barIndex: Int): BooleanSupplier {
         TODO("Not yet implemented")

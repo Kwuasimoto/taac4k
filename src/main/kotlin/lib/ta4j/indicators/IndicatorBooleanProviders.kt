@@ -6,12 +6,8 @@ import org.ta4j.core.indicators.SMAIndicator
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 import java.util.function.BooleanSupplier
 
-
-
-interface IndicatorBooleanProvider<T, C> {
+interface IndicatorBooleanProvider<T> {
     val indicator: T
-    val nodes: C
-    fun build(): T
     fun isOver(barSeries: BarSeries, barIndex: Int = 0): BooleanSupplier
     fun isUnder(barSeries: BarSeries, barIndex: Int = 0): BooleanSupplier
 }
@@ -19,11 +15,11 @@ interface IndicatorBooleanProvider<T, C> {
 /**
  * TA4J HELPER INDICATORS
  */
-interface CloseBooleanProvider : IndicatorBooleanProvider<ClosePriceIndicator, Unit>
+interface CloseBooleanProvider : IndicatorBooleanProvider<ClosePriceIndicator>
 
 /**
  * TA4J INDICATORS
  */
-interface SMABooleanProvider : IndicatorBooleanProvider<SMAIndicator, SMAIndicatorNodes>
-interface MACDBooleanProvider : IndicatorBooleanProvider<MACDIndicator, MACDIndicatorNodes>
+interface SMABooleanProvider : IndicatorBooleanProvider<SMAIndicator>
+interface MACDBooleanProvider : IndicatorBooleanProvider<MACDIndicator>
 

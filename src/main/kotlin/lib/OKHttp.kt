@@ -5,7 +5,7 @@ import io.polygon.kotlin.sdk.HttpClientProvider
 import okhttp3.Interceptor
 import okhttp3.Response
 
-open class OKHttp(
+class OKHttp(
     val client: HttpClientProvider = DefaultOkHttpClientProvider(
         applicationInterceptors = listOf(object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {

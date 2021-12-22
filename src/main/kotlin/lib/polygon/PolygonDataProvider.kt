@@ -8,7 +8,7 @@ class PolygonDataProvider (
     private val ticker: String,
     // PolygonDataProvider *has a* PolygonBarBuilder *has a* polygonClient
     private val polygon: PolygonClient = PolygonClient(),
-    private val polygonBarBuilder: PolygonBarSeriesBuilder = PolygonBarSeriesBuilder(),
+    private val polygonBarBuilder: PolygonBarSeriesParser = PolygonBarSeriesParser(),
 ): MarketDataProvider {
 
     override fun getMarketDataForAggregates(

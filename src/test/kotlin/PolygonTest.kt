@@ -1,18 +1,17 @@
 import lib.polygon.PolygonDataProvider
-import lib.ta4j.util.MovingAverageConditions
 import lib.ta4j.TA4JIndicators
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
-class PolygonTest {
+internal class PolygonTest {
     private val polygonClient = PolygonDataProvider("AAPL")
     /**
      * Test if testClient is building the correct number of minute bars.
      */
     @BeforeAll
-    fun `Build Fun Zone Stuff` () {
+    fun `Embrace Shrek` () {
         /**
-        ⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀ ⣀⣀⣤⣤⣤⣀⡀
+         ⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀ ⣀⣀⣤⣤⣤⣀⡀
         ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀
         ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆
         ⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆
@@ -32,13 +31,17 @@ class PolygonTest {
     fun `TDank's Fun Zone` () {
 
         // ------------- USAGE -------------
-        val resultSet = polygonClient.getMarketDataForAggregates(
+        val barSeries = polygonClient.getMarketDataForAggregates(
             multiplier = 1,
             timespan = "minute",
             fromDate = "2019-01-01"
         )
 
+        val allIndicators = TA4JIndicators(barSeries)
+
         // --- PERFORM TA ---
-        val boolSupp = indicators?.macd
+        allIndicators.close.checkCondition {
+            allIndicators.close.conditions.movingUp(it)
+        }
     }
 }

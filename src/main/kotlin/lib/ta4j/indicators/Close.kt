@@ -1,24 +1,35 @@
 package lib.ta4j.indicators
 
+import lib.ta4j.suppliers.helpers.CloseConditionSupplier
+import lib.ta4j.suppliers.ConditionAlertSupplier
+import lib.ta4j.suppliers.IndicatorConditionSupplier
 import org.ta4j.core.BarSeries
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
-import java.util.function.BooleanSupplier
+
+/**
+ * All Indicators extend fooIndicator which implements Indicator<fooIndicator>
+ */
+
 
 class Close(
-    val barSeries: BarSeries?
-) : CloseBooleanProvider {
 
-    override val indicator: ClosePriceIndicator
-        get() =
-            if (barSeries !== null)
-                ClosePriceIndicator(barSeries)
-            else throw Error("Close Price Indicator is null!")
+    barSeries: BarSeries,
+    override val conditions: CloseConditionSupplier = CloseConditionSupplier(),
 
-    override fun isOver(barSeries: BarSeries, barIndex: Int): BooleanSupplier {
-        TODO("Not yet implemented")
-    }
+    ) : ClosePriceIndicator(barSeries),
+    /**
+     * alert: = CloseAlertProvider<Close>
+     * *hidden* indicator: = Close
+     */
+    IndicatorConditionSupplier<CloseConditionSupplier, Close> {
 
-    override fun isUnder(barSeries: BarSeries, barIndex: Int): BooleanSupplier {
-        TODO("Not yet implemented")
-    }
+    /**
+     * Individual indicator condition behaviour
+     * can be overwritten by checkCondition function.
+     */
+    override fun checkCondition(
+        condition: (it: Close) -> ConditionAlertSupplier
+
+    ): ConditionAlertSupplier =
+        condition(this)
 }

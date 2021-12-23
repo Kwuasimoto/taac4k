@@ -5,7 +5,7 @@ import lib.MarketDataClient
 
 class PolygonClient: MarketDataClient() {
     val restClient: PolygonRestClient = PolygonRestClient(
-        apiKey = "",
+        apiKey = "ZgFx6ebkngGhMAgS7jM8pJobC4NouCye",
         httpClientProvider = okHttp.client
     )
 }

@@ -2,13 +2,13 @@ package lib.polygon
 
 import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.ta4j.TA4JBarBuilderSupplier
+import lib.ta4j.suppliers.BarBuilderSupplier
 import org.ta4j.core.Bar
 import org.ta4j.core.num.DoubleNum
 
 class PolygonBarBuilder(
     private val date: PolygonDateParser = PolygonDateParser()
-): TA4JBarBuilderSupplier {
+): BarBuilderSupplier {
 
     fun parseDTO(result: AggregateDTO, params: AggregatesParameters): Bar {
         return barBuilder

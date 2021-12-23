@@ -1,12 +1,12 @@
 package lib.polygon
 
-import lib.ta4j.TA4JDateParser
+import lib.ta4j.parser.DateParser
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-class PolygonDateParser: TA4JDateParser {
+class PolygonDateParser: DateParser {
     override fun parseMillis(millis: Long?): ZonedDateTime {
         if(millis == null) throw IllegalArgumentException("millis null")
 

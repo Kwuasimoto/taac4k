@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lib.ta4j.indicators.CloseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-22T16:05:52" hostname="DESKTOP-LSLE137" time="0.014">
-  <properties/>
-  <testcase name="barsSince()" classname="lib.ta4j.indicators.CloseTest" time="0.014"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

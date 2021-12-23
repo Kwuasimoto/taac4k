@@ -1,7 +1,7 @@
-package lib.ta4j.conditions.helpers
+package lib.ta4j.conditions
 
 import lib.ta4j.indicators.Close
-import lib.ta4j.conditions.providers.helpers.CloseConditionsProvider
+import lib.ta4j.conditions.providers.CloseConditionsProvider
 
 open class CloseConditions : IndicatorConditions<Close>(), CloseConditionsProvider
 

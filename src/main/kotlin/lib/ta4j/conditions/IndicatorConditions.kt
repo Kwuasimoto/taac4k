@@ -1,7 +1,7 @@
-package lib.ta4j.conditions.helpers
+package lib.ta4j.conditions
 
 import lib.ta4j.alerts.ZonedAlert
-import lib.ta4j.conditions.providers.helpers.IndicatorConditionsProvider
+import lib.ta4j.conditions.providers.IndicatorConditionsProvider
 import lib.ta4j.isRising
 import org.ta4j.core.BarSeries
 import org.ta4j.core.Indicator

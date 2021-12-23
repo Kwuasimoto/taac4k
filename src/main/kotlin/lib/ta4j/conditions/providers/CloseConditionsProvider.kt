@@ -1,4 +1,4 @@
-package lib.ta4j.conditions.providers.helpers
+package lib.ta4j.conditions.providers
 
 import lib.ta4j.indicators.Close
 

@@ -1,22 +1,23 @@
-package lib.ta4j.indicators.conditions
+package lib.ta4j.conditions
 
-import com.nhaarman.mockitokotlin2.mock
 import lib.polygon.PolygonDataProvider
-import lib.ta4j.indicators.Indicators
-import lib.ta4j.indicators.RSI
-import lib.ta4j.indicators.Volume
+import lib.ta4j.indicators.Close
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.jupiter.MockitoExtension
 import org.ta4j.core.BarSeries
 
-internal class RSIConditionsTest {
+@ExtendWith(MockitoExtension::class)
+internal class CloseConditionsTest {
 
     @Mock private var mockBarSeries = Mockito.mock(BarSeries::class.java)
-    @Mock private var mockRSI = Mockito.mock(RSI::class.java)
+    @Mock private var mockClose = Mockito.mock(Close::class.java)
 
     private var polygon = PolygonDataProvider("AAPL")
 
@@ -27,7 +28,11 @@ internal class RSIConditionsTest {
             multiplier = 1,
             fromDate = "2019-01-01"
         )
-        mockRSI = Indicators(mockBarSeries).rsi
+        mockClose = Close(mockBarSeries)
+    }
+
+    @AfterEach
+    fun tearDown() {
     }
 
     @Test
@@ -43,6 +48,14 @@ internal class RSIConditionsTest {
     }
 
     @Test
+    fun isOver() {
+    }
+
+    @Test
+    fun isUnder() {
+    }
+
+    @Test
     fun crossUnder() {
     }
 
@@ -52,13 +65,5 @@ internal class RSIConditionsTest {
 
     @Test
     fun pivotDown() {
-    }
-
-    @Test
-    fun isOver() {
-    }
-
-    @Test
-    fun isUnder() {
     }
 }

@@ -26,8 +26,6 @@ class Indicators(
     val close: Close = Close(barSeries),
     val volume: Volume = Volume(barSeries),
 
-
-
     // Indicators
     val rsi: RSI = RSI(close)
 )

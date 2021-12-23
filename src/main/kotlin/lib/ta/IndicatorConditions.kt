@@ -1,11 +1,14 @@
-package lib.ta.ta4j.conditions
+package lib.ta
 
-import lib.ta.ta4j.alerts.ZonedAlert
-import lib.ta.ta4j.conditions.providers.IndicatorConditionsProvider
+import lib.ta.alerts.ZonedAlert
 import lib.ta.ta4j.isRising
 import org.ta4j.core.BarSeries
 import org.ta4j.core.Indicator
 
+/**
+ * To implement a diff TA Lib you'd have to switch out their *Indicator*
+ * interface here and re-implement the default methods,
+ */
 abstract class IndicatorConditions<T : Indicator<*>> : IndicatorConditionsProvider<T> {
 
     override fun isRising(indicator: T, length: Int): ZonedAlert = alert {

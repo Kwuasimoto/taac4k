@@ -1,8 +1,8 @@
 package lib.ta.ta4j.indicators
 
-import lib.ta.ta4j.alerts.ZonedAlert
-import lib.ta.ta4j.conditions.IndicatorConditionSupplier
-import lib.ta.ta4j.conditions.VolumeConditions
+import lib.ta.alerts.ZonedAlert
+import lib.ta.IndicatorConditionSupplier
+import lib.ta.conditions.VolumeConditions
 import org.ta4j.core.BarSeries
 import org.ta4j.core.indicators.helpers.VolumeIndicator
 

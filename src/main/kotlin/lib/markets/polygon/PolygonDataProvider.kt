@@ -1,6 +1,7 @@
 package lib.markets.polygon
 
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
+import lib.markets.MarketDataProvider
 import lib.markets.polygon.client.PolygonClient
 import org.ta4j.core.BarSeries
 

@@ -1,8 +1,8 @@
 package lib.ta.ta4j.indicators
 
-import lib.ta.ta4j.alerts.ZonedAlert
-import lib.ta.ta4j.conditions.CloseConditions
-import lib.ta.ta4j.conditions.IndicatorConditionSupplier
+import lib.ta.alerts.ZonedAlert
+import lib.ta.conditions.CloseConditions
+import lib.ta.IndicatorConditionSupplier
 import org.ta4j.core.BarSeries
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 

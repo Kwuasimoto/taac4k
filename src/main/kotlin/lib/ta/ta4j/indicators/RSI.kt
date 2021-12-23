@@ -1,8 +1,8 @@
 package lib.ta.ta4j.indicators
 
-import lib.ta.ta4j.alerts.ZonedAlert
-import lib.ta.ta4j.conditions.IndicatorConditionSupplier
-import lib.ta.ta4j.conditions.RSIConditions
+import lib.ta.alerts.ZonedAlert
+import lib.ta.IndicatorConditionSupplier
+import lib.ta.conditions.RSIConditions
 import org.ta4j.core.indicators.RSIIndicator
 
 class RSI (

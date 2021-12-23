@@ -1,6 +1,6 @@
-package lib.ta.ta4j.conditions
+package lib.ta
 
-import lib.ta.ta4j.alerts.ZonedAlert
+import lib.ta.alerts.ZonedAlert
 
 /**
  * Implement onto CustomIndicator Classes [@Indicators]

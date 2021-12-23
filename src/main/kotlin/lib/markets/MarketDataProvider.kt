@@ -1,4 +1,4 @@
-package lib.markets.polygon
+package lib.markets
 
 import org.ta4j.core.BarSeries
 import java.text.SimpleDateFormat

@@ -1,7 +1,6 @@
-package lib.ta.ta4j.conditions.providers
+package lib.ta
 
-import lib.ta.ta4j.alerts.IndicatorAlert
-import lib.ta.ta4j.alerts.ZonedAlert
+import lib.ta.alerts.ZonedAlert
 import org.ta4j.core.BarSeries
 
 /**

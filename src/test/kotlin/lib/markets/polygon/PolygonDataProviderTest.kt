@@ -1,4 +1,4 @@
-package lib.polygon
+package lib.markets.polygon
 
 import lib.markets.polygon.PolygonDataProvider
 import org.junit.jupiter.api.Test

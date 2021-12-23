@@ -1,8 +1,8 @@
 package lib.ta.ta4j.indicators
 
-import lib.ta.ta4j.alerts.ZonedAlert
-import lib.ta.ta4j.conditions.EMAConditions
-import lib.ta.ta4j.conditions.IndicatorConditionSupplier
+import lib.ta.alerts.ZonedAlert
+import lib.ta.conditions.EMAConditions
+import lib.ta.IndicatorConditionSupplier
 import org.ta4j.core.indicators.EMAIndicator
 
 class EMA(

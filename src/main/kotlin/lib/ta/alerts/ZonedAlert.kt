@@ -1,4 +1,4 @@
-package lib.ta.ta4j.alerts
+package lib.ta.alerts
 
 import java.time.ZonedDateTime
 import java.util.function.BooleanSupplier

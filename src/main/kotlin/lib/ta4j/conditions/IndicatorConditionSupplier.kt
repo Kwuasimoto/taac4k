@@ -1,4 +1,4 @@
-package lib.ta4j.conditions.suppliers.helpers
+package lib.ta4j.conditions
 
 import lib.ta4j.alerts.ZonedAlert
 

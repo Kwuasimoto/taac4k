@@ -1,6 +1,6 @@
 package lib.polygon
 
-import lib.ta4j.parser.DateParser
+import lib.ta4j.DateParser
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId

@@ -1,4 +1,4 @@
-package lib.ta4j.suppliers
+package lib.ta4j
 
 import org.ta4j.core.BaseBar
 import org.ta4j.core.BaseBarBuilder

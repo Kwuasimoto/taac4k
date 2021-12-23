@@ -1,4 +1,4 @@
-package lib.ta4j.parser
+package lib.ta4j
 import java.time.Duration
 import java.time.ZonedDateTime
 

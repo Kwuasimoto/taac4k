@@ -1,10 +1,12 @@
-package lib.ta4j.indicators
+package lib.ta4j.indicators.conditions
 
 import lib.polygon.PolygonDataProvider
-import lib.ta4j.indicators.alerts.suppliers.ZonedAlert
-import org.junit.jupiter.api.Assertions.assertEquals
+import lib.ta4j.indicators.Close
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -12,12 +14,10 @@ import org.mockito.junit.jupiter.MockitoExtension
 import org.ta4j.core.BarSeries
 
 @ExtendWith(MockitoExtension::class)
-internal class CloseTest {
+internal class CloseConditionsTest {
 
-    @Mock
-    private var mockBarSeries = Mockito.mock(BarSeries::class.java)
-    @Mock
-    private var mockClose = Mockito.mock(Close::class.java)
+    @Mock private var mockBarSeries = Mockito.mock(BarSeries::class.java)
+    @Mock private var mockClose = Mockito.mock(Close::class.java)
 
     private var polygon = PolygonDataProvider("AAPL")
 
@@ -31,15 +31,39 @@ internal class CloseTest {
         mockClose = Close(mockBarSeries)
     }
 
-    @Test
-    fun `Check Close movingDown Condition`() {
-        val alert = mockClose.checkCondition { mockClose.conditions.isFalling(it, 3) }
-        assertEquals(true, alert.asBoolean)
+    @AfterEach
+    fun tearDown() {
     }
 
     @Test
-    fun `Check Close movingUp Condition`() {
-        val alert = mockClose.checkCondition { mockClose.conditions.isRising(it) }
-        assertEquals(false,alert.asBoolean)
+    fun isRising() {
+    }
+
+    @Test
+    fun isFalling() {
+    }
+
+    @Test
+    fun crossOver() {
+    }
+
+    @Test
+    fun isOver() {
+    }
+
+    @Test
+    fun isUnder() {
+    }
+
+    @Test
+    fun crossUnder() {
+    }
+
+    @Test
+    fun pivotUp() {
+    }
+
+    @Test
+    fun pivotDown() {
     }
 }

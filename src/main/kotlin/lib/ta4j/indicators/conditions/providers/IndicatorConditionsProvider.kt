@@ -2,11 +2,12 @@ package lib.ta4j.indicators.conditions.providers
 
 import lib.ta4j.indicators.alerts.suppliers.ZonedAlert
 import org.ta4j.core.BarSeries
+import org.ta4j.core.Indicator
 
 /**
  * ### Default Condition Supplier
  */
-interface IndicatorConditionsProvider<T> {
+interface IndicatorConditionsProvider<in T> {
 //    /**
 //     *
 //     */

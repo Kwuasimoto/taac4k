@@ -11,7 +11,7 @@ fun BarSeries.isRising(length: Int) =
             if(i == 0) continue;
 
             result = getBar(barCount - i).closePrice >
-                    getBar(barCount - (i + 1)).closePrice
+                        getBar(barCount - (i + 1)).closePrice
         }
 
         result

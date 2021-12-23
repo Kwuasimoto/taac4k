@@ -1,5 +1,6 @@
 package lib.polygon
 
+import lib.markets.polygon.PolygonDataProvider
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

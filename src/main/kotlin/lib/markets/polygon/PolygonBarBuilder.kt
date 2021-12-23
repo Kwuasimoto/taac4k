@@ -2,7 +2,7 @@ package lib.markets.polygon
 
 import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.markets.BarBuilderSupplier
+import lib.ta.ta4j.suppliers.BarBuilderSupplier
 import org.ta4j.core.Bar
 import org.ta4j.core.num.DoubleNum
 

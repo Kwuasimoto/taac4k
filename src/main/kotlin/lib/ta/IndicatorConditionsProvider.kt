@@ -1,62 +1,93 @@
 package lib.ta
 
-import lib.ta.alerts.ZonedAlert
 import org.ta4j.core.BarSeries
 
 /**
  * ### Default Condition Supplier
  */
-interface IndicatorConditionsProvider<in T> : IndicatorAlert {
+interface IndicatorConditionsProvider : IndicatorAlert {
 //    /**
 //     *
 //     */
-//    fun barsSince(indicator: T, condition: () -> ConditionAlertSupplier, length: Int): ConditionAlertSupplier
+//    fun barsSince condition: () -> ConditionAlertSupplier, length: Int): ConditionAlertSupplier
+
+    fun percentChanged(
+        change: Float,
+        barIndex: Int = 0,
+        period: Int = 0
+    ): Boolean
 
     /**
      * ## Indicator moving down.
      */
-    fun isRising(indicator: T, length: Int = 0): ZonedAlert
+    fun isRising(
+        numOfBars: Int = 0
+    ): Boolean
 
     /**
      * ## Indicator moving down.
      */
-    fun isFalling(indicator: T, length: Int = 0): ZonedAlert
-
-    /**
-     * ###
-     */
-    fun crossOver(indicator: T, barSeries: BarSeries, barIndex: Int = 0, length: Int = 0): ZonedAlert
-
-    /**
-     * ###
-     */
-    fun crossUnder(indicator: T, barSeries: BarSeries, barIndex: Int = 0, length: Int = 0): ZonedAlert
-//
-//
-    /**
-     * @param checkFrom bar to start the pivot analysis from.
-     * @param length bars past [checkFrom].
-     */
-    fun pivotUp(indicator: T, checkFrom: Int = 1, length: Int = 1): ZonedAlert
-
-    /**
-     * @param checkFrom bar to start the pivot analysis from.
-     * @param length bars past [checkFrom].
-     */
-    fun pivotDown(indicator: T, checkFrom: Int = 1, length: Int = 1): ZonedAlert
+    fun isFalling(
+        numOfBars: Int = 0
+    ): Boolean
 
     /**
      * @param barSeries bars series to compare against
      * @param barIndex which bar to check in [barSeries], is over this.barSeries.
      */
-    fun isOver(indicator: T, barSeries: BarSeries, barIndex: Int = 0, length: Int = 0): ZonedAlert
+    fun isOver(
+        barSeries: BarSeries,
+        barIndex: Int = 0,
+        length: Int = 0
+    ): Boolean
 
     /**
      * ### uses ![isOver]
      * @param barSeries bars series to compare against.
      * @param barIndex which bar to check in [barSeries], is under this.barSeries.
      */
-    fun isUnder(indicator: T, barSeries: BarSeries, barIndex: Int = 0, length: Int = 0): ZonedAlert
+    fun isUnder(
+        barSeries: BarSeries,
+        barIndex: Int = 0,
+        length: Int = 0
+    ): Boolean
+
+    /**
+     * ###
+     */
+    fun crossOver(
+        barSeries: BarSeries,
+        barIndex: Int = 0,
+        period: Int = 0
+    ): Boolean
+
+    /**
+     * ###
+     */
+    fun crossUnder(
+        barSeries: BarSeries,
+        barIndex: Int = 0,
+        length: Int = 0
+    ): Boolean
+
+    /**
+     * @param checkFrom bar to start the pivot analysis from.
+     * @param length bars past [checkFrom].
+     */
+    fun pivotUp(
+        checkFrom: Int = 1,
+        length: Int = 1
+    ): Boolean
+
+    /**
+     * @param checkFrom bar to start the pivot analysis from.
+     * @param length bars past [checkFrom].
+     */
+    fun pivotDown(
+        checkFrom: Int = 1,
+        length: Int = 1
+    ): Boolean
+
 //
 //    fun bullishDivergence(indicator: T): ConditionAlertSupplier
 //    fun hiddenBullishDivergence(indicator: T): ConditionAlertSupplier

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lib.ta.conditions.CloseConditionsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-23T19:37:10" hostname="DESKTOP-LSLE137" time="0.06">
+  <properties/>
+  <testcase name="isRising()" classname="lib.ta.conditions.CloseConditionsTest" time="0.06"/>
+  <system-out><![CDATA[25.8
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

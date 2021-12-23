@@ -1,38 +1,45 @@
 package lib.ta4j.indicators.conditions
 
 import lib.ta4j.indicators.Close
-import lib.ta4j.indicators.alerts.CloseAlertSupplier
+import lib.ta4j.indicators.alerts.suppliers.CloseAlertSupplier
 import lib.ta4j.indicators.conditions.providers.helpers.CloseConditionsProvider
-import lib.ta4j.indicators.alerts.ZonedAlertSupplier
-import org.ta4j.core.Bar
+import lib.ta4j.indicators.alerts.suppliers.ZonedAlert
+import lib.ta4j.isRising
+import org.ta4j.core.BarSeries
 
-class CloseConditions : CloseConditionsProvider, CloseAlertSupplier {
+open class CloseConditions : CloseConditionsProvider, CloseAlertSupplier {
 
+    override fun isRising(indicator: Close, length: Int): ZonedAlert = alert {
+        indicator.barSeries.isRising(length)
+    }
 
+    override fun isFalling(indicator: Close, length: Int): ZonedAlert = alert {
+        !indicator.barSeries.isRising(length)
+    }
 
-    override fun movingUp(indicator: Close, length: Int): ZonedAlertSupplier =
-        alert {
-            indicator.barSeries.lastBar.closePrice >
-            indicator.barSeries.getBar(indicator.barSeries.barCount-2).closePrice
-        }
+    override fun crossOver(indicator: Close, barSeries: BarSeries, barIndex: Int, length: Int): ZonedAlert {
+        TODO("Not yet implemented")
+    }
 
-    override fun movingDown(indicator: Close, length: Int): ZonedAlertSupplier = alert {
-        if(length > 0) {
-            var result = true
+    override fun isOver(indicator: Close, barSeries: BarSeries, barIndex: Int, length: Int): ZonedAlert {
+        TODO("Not yet implemented")
+    }
 
-            for (i in 0 until length) {
-                if(!result) break
-                if(i == 0) continue;
+    override fun isUnder(indicator: Close, barSeries: BarSeries, barIndex: Int, length: Int): ZonedAlert {
+        TODO("Not yet implemented")
+    }
 
-                val rightBar: Bar = indicator.barSeries.getBar(indicator.barSeries.barCount - i)
-                val leftBar: Bar = indicator.barSeries.getBar(indicator.barSeries.barCount - (i + 1))
+    override fun crossUnder(indicator: Close, barSeries: BarSeries, barIndex: Int, length: Int): ZonedAlert {
+        TODO("Not yet implemented")
+    }
 
-                result = rightBar.closePrice > leftBar.closePrice
-            }
+    override fun pivotUp(indicator: Close, checkFrom: Int, length: Int): ZonedAlert {
+        TODO("Not yet implemented")
+    }
 
-            result
-        }
-
-        else !this.movingUp(indicator).asBoolean
+    override fun pivotDown(indicator: Close, checkFrom: Int, length: Int): ZonedAlert {
+        TODO("Not yet implemented")
     }
 }
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lib.ta4j.indicators.CloseTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-12-23T06:00:47" hostname="DESKTOP-LSLE137" time="1.193">
+  <properties/>
+  <testcase name="Check Close movingUp Condition()" classname="lib.ta4j.indicators.CloseTest" time="0.888"/>
+  <testcase name="Check Close movingDown Condition()" classname="lib.ta4j.indicators.CloseTest" time="0.304"/>
+  <system-out><![CDATA[Intercepting application level
+Intercepting network level
+Intercepting application level
+Intercepting network level
+]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+</testsuite>

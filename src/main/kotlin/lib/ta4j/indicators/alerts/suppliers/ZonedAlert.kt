@@ -1,9 +1,9 @@
-package lib.ta4j.indicators.alerts
+package lib.ta4j.indicators.alerts.suppliers
 
 import java.time.ZonedDateTime
 import java.util.function.BooleanSupplier
 
-class ZonedAlertSupplier(
+class ZonedAlert(
     private val bool: Boolean,
     val triggeredAt: ZonedDateTime = ZonedDateTime.now()
 ) : BooleanSupplier {

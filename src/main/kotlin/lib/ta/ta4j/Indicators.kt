@@ -1,4 +1,7 @@
-package lib.ta.ta4j.indicators
+package lib.ta.ta4j
+import lib.ta.ta4j.indicators.Close
+import lib.ta.ta4j.indicators.RSI
+import lib.ta.ta4j.indicators.Volume
 import org.ta4j.core.BarSeries
 
 /**

@@ -1,4 +1,4 @@
-package lib.ta.ta4j.util
+package lib.markets
 import java.time.Duration
 import java.time.ZonedDateTime
 

@@ -1,6 +1,6 @@
 package lib.markets.polygon
 
-import lib.ta.ta4j.util.DateParser
+import lib.markets.DateParser
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId

@@ -1,7 +1,7 @@
 package lib.ta.conditions
 
 import lib.markets.polygon.PolygonDataProvider
-import lib.ta.ta4j.indicators.Indicators
+import lib.ta.ta4j.Indicators
 import lib.ta.ta4j.indicators.RSI
 import org.junit.jupiter.api.Test
 

@@ -1,4 +1,4 @@
-package lib.ta.ta4j.util
+package lib.markets
 
 import org.ta4j.core.BaseBar
 import org.ta4j.core.BaseBarBuilder

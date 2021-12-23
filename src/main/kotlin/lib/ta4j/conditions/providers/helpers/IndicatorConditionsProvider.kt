@@ -1,13 +1,13 @@
-package lib.ta4j.indicators.conditions.providers
+package lib.ta4j.conditions.providers.helpers
 
-import lib.ta4j.indicators.alerts.suppliers.ZonedAlert
+import lib.ta4j.alerts.IndicatorAlert
+import lib.ta4j.alerts.ZonedAlert
 import org.ta4j.core.BarSeries
-import org.ta4j.core.Indicator
 
 /**
  * ### Default Condition Supplier
  */
-interface IndicatorConditionsProvider<in T> {
+interface IndicatorConditionsProvider<in T> : IndicatorAlert {
 //    /**
 //     *
 //     */

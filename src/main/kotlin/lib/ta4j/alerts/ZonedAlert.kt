@@ -1,4 +1,4 @@
-package lib.ta4j.indicators.alerts.suppliers
+package lib.ta4j.alerts
 
 import java.time.ZonedDateTime
 import java.util.function.BooleanSupplier

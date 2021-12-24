@@ -1,5 +1,6 @@
 package lib.ta
 
+import lib.ta.ta4j.suppliers.IndicatorBarValueProvider
 import org.ta4j.core.BarSeries
 import org.ta4j.core.Indicator
 
@@ -7,70 +8,64 @@ import org.ta4j.core.Indicator
  * To implement a diff TA Lib you'd have to switch out their *Indicator*
  * interface here and re-implement the default methods,
  */
-abstract class IndicatorConditions(
-    private val indicator: Indicator<*>
-
-    ): IndicatorConditionsProvider {
+abstract class IndicatorConditions(indicator: Indicator<*>):
+    IndicatorBarValueProvider(indicator), IndicatorConditionsProvider {
 
     /**
      * Period not integrated, will be today :)
      */
     override fun percentChanged(change: Float, barIndex: Int, period: Int): Boolean = alert {
-        if(period == 0) {
-            val open = indicator.barSeries.getBar(barIndex).openPrice
-            val close = indicator.barSeries.getBar(barIndex).closePrice
-            //val actualChange =
-
-            false
-        } else true
+        period != 0
     }
 
     /**
      * This Indicator isRising?
      */
-    override fun isRising(numOfBars: Int): Boolean = alert {
-        if(numOfBars > 0) {
+    override fun isRising(period: Int): Boolean = alert {
+        if(period > 0) {
             var result = true
 
-            for (i in 0 until numOfBars) {
+            for (i in 0 until period) {
                 if(!result) break
                 if(i == 0) continue;
 
-                result = indicator.barSeries.getBar(indicator.barSeries.barCount - i).closePrice >
-                        indicator.barSeries.getBar(indicator.barSeries.barCount - (i + 1)).closePrice
+                result = close(barCount - i) >
+                         close(barCount - (i + 1))
             }
 
             result
         }
-        else indicator.barSeries.getBar(indicator.barSeries.barCount - 1).closePrice >
-                indicator.barSeries.getBar(indicator.barSeries.barCount - 2).closePrice
+        else close(barCount - 1) >
+             close(barCount - 2)
     }
 
     /**
      * @param indicator barSeries isFalling
-     * @param numOfBars barSeries isFalling for period
+     * @param period barSeries isFalling for period
      */
-    override fun isFalling(numOfBars: Int): Boolean = alert {
-        !this.isRising(numOfBars)
+    override fun isFalling(period: Int): Boolean = alert {
+        !this.isRising(period)
     }
 
-    override fun isOver(barSeries: BarSeries, barIndex: Int, length: Int): Boolean = alert {
-        val targetPrice = barSeries.getBar(barIndex).closePrice
-
+    override fun isOver(barSeries: BarSeries, barIndex: Int, period: Int): Boolean = alert {
         if(barIndex == 0){
-            indicator.barSeries.getBar(barIndex).closePrice > targetPrice
+            // Is this closePrice greater than target price
+            close(barSeries.barCount - 1) >
+            barSeries.getBar(barSeries.barCount - 1).closePrice
         } else {
-            indicator.barSeries.getBar(indicator.barSeries.barCount - 1).closePrice > targetPrice
+            // Is this closePrice greater than target price
+            close(barIndex) >
+            barSeries.getBar(barIndex).closePrice
         }
     }
 
-    override fun isUnder(barSeries: BarSeries, barIndex: Int, length: Int): Boolean = alert {
-        !this.isOver(barSeries, barIndex, length)
+    override fun isUnder(barSeries: BarSeries, barIndex: Int, period: Int): Boolean = alert {
+        !this.isOver(barSeries, barIndex, period)
     }
 
     /**
-     * @param indicator
-     * period - [not integrated yet]
+     * Situations:
+     *
      */
     override fun crossOver(barSeries: BarSeries, barIndex: Int, period: Int): Boolean = alert {
         val targetToCross = barSeries.getBar(barIndex).closePrice
@@ -80,15 +75,15 @@ abstract class IndicatorConditions(
          */
 
         if(barIndex == 0){
-            indicator.barSeries.getBar(barIndex).closePrice > targetToCross &&
-            indicator.barSeries.getBar(barIndex - 1).closePrice <= targetToCross
+            close(barCount - 1) > targetToCross &&
+            close(barCount - 2) <= targetToCross
         } else {
-            indicator.barSeries.getBar(indicator.barSeries.barCount - 1).closePrice > targetToCross &&
-            indicator.barSeries.getBar(indicator.barSeries.barCount - 2).closePrice <= targetToCross
+            close(barIndex) > targetToCross &&
+            close(barIndex - 1) <= targetToCross
         }
     }
 
-    override fun crossUnder(barSeries: BarSeries, barIndex: Int, length: Int): Boolean = alert {
+    override fun crossUnder(barSeries: BarSeries, barIndex: Int, period: Int): Boolean = alert {
         val targetToCross = barSeries.getBar(barIndex).closePrice
 
         /**
@@ -96,19 +91,19 @@ abstract class IndicatorConditions(
          */
 
         if(barIndex == 0){
-            indicator.barSeries.getBar(barIndex).closePrice < targetToCross &&
-            indicator.barSeries.getBar(barIndex - 1).closePrice >= targetToCross
+            close(barCount - 1) < targetToCross &&
+            close(barCount - 2) >= targetToCross
         } else {
-            indicator.barSeries.getBar(indicator.barSeries.barCount - 1).closePrice < targetToCross &&
-            indicator.barSeries.getBar(indicator.barSeries.barCount - 2).closePrice >= targetToCross
+            close(barIndex) < targetToCross &&
+            close(barIndex - 1) >= targetToCross
         }
     }
 
-    override fun pivotUp(checkFrom: Int, length: Int): Boolean = alert {
+    override fun pivotUp(leftBarIndex: Int, rightBarIndex: Int): Boolean = alert {
         TODO("Not yet implemented")
     }
 
-    override fun pivotDown(checkFrom: Int, length: Int): Boolean = alert {
+    override fun pivotDown(leftBarIndex: Int, rightBarIndex: Int): Boolean = alert {
         TODO("Not yet implemented")
     }
 }

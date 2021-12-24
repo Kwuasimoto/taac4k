@@ -23,6 +23,6 @@ interface MarketDataProvider {
         toDate: String = SimpleDateFormat("yyyy-MM-dd").format(Date()),
         unadjusted: Boolean = true,
         limit: Long = 5000,
-    ): BarSeries
+    ): MutableList<MarketData>
 }
 

@@ -20,16 +20,12 @@ interface IndicatorConditionsProvider : IndicatorAlert {
     /**
      * ## Indicator moving down.
      */
-    fun isRising(
-        numOfBars: Int = 0
-    ): Boolean
+    fun isRising(period: Int = 0): Boolean
 
     /**
      * ## Indicator moving down.
      */
-    fun isFalling(
-        numOfBars: Int = 0
-    ): Boolean
+    fun isFalling(period: Int = 0): Boolean
 
     /**
      * @param barSeries bars series to compare against
@@ -38,7 +34,7 @@ interface IndicatorConditionsProvider : IndicatorAlert {
     fun isOver(
         barSeries: BarSeries,
         barIndex: Int = 0,
-        length: Int = 0
+        period: Int = 0
     ): Boolean
 
     /**
@@ -49,7 +45,7 @@ interface IndicatorConditionsProvider : IndicatorAlert {
     fun isUnder(
         barSeries: BarSeries,
         barIndex: Int = 0,
-        length: Int = 0
+        period: Int = 0
     ): Boolean
 
     /**
@@ -67,26 +63,20 @@ interface IndicatorConditionsProvider : IndicatorAlert {
     fun crossUnder(
         barSeries: BarSeries,
         barIndex: Int = 0,
-        length: Int = 0
+        period: Int = 0
     ): Boolean
 
     /**
      * @param checkFrom bar to start the pivot analysis from.
-     * @param length bars past [checkFrom].
+     * @param rightBarIndex bars past [checkFrom].
      */
-    fun pivotUp(
-        checkFrom: Int = 1,
-        length: Int = 1
-    ): Boolean
+    fun pivotUp(leftBarIndex: Int = 0, rightBarIndex: Int = 1): Boolean
 
     /**
      * @param checkFrom bar to start the pivot analysis from.
-     * @param length bars past [checkFrom].
+     * @param rightBarIndex bars past [checkFrom].
      */
-    fun pivotDown(
-        checkFrom: Int = 1,
-        length: Int = 1
-    ): Boolean
+    fun pivotDown(leftBarIndex: Int = 0, rightBarIndex: Int = 1): Boolean
 
 //
 //    fun bullishDivergence(indicator: T): ConditionAlertSupplier

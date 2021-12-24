@@ -1,18 +1,16 @@
 package lib.ta.ta4j.indicators
 
-import lib.ta.alerts.ZonedAlert
+import lib.ta.IndicatorDecorator
 import lib.ta.conditions.EMAConditions
-import lib.ta.IndicatorConditionSupplier
+import lib.ta.ta4j.decorator.ZonedIndicator
+import lib.ta.ta4j.indicators.helpers.Close
 import org.ta4j.core.indicators.EMAIndicator
 
-class EMA(
-    close: Close,
+class EMA(close: Close,
+
     barCount: Int = 12,
 
-    override val conditions: EMAConditions = EMAConditions()
+    override val rawIndicator: EMAIndicator = EMAIndicator(close.rawIndicator, barCount),
+    override val conditions: EMAConditions = EMAConditions(rawIndicator),
 
-) : EMAIndicator(close, barCount),
-    IndicatorConditionSupplier<EMA, EMAConditions> {
-
-    override fun checkCondition(condition: (it: EMA) -> ZonedAlert): ZonedAlert = condition(this)
-}
+) : ZonedIndicator<EMAIndicator>(), IndicatorDecorator<EMAIndicator, EMAConditions>

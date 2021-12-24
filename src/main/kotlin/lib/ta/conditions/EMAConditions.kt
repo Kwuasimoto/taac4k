@@ -1,4 +1,6 @@
 package lib.ta.conditions
 
-class EMAConditions {
-}
+import lib.ta.IndicatorConditions
+import org.ta4j.core.Indicator
+
+class EMAConditions(indicator: Indicator<*>) : IndicatorConditions(indicator)

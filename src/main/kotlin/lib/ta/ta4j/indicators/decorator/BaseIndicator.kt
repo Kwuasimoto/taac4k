@@ -1,4 +1,4 @@
-package lib.ta.ta4j.decorator
+package lib.ta.ta4j.indicators.decorator
 
 import java.util.function.BooleanSupplier
 

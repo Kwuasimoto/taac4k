@@ -1,16 +1,19 @@
 package lib.markets.polygon
 
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
+import io.polygon.kotlin.sdk.rest.PolygonRestClient
 import lib.markets.MarketData
+import lib.markets.MarketDataClient
 import lib.markets.MarketDataProvider
 import lib.markets.polygon.client.PolygonClient
 
-class PolygonDataProvider (
+class PolygonDataProvider(
     private val ticker: String,
     // PolygonDataProvider *has a* PolygonBarBuilder *has a* polygonClient
-    private val polygon: PolygonClient = PolygonClient(),
-    private val adapter: PolygonDataAdapter = PolygonDataAdapter(),
-): MarketDataProvider {
+    private val client: MarketDataClient<PolygonRestClient> = PolygonClient(),
+    private val converter: PolygonDataAdapter = PolygonDataConverter(),
+) : MarketDataProvider() {
+
 
     override fun getMarketDataForAggregates(
         multiplier: Long,
@@ -26,9 +29,8 @@ class PolygonDataProvider (
             ticker = this.ticker,
             multiplier, timespan, fromDate, toDate, unadjusted, limit
         )
-
-        return adapter.parsePolygonAggregatesDTO(
-            polygon.restClient.getAggregatesBlocking(params),
+        return converter.parsePolygonAggregatesDTO(
+            client.rest.getAggregatesBlocking(params),
             params
         )
     }

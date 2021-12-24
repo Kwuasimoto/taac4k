@@ -4,7 +4,8 @@ import org.ta4j.core.BarSeries
 import java.text.SimpleDateFormat
 import java.util.*
 
-interface MarketDataProvider {
+abstract class MarketDataProvider {
+
     /**
      * @param multiplier applies to timespan.
      *  [barLength = multiplier * timespan]
@@ -16,7 +17,7 @@ interface MarketDataProvider {
      * @param limit How many instances of data do we want? (def: 5000, max: 50000)
      * @return [BarSeries]
      */
-    fun getMarketDataForAggregates(
+    abstract fun getMarketDataForAggregates(
         multiplier: Long,
         timespan: String,
         fromDate: String,

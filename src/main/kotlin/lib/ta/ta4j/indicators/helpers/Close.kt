@@ -1,14 +1,10 @@
 package lib.ta.ta4j.indicators.helpers
 
 import lib.ta.IndicatorDecorator
-import lib.ta.TestAnnotation
-import lib.ta.alerts.ZonedAlert
 import lib.ta.conditions.CloseConditions
-import lib.ta.ta4j.decorator.BaseIndicator
-import lib.ta.ta4j.decorator.ZonedIndicator
+import lib.ta.ta4j.indicators.decorator.ZonedIndicator
 import org.ta4j.core.BarSeries
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
-import java.util.function.BooleanSupplier
 
 
 /**

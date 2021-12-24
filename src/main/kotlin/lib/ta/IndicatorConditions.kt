@@ -1,6 +1,5 @@
 package lib.ta
 
-import lib.ta.ta4j.suppliers.IndicatorBarValueProvider
 import org.ta4j.core.BarSeries
 import org.ta4j.core.Indicator
 
@@ -9,7 +8,7 @@ import org.ta4j.core.Indicator
  * interface here and re-implement the default methods,
  */
 abstract class IndicatorConditions(indicator: Indicator<*>):
-    IndicatorBarValueProvider(indicator), IndicatorConditionsProvider {
+    IndicatorBarValueSupplier(indicator), IndicatorConditionsProvider {
 
     /**
      * Period not integrated, will be today :)

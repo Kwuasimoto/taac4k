@@ -2,6 +2,6 @@ package lib.ta.conditions
 
 import lib.ta.IndicatorConditions
 import lib.ta.ta4j.indicators.helpers.Volume
-import lib.ta.ta4j.conditions.providers.VolumeConditionsProvider
+import org.ta4j.core.Indicator
 
-class VolumeConditions : IndicatorConditions<Volume>(), VolumeConditionsProvider
+class VolumeConditions(indicator: Indicator<*>) : IndicatorConditions(indicator)

@@ -1,11 +1,11 @@
-package lib.ta.ta4j.suppliers
+package lib.ta
 
 import org.ta4j.core.Bar
 import org.ta4j.core.Indicator
 import org.ta4j.core.num.Num
 import java.time.ZonedDateTime
 
-abstract class IndicatorBarValueProvider(private val indicator: Indicator<*>) {
+abstract class IndicatorBarValueSupplier(private val indicator: Indicator<*>) {
 
     val barCount:Int = indicator.barSeries.barCount
 

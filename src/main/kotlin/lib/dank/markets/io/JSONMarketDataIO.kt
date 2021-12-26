@@ -14,7 +14,7 @@ import java.util.*
 /**
  * Utility Class, Optional use, it is not integrated forcefully anywhere.
  */
-open class MarketDataIO(
+open class JSONMarketDataIO(
     open val rawMutableMarketDataList: MutableList<JSONMarketData>? = null,
 
     open val testResourcePath: String = "src/test/resources",
@@ -87,7 +87,7 @@ fun MutableList<JSONMarketData>.toJSONArray(): JSONArray {
             "beginTime":"${datum.beginTime}",
             "endTime":"${datum.endTime}",
             "multiplier":"${datum.multiplier}",
-        }${if (this.size - 1 == indexOf(datum)) "]" else ","} 
+        }${if (this.size - 1 == indexOf(datum)) "]" else ","}
         """.trimIndent().replace(" ", "")
 
     return JSONArray(out)

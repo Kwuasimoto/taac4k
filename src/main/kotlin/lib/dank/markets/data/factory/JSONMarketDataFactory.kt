@@ -21,7 +21,7 @@ open class JSONMarketDataFactory(
     /**
      * @DATALOSS - beginTime
      */
-    open fun getJSONDataFromAggregates(dto: AggregateDTO, aggregateParams: AggregatesParameters): JSONMarketData =
+    open fun fromAggregate(dto: AggregateDTO, aggregateParams: AggregatesParameters): JSONMarketData =
         builder
             .ticker(aggregateParams.ticker)
             .open(dto.open!!)

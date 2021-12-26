@@ -18,7 +18,7 @@ open class PolygonDataAdapter(
         val newMarketDataList = newList
 
         for (aggregate in aggregates.results)
-            newMarketDataList.add(jsonMarketDataFactory.getJSONDataFromAggregates(aggregate, params))
+            newMarketDataList.add(jsonMarketDataFactory.fromAggregate(aggregate, params))
 
         return newMarketDataList
     }

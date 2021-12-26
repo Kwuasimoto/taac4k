@@ -38,5 +38,6 @@ internal class MarketsTest {
         assertEquals(markets.polygon.converter::class.java, PolygonDataAdapter::class.java)
         //@See [PolygonDataProviderTest]
         assertEquals(markets.polygon.provider::class.java, PolygonDataProvider::class.java)
+        assertEquals(markets.polygon.ticker, "AAPL")
     }
 }

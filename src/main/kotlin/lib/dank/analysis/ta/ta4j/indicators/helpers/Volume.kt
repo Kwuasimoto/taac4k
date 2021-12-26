@@ -16,6 +16,6 @@ open class Volume(
     override val adapter: MarketAnalysisAdapter = TA4JAdapter(),
 
     override val conditions: VolumeConditions = VolumeConditions(marketDataJSONList),
-    override val indicator: VolumeIndicator = VolumeIndicator(adapter.toBarSeries(marketDataJSONList), length)
+    override val indicator: VolumeIndicator = VolumeIndicator(adapter.to(marketDataJSONList), length)
 
 ) : WithZonedCondition, ConditionsSupplier<VolumeIndicator, VolumeConditions>

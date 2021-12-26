@@ -5,7 +5,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.dank.experimental.toBarSeries
 import lib.dank.markets.MarketDataJSON
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
@@ -20,7 +19,7 @@ import java.time.ZonedDateTime
 @ExtendWith(MockitoExtension::class)
 internal class PolygonDataProviderTest {
 
-    private var aggregatesParameters: AggregatesParameters = AggregatesParameters(
+    private val aggregatesParameters: AggregatesParameters = AggregatesParameters(
         "AAPL",
         1,
         "minute",
@@ -69,6 +68,11 @@ internal class PolygonDataProviderTest {
     }
 
     @Test
+    fun getAdapter() {
+        assertEquals(polygonDataProvider.adapter::class.java, PolygonDataAdapter::class.java)
+    }
+
+    @Test
     fun rawAggregates() {
         assertEquals(
             polygonDataProvider.client.rest.getAggregatesBlocking(aggregatesParameters)::class.java,
@@ -77,29 +81,15 @@ internal class PolygonDataProviderTest {
     }
 
     @Test
-    fun useAdapter() {
-        whenever(
-            polygonDataProvider.adapter.from(AggregatesDTO(results = aggregatesDTO.results), aggregatesParameters)
-                .toBarSeries().getBar(0).closePrice.doubleValue()
-        ).thenReturn(60.0)
-        whenever(
-            polygonDataProvider.adapter.from(AggregatesDTO(results = aggregatesDTO.results), aggregatesParameters)
-                .toBarSeries().getBar(0).lowPrice.doubleValue()
-        ).thenReturn(20.0)
-    }
+    fun useMarketDataAdapter() {
+        val testMarketDataJSONList = polygonDataProvider.adapter.from(
+            AggregatesDTO(results = aggregatesDTO.results),
+            aggregatesParameters
+        )
 
-
-    @Test
-    fun oneStepToConversionExample() {
-
-        /**
-         * @DoAnalysis, Get Data back from analysis libs and check conditions :)
-         */
-    }
-
-
-    @Test
-    fun getAggregates() {
-
+        assertEquals(testMarketDataJSONList[0].close, 60.0)
+        assertEquals(testMarketDataJSONList[0].low, 20.0)
+        assertEquals(testMarketDataJSONList[0].open, 40.0)
+        assertEquals(testMarketDataJSONList[0].high, 80.0)
     }
 }

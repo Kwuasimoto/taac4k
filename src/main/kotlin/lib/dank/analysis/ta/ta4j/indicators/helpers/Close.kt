@@ -20,7 +20,7 @@ open class Close(
     override val adapter: MarketAnalysisAdapter = TA4JAdapter(),
 
     override val conditions: CloseConditions = CloseConditions(marketDataJSONList),
-    override val indicator: ClosePriceIndicator = ClosePriceIndicator(adapter.toBarSeries(marketDataJSONList))
+    override val indicator: ClosePriceIndicator = ClosePriceIndicator(adapter.to(marketDataJSONList))
 
 ) : WithZonedCondition, ConditionsSupplier<ClosePriceIndicator, CloseConditions>
 

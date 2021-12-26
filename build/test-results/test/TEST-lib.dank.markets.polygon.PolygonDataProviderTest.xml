@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lib.dank.markets.polygon.PolygonDataProviderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-26T01:15:05" hostname="DESKTOP-LSLE137" time="0.069">
+  <properties/>
+  <testcase name="oneStepToConversionExample()" classname="lib.dank.markets.polygon.PolygonDataProviderTest" time="0.069"/>
+  <system-out><![CDATA[org.ta4j.core.BaseBarSeries@1b6d6cdb]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+</testsuite>

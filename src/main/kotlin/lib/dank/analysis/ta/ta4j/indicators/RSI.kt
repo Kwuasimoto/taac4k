@@ -14,10 +14,10 @@ open class RSI(
 
     override val adapter: MarketAnalysisAdapter = TA4JAdapter(),
 
-    override val indicator: RSIIndicator =
-        RSIIndicator(close.indicator, barCount),
+    override val rawIndicator: RSIIndicator =
+        RSIIndicator(close.rawIndicator, barCount),
 
     override val conditions: RSIConditions =
         RSIConditions(close.marketDataJSONList)
 
-) : WithZonedCondition, ConditionsSupplier<RSIIndicator, RSIConditions>
+) : WithZonedCondition, Conditions<RSIIndicator, RSIConditions>

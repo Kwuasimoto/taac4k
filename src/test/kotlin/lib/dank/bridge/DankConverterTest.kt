@@ -63,7 +63,7 @@ internal class DankConverterTest {
     @Test
     fun fromPolygonToTA4J() {
         // To an Analysis Library [to conversions are compatible with analysis/indicators]
-        val convertedBar = mockConverter.ta4jAdapter.to(
+        val convertedBar = mockConverter.ta4jAdapter.toBarSeries(
             // From a MarketData Adapter [from conversions are compatible with Conditions]
             mockConverter.polygonAdapter.from(mockAggregates, aggregatesParameters)
         ).getBar(0)

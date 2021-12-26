@@ -8,7 +8,7 @@ import org.ta4j.core.num.DecimalNum
 
 // Works :o
 // T::class.java.hasInterface();
-//fun <T> Class<T>.hasInterface(face: Class<*>): Boolean = this.interfaces.any { it === face }
+fun <T> Class<T>.hasInterface(face: Class<*>): Boolean = this.interfaces.any { it === face }
 //
 //fun MutableList<MarketDataJSON>.toBarSeries(): BarSeries {
 //    /**

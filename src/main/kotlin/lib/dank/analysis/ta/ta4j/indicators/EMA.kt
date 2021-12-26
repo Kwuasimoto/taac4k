@@ -16,7 +16,7 @@ open class EMA(
     override val conditions: EMAConditions =
         EMAConditions(close.marketDataJSONList),
 
-    override val indicator: EMAIndicator =
-        EMAIndicator(close.indicator, barCount)
+    override val rawIndicator: EMAIndicator =
+        EMAIndicator(close.rawIndicator, barCount)
 
-) : WithZonedCondition, ConditionsSupplier<EMAIndicator, EMAConditions>
+) : WithZonedCondition, Conditions<EMAIndicator, EMAConditions>

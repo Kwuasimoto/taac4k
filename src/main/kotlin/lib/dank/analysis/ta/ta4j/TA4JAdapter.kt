@@ -8,7 +8,7 @@ import org.ta4j.core.BaseBarSeriesBuilder
 import org.ta4j.core.num.DecimalNum
 
 class TA4JAdapter : MarketAnalysisAdapter {
-    override fun to(marketDataJSONList: MutableList<MarketDataJSON>, name: String): BarSeries =
+    override fun toBarSeries(marketDataJSONList: MutableList<MarketDataJSON>, name: String): BarSeries =
 
         if (marketDataJSONList.size <= 0) throw IllegalArgumentException("marketDataJSONList is empty!, cant adapt")
         else {

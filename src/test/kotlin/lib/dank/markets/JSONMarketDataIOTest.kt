@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.dank.markets.data.JSONMarketData
 import lib.dank.markets.io.JSONMarketDataIO
+import lib.dank.markets.io.toJSONArray
 import lib.dank.markets.polygon.PolygonClient
 import lib.dank.markets.polygon.PolygonDataAdapter
 import lib.dank.markets.polygon.PolygonDataProvider
@@ -31,7 +32,7 @@ internal class JSONMarketDataIOTest {
     )
     private val jsonFileName: String = "market_data_febd073d-b727-4258-9a17-f5b31c96b750.json"
 
-    private val mockJSONMarketData: MutableList<JSONMarketData> = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
+    private var mockJSONMarketData: MutableList<JSONMarketData> = mutableListOf()
     private val mockProvider: PolygonDataProvider = mock()
 
     @BeforeAll
@@ -51,13 +52,18 @@ internal class JSONMarketDataIOTest {
 
     @Test
     fun read() {
-        val readData = JSONMarketDataIO(jsonFileName = jsonFileName)
-                .read(aggregatesParams = mockParameters)
-        println(readData)
+        // To an Analysis Library [to conversions are compatible with analysis/indicators]
+        mockJSONMarketData = JSONMarketDataIO(jsonFileName = jsonFileName).read(aggregatesParams = mockParameters)
+
+        assertEquals(5000, mockJSONMarketData.size)
+        assertEquals(5000, mockJSONMarketData.toJSONArray().length())
     }
 
     @Test
     fun toBarSeries() {
+        /**
+         * .2 seconds :O
+         */
         assertEquals(5000, JSONMarketDataIO(jsonFileName = jsonFileName).toBarSeries().barCount)
     }
 }

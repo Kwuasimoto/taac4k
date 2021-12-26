@@ -1,6 +1,7 @@
 package lib.dank.markets.polygon
 
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
@@ -20,43 +21,22 @@ import java.util.*
 @ExtendWith(MockitoExtension::class)
 internal class PolygonDataProviderTest {
 
+    private val polygonDataProvider: PolygonDataProvider = PolygonDataProvider()
+
     private val aggregatesParameters: AggregatesParameters = AggregatesParameters(
         "AAPL",
         1,
         "minute",
         "2019-01-01",
-        "2020-01-01",
-        true
+        "2021-01-01",
+        true,
     )
 
-    private val polygonDataProvider: PolygonDataProvider = mock()
     private val aggregatesDTO: AggregatesDTO = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
     private val JSONMarketDataList: LinkedList<JSONMarketData> = mock()
 
     @BeforeAll
-    fun setUp() {
-        whenever(polygonDataProvider.ticker).thenReturn("AAPL")
-        whenever(polygonDataProvider.adapter).thenReturn(PolygonDataAdapter())
-        whenever(polygonDataProvider.client).thenReturn(PolygonClient())
-
-        /**
-         * Setup DTO for [useAdapter]
-         */
-        whenever(aggregatesDTO.results).thenReturn(
-            listOf(
-                AggregateDTO(
-                    "AAPL",
-                    1000.50,
-                    55.2,
-                    40.0,
-                    60.0,
-                    20.0,
-                    80.0,
-                    ZonedDateTime.now().toEpochSecond()
-                )
-            )
-        )
-    }
+    fun setUp() {}
 
     @Test
     fun getTicker() {
@@ -73,35 +53,23 @@ internal class PolygonDataProviderTest {
         assertEquals(polygonDataProvider.adapter::class.java, PolygonDataAdapter::class.java)
     }
 
+    /**
+     * Test raw data fetch
+     */
     @Test
     fun rawAggregates() {
-        assertEquals(
-            polygonDataProvider.client.rest.getAggregatesBlocking(aggregatesParameters)::class.java,
-            AggregatesDTO::class.java
-        )
+        val rawAggregates = polygonDataProvider.client.rest.getAggregatesBlocking(aggregatesParameters)
+        assertEquals(rawAggregates::class.java, AggregatesDTO::class.java)
+        assertEquals(5000, rawAggregates.results.size)
     }
 
+    /**
+     * Prepped data for Conditions
+     */
     @Test
     fun oneShotMarketDataList() {
-        assertEquals(JSONMarketDataList::class.java,
-            polygonDataProvider.getAggregates(
-                1, "minute", "2019-01-01"
-            )::class.java
-        )
+        val mockResult = polygonDataProvider.getAggregates(1, "minute", "2019-01-01", limit = 100)
+        assertEquals(100, mockResult.size)
+        assertEquals(JSONMarketData::class.java, mockResult[0]::class.java)
     }
-
-    @Test
-    fun useMarketDataAdapter() {
-        val testMarketDataJSONList = polygonDataProvider.adapter.from(
-            AggregatesDTO(results = aggregatesDTO.results),
-            aggregatesParameters
-        )
-
-        assertEquals(testMarketDataJSONList[0].close, 60.0)
-        assertEquals(testMarketDataJSONList[0].low, 20.0)
-        assertEquals(testMarketDataJSONList[0].open, 40.0)
-        assertEquals(testMarketDataJSONList[0].high, 80.0)
-    }
-
-
 }

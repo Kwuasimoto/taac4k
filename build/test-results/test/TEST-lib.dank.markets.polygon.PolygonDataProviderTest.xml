@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lib.dank.markets.polygon.PolygonDataProviderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-26T22:05:06" hostname="DESKTOP-LSLE137" time="1.032">
+  <properties/>
+  <testcase name="oneShotMarketDataList()" classname="lib.dank.markets.polygon.PolygonDataProviderTest" time="1.032"/>
+  <system-out><![CDATA[lib.dank.markets.polygon.PolygonDataAdapter@32007ff1
+Intercepting application level
+Intercepting network level
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

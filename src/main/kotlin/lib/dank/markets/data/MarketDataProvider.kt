@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 interface MarketDataProvider {
+    val adapter: MarketDataAdapter
+
     fun getAggregates(
         multiplier: Long,
         timespan: String,
@@ -13,6 +15,7 @@ interface MarketDataProvider {
         limit: Long = 5000,
         // Providing polygonClient to polygonBarBuilder delegates hidden call to
         // Polygon bar builder
+        adapter: MarketDataAdapter = this.adapter
     ): MutableList<JSONMarketData>
 
 }

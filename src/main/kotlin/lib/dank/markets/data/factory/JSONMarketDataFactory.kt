@@ -54,12 +54,9 @@ open class JSONMarketDataFactory(
             val returnList = newList
 
             for (rawJSON in jsonArray) {
-
                 rawJSON as JSONObject
 
-                println(rawJSON)
                 returnList.add(builder
-
                     .ticker(rawJSON["ticker"].toString())
                     .open(rawJSON["open"].toString().toDouble())
                     .high(rawJSON["high"].toString().toDouble())

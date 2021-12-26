@@ -1,11 +1,5 @@
 package lib.dank.experimental
 
-import lib.dank.markets.MarketDataJSON
-import org.ta4j.core.BarSeries
-import org.ta4j.core.BaseBar
-import org.ta4j.core.BaseBarSeries
-import org.ta4j.core.num.DecimalNum
-
 // Works :o
 // T::class.java.hasInterface();
 fun <T> Class<T>.hasInterface(face: Class<*>): Boolean = this.interfaces.any { it === face }

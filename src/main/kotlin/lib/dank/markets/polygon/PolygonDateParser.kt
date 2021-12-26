@@ -1,6 +1,6 @@
 package lib.dank.markets.polygon
 
-import lib.dank.markets.MarketDateParser
+import lib.dank.markets.data.MarketDateParser
 import lib.dank.markets.enums.TIMESPAN
 import java.time.Duration
 import java.time.Instant

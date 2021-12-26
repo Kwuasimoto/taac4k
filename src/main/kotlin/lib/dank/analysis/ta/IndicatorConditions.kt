@@ -1,13 +1,13 @@
 package lib.dank.analysis.ta
 
 import lib.dank.analysis.ta.enums.OHLC
-import lib.dank.markets.MarketDataJSON
+import lib.dank.markets.data.JSONMarketData
 
 /**
  * To implement a diff TA Lib you'd have to switch out their *Indicator*
  * interface here and re-implement the default methods,
  */
-abstract class IndicatorConditions(override val marketDataList: MutableList<MarketDataJSON>) : IndicatorConditionsProvider {
+abstract class IndicatorConditions(override val marketDataList: MutableList<JSONMarketData>) : IndicatorConditionsProvider {
 
     override val barCount: Int = marketDataList.size
 
@@ -82,7 +82,7 @@ abstract class IndicatorConditions(override val marketDataList: MutableList<Mark
 
     override fun isOver(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int,
         targetIndex: Int,
@@ -113,7 +113,7 @@ abstract class IndicatorConditions(override val marketDataList: MutableList<Mark
 
     override fun isUnder(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int,
         targetIndex: Int,
@@ -133,7 +133,7 @@ abstract class IndicatorConditions(override val marketDataList: MutableList<Mark
      */
     override fun crossOver(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int,
         targetIndex: Int,
@@ -162,7 +162,7 @@ abstract class IndicatorConditions(override val marketDataList: MutableList<Mark
 
     override fun crossUnder(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int,
         targetIndex: Int,

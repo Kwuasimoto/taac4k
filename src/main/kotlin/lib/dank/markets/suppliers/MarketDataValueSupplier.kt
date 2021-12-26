@@ -1,7 +1,7 @@
 package lib.dank.markets.suppliers
 
 import lib.dank.analysis.ta.enums.OHLC
-import lib.dank.markets.MarketDataJSON
+import lib.dank.markets.data.JSONMarketData
 import java.time.Duration
 import java.time.ZonedDateTime
 
@@ -34,10 +34,10 @@ import java.time.ZonedDateTime
 //}
 
 interface MarketDataValueSupplier {
-    val marketDataList: MutableList<MarketDataJSON>
+    val marketDataList: MutableList<JSONMarketData>
     val barCount: Int
 
-    fun barValue(marketSeries: MutableList<MarketDataJSON>, barIndex: Int, ohlc: OHLC = OHLC.CLOSE): Double =
+    fun barValue(marketSeries: MutableList<JSONMarketData>, barIndex: Int, ohlc: OHLC = OHLC.CLOSE): Double =
         marketSeries[barIndex][ohlc.name] as Double
 
     fun barValue(barIndex: Int, ohlc: OHLC = OHLC.CLOSE): Double = marketDataList[barIndex][ohlc.name] as Double

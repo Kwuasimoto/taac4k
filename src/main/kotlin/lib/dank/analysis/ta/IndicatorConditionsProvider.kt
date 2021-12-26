@@ -1,7 +1,7 @@
 package lib.dank.analysis.ta
 
 import lib.dank.analysis.ta.enums.OHLC
-import lib.dank.markets.MarketDataJSON
+import lib.dank.markets.data.JSONMarketData
 import lib.dank.markets.suppliers.MarketDataValueSupplier
 
 /**
@@ -54,7 +54,7 @@ interface IndicatorConditionsProvider : MarketDataValueSupplier, ConditionAlertS
 
     fun isOver(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int = 0,
         targetIndex: Int = 1,
@@ -68,7 +68,7 @@ interface IndicatorConditionsProvider : MarketDataValueSupplier, ConditionAlertS
 
     fun isUnder(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int = 0,
         targetIndex: Int = 1,
@@ -82,7 +82,7 @@ interface IndicatorConditionsProvider : MarketDataValueSupplier, ConditionAlertS
 
     fun crossOver(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int = 0,
         targetIndex: Int = 1,
@@ -97,7 +97,7 @@ interface IndicatorConditionsProvider : MarketDataValueSupplier, ConditionAlertS
 
     fun crossUnder(
 
-        targetSeries: MutableList<MarketDataJSON>,
+        targetSeries: MutableList<JSONMarketData>,
 
         barIndex: Int = 0,
         targetIndex: Int = 1,

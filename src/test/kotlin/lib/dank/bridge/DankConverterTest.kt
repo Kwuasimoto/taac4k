@@ -54,10 +54,13 @@ internal class DankConverterTest {
             )
         )
 
-        whenever(mockBarSeries.getBar(0).openPrice.doubleValue()).thenReturn(40.0)
-        whenever(mockBarSeries.getBar(0).closePrice.doubleValue()).thenReturn(60.0)
-        whenever(mockBarSeries.getBar(0).lowPrice.doubleValue()).thenReturn(20.0)
-        whenever(mockBarSeries.getBar(0).highPrice.doubleValue()).thenReturn(80.0)
+//        whenever(mockBarSeries.getBar(0).openPrice.doubleValue()).thenReturn(40.0)
+//        whenever(mockBarSeries.getBar(0).closePrice.doubleValue()).thenReturn(60.0)
+//        whenever(mockBarSeries.getBar(0).lowPrice.doubleValue()).thenReturn(20.0)
+//        whenever(mockBarSeries.getBar(0).highPrice.doubleValue()).thenReturn(80.0)
+//        whenever(mockBarSeries.getBar(0).).thenReturn(80.0)
+//        whenever(mockBarSeries.getBar(0).highPrice.doubleValue()).thenReturn(80.0)
+//        whenever(mockBarSeries.getBar(0).highPrice.doubleValue()).thenReturn(80.0)
     }
 
     @Test

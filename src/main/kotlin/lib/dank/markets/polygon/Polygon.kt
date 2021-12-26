@@ -1,6 +1,6 @@
 package lib.dank.markets.polygon
 
-import lib.dank.markets.MarketDataProvider
+import lib.dank.markets.data.MarketDataProvider
 
 class Polygon(
     val ticker: String = "AAPL",

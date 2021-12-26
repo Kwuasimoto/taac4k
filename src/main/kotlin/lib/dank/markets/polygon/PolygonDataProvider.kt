@@ -1,8 +1,8 @@
 package lib.dank.markets.polygon
 
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.dank.markets.MarketDataJSON
-import lib.dank.markets.MarketDataProvider
+import lib.dank.markets.data.JSONMarketData
+import lib.dank.markets.data.MarketDataProvider
 
 class PolygonDataProvider(
 
@@ -22,7 +22,7 @@ class PolygonDataProvider(
         limit: Long,
         // Providing polygonClient to polygonBarBuilder delegates hidden call to
         // Polygon bar builder
-    ): MutableList<MarketDataJSON> {
+    ): MutableList<JSONMarketData> {
         val params = AggregatesParameters(
             ticker = this.ticker,
             multiplier, timespan, fromDate, toDate, unadjusted, limit
@@ -30,6 +30,5 @@ class PolygonDataProvider(
 
         return adapter.from(client.rest.getAggregatesBlocking(params), params)
     }
-
 }
 

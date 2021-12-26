@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
+import lib.dank.markets.io.MarketDataIO
 import lib.dank.markets.polygon.PolygonClient
 import lib.dank.markets.polygon.PolygonDataAdapter
 import lib.dank.markets.polygon.PolygonDataProvider
@@ -16,7 +17,6 @@ import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
-import org.ta4j.core.BarSeries
 import java.time.ZonedDateTime
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -31,6 +31,7 @@ internal class MarketDataIOTest {
         "2021-01-01",
         true
     )
+    private val jsonFileName: String = "market_data_febd073d-b727-4258-9a17-f5b31c96b750.json"
 
     private val mockAggregates: AggregatesDTO = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
     private val mockProvider: PolygonDataProvider = mock()
@@ -69,11 +70,20 @@ internal class MarketDataIOTest {
 
     @Test
     fun write() {
-        assertEquals(true, MarketDataIO(mockProvider.adapter.from(mockProvider.client.rest.getAggregatesBlocking(mockParameters), mockParameters)).write())
+        assertEquals(true, MarketDataIO(
+            mockProvider.adapter.from(
+                mockProvider.client.rest.getAggregatesBlocking(mockParameters), mockParameters)).write())
     }
 
     @Test
     fun read() {
-        assertEquals(5000, MarketDataIO(fileName = "market_data_576f27ac-828a-428c-b240-42da80317bf3.json").toBarSeries().barCount)
+        val readData = MarketDataIO(jsonFileName = jsonFileName)
+                .read(aggregatesParams = mockParameters)
+        println(readData)
+    }
+
+    @Test
+    fun toBarSeries() {
+        assertEquals(5000, MarketDataIO(jsonFileName = jsonFileName).toBarSeries().barCount)
     }
 }

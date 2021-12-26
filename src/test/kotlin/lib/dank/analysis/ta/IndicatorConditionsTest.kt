@@ -9,7 +9,8 @@ import lib.dank.analysis.ta.ta4j.Indicators
 import lib.dank.analysis.ta.ta4j.TA4JAdapter
 import lib.dank.analysis.ta.ta4j.indicators.helpers.Close
 import lib.dank.bridge.DankConverter
-import lib.dank.markets.MarketDataJSON
+import lib.dank.markets.io.MarketDataIO
+import lib.dank.markets.data.JSONMarketData
 import lib.dank.markets.polygon.PolygonDataAdapter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
@@ -39,13 +40,17 @@ internal class IndicatorConditionsTest {
 
     private val mockConverter: DankConverter = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
     private val mockIndicators: Indicators = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
-    private val mockMarketDataJSONList: MutableList<MarketDataJSON> = mock()
+    private val mockJSONMarketDataList: MutableList<JSONMarketData> = mock()
 
+    private val marketDataIO = MarketDataIO(jsonFileName = "market_data_576f27ac-828a-428c-b240-42da80317bf3.json")
 
     @BeforeAll
     fun setUp() {
         whenever(mockConverter.polygonAdapter).thenReturn(PolygonDataAdapter())
         whenever(mockConverter.ta4jAdapter).thenReturn(TA4JAdapter())
+
+            // Get IO DATA
+        val marketData = marketDataIO.toBarSeries()
 
         whenever(mockAggregates.results).thenReturn(
             listOf(
@@ -80,8 +85,8 @@ internal class IndicatorConditionsTest {
             mockParameters
         )
 
-        whenever(mockMarketDataJSONList[0]).thenReturn(convertedMockData[0])
-        whenever(mockMarketDataJSONList[1]).thenReturn(convertedMockData[1])
+        whenever(mockJSONMarketDataList[0]).thenReturn(convertedMockData[0])
+        whenever(mockJSONMarketDataList[1]).thenReturn(convertedMockData[1])
     }
 
     @Test

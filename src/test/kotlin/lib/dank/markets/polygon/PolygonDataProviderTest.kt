@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.dank.markets.MarketDataJSON
+import lib.dank.markets.data.JSONMarketData
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import java.time.ZonedDateTime
+import java.util.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
@@ -30,7 +31,7 @@ internal class PolygonDataProviderTest {
 
     private val polygonDataProvider: PolygonDataProvider = mock()
     private val aggregatesDTO: AggregatesDTO = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
-    private val marketDataJSONList: MutableList<MarketDataJSON> = mock()
+    private val JSONMarketDataList: LinkedList<JSONMarketData> = mock()
 
     @BeforeAll
     fun setUp() {
@@ -81,6 +82,15 @@ internal class PolygonDataProviderTest {
     }
 
     @Test
+    fun oneShotMarketDataList() {
+        assertEquals(JSONMarketDataList::class.java,
+            polygonDataProvider.getAggregates(
+                1, "minute", "2019-01-01"
+            )::class.java
+        )
+    }
+
+    @Test
     fun useMarketDataAdapter() {
         val testMarketDataJSONList = polygonDataProvider.adapter.from(
             AggregatesDTO(results = aggregatesDTO.results),
@@ -92,4 +102,6 @@ internal class PolygonDataProviderTest {
         assertEquals(testMarketDataJSONList[0].open, 40.0)
         assertEquals(testMarketDataJSONList[0].high, 80.0)
     }
+
+
 }

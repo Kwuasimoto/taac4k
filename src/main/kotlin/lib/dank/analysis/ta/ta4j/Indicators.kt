@@ -3,7 +3,7 @@ package lib.dank.analysis.ta.ta4j
 import lib.dank.analysis.ta.ta4j.indicators.RSI
 import lib.dank.analysis.ta.ta4j.indicators.helpers.Close
 import lib.dank.analysis.ta.ta4j.indicators.helpers.Volume
-import lib.dank.markets.data.JSONMarketData
+import lib.dank.markets.data.MarketData
 
 /**
  * ## Lunos Indicators Class
@@ -24,12 +24,12 @@ import lib.dank.markets.data.JSONMarketData
  */
 
 class Indicators(
-    JSONMarketDataList: MutableList<JSONMarketData>,
+    MarketDataList: MutableList<MarketData>,
 
     volumeLength: Int = 12,
     // Helpers
-    val close: Close = Close(JSONMarketDataList),
-    val volume: Volume = Volume(JSONMarketDataList, length = volumeLength),
+    val close: Close = Close(MarketDataList),
+    val volume: Volume = Volume(MarketDataList, length = volumeLength),
 
     // Indicators
     val rsi: RSI = RSI(close)

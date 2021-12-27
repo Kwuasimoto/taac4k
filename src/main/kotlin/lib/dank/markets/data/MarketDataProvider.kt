@@ -1,5 +1,6 @@
 package lib.dank.markets.data
 
+import lib.dank.markets.data.adapter.MarketDataAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +17,7 @@ interface MarketDataProvider {
         // Providing polygonClient to polygonBarBuilder delegates hidden call to
         // Polygon bar builder
         adapter: MarketDataAdapter = this.adapter
-    ): MutableList<JSONMarketData>
+    ): MutableList<MarketData>
 
 }
 

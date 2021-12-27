@@ -1,6 +1,6 @@
 package lib.dank.markets.data
 
-import lib.dank.markets.enums.TIMESPAN
+import lib.dank.markets.data.enums.TIMESPAN
 import java.time.Duration
 import java.time.ZonedDateTime
 
@@ -9,6 +9,6 @@ import java.time.ZonedDateTime
  * which only saves you from writing one class
  */
 interface MarketDateParser {
-    fun parseMillis(millis: Long?): ZonedDateTime
-    fun parseDuration(timespan: TIMESPAN, multiplier: Long): Duration
+    fun toZonedDateTime(millis: Long?): ZonedDateTime
+    fun toDuration(timespan: TIMESPAN, multiplier: Long): Duration
 }

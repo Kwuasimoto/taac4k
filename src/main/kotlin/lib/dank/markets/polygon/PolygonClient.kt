@@ -2,8 +2,8 @@ package lib.dank.markets.polygon
 
 import io.polygon.kotlin.sdk.DefaultOkHttpClientProvider
 import io.polygon.kotlin.sdk.rest.PolygonRestClient
-import lib.dank.markets.suppliers.HttpClientSupplier
-import lib.dank.markets.suppliers.RestClientSupplier
+import lib.dank.markets.http.HttpClientSupplier
+import lib.dank.markets.http.RestClientSupplier
 import okhttp3.Interceptor
 import okhttp3.Response
 

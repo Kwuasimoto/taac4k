@@ -1,9 +1,10 @@
 package lib.dank.analysis.ta.conditions.executor
 
-import lib.dank.analysis.ta.MarketAnalysisAdapter
-import java.util.function.BooleanSupplier
-
+/**
+ * for checking the conditions' executed within the Conditions objects,
+ * supplies Results to [IndicatorConditionsExecutor]
+ */
+@FunctionalInterface
 interface ConditionsExecutor {
-    val adapter: MarketAnalysisAdapter
-    fun checkCondition(condition: () -> Boolean): BooleanSupplier = BooleanSupplier { condition ( ) }
+    fun check(bool: () -> Boolean): Boolean = bool()
 }

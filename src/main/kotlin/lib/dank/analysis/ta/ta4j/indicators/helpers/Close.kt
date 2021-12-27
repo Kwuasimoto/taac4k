@@ -1,11 +1,11 @@
 package lib.dank.analysis.ta.ta4j.indicators.helpers
 
-import lib.dank.analysis.ta.MarketAnalysisAdapter
 import lib.dank.analysis.ta.conditions.helpers.CloseConditions
-import lib.dank.analysis.ta.ta4j.TA4JAdapter
-import lib.dank.analysis.ta.conditions.IndicatorConditions
+import lib.dank.analysis.ta.IndicatorConditionsDecorator
 import lib.dank.analysis.ta.conditions.executor.ZonedConditionsExecutor
-import lib.dank.markets.data.JSONMarketData
+import lib.dank.markets.data.MarketData
+import lib.dank.markets.data.adapter.BaseMarketDataAdapter
+import lib.dank.markets.data.adapter.MarketDataAdapter
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 
 
@@ -16,12 +16,12 @@ import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 //@TestAnnotation(ClosePriceIndicator::class, CloseConditions::class)
 open class Close(
 
-    open val JSONMarketDataList: MutableList<JSONMarketData>,
-    override val adapter: MarketAnalysisAdapter = TA4JAdapter(),
+    val MarketDataList: MutableList<MarketData>,
 
-    override val conditions: CloseConditions = CloseConditions(JSONMarketDataList),
-    override val rawIndicator: ClosePriceIndicator = ClosePriceIndicator(adapter.toBarSeries(JSONMarketDataList))
+    override val adapter: MarketDataAdapter = BaseMarketDataAdapter(),
+    override val conditions: CloseConditions = CloseConditions(MarketDataList),
+    override val rawIndicator: ClosePriceIndicator = ClosePriceIndicator(adapter.toBarSeries(MarketDataList))
 
-) : ZonedConditionsExecutor, IndicatorConditions<ClosePriceIndicator, CloseConditions>
+) : ZonedConditionsExecutor, IndicatorConditionsDecorator<ClosePriceIndicator, CloseConditions>
 
 

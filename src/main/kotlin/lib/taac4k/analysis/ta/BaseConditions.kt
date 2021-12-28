@@ -11,7 +11,7 @@ abstract class BaseConditions(
     open val marketDataMutableList: MutableList<MarketData>,
 ) : ConditionsProvider {
 
-//    override val barCount: Int = marketDataList.size
+    //    override val barCount: Int = marketDataList.size
     private var cachedBool: Boolean = false
     private var cachedBarsLeft: Int = 0
 
@@ -48,7 +48,10 @@ abstract class BaseConditions(
     ): Boolean = check {
         val barGapLength = rightBarIndex - leftBarIndex
 
-        if (barGapLength > 1) {
+        if (barGapLength == 0)
+            throw IllegalArgumentException("Cannot check if a single bar is rising, maybe in the future on live charts :)")
+
+        if (barGapLength >= 2) {
             var result = true
 
             for (i in 0 until barGapLength) {
@@ -96,19 +99,7 @@ abstract class BaseConditions(
         period: Int
 
     ): Boolean = check {
-        if(comparableIndex < 0 || barIndex < 0 ) throw IllegalArgumentException("comparableIndex or barIndex cannot be 0!")
-
-        if (comparableIndex == 0 && barIndex == 0)
-            throw IllegalArgumentException("barIndex and targetIndex cannot be 0")
-
-        // Is this closePrice greater than target price
-        if (comparableIndex == 0)
-            values.barValue(barIndex, barOHLC) >
-                    values.barValue(comparableList, barIndex, comparableOHLC)
-
-        if (barIndex == 0)
-            values.barValue(comparableIndex, comparableOHLC) >
-                    values.barValue(comparableList, comparableIndex - 1, barOHLC)
+        if (comparableIndex < 0 || barIndex < 0) throw IllegalArgumentException("comparableIndex or barIndex cannot be less than 0!")
         else {
             val barVal = values.barValue(barIndex, barOHLC)
             val comparableVal = values.barValue(comparableList, comparableIndex, comparableOHLC)
@@ -137,6 +128,9 @@ abstract class BaseConditions(
     /**
      *
      * Starts at comparableIndex,
+     *
+     * Check if barVal crosses over comparableVal,
+     *   and if barVal remains above comparableVal for (barGapLength =
      */
     override fun crossOver(
 
@@ -162,14 +156,23 @@ abstract class BaseConditions(
 
                 }
 
-                if (values.barValue(barIndex, barOHLC) > values.barValue(comparableList, comparableIndex, comparableOHLC)) {
+                if (values.barValue(barIndex, barOHLC) > values.barValue(
+                        comparableList,
+                        comparableIndex,
+                        comparableOHLC
+                    )
+                ) {
                     TODO("")
 
                 }
                 TODO("")
 
             } else {
-                cachedBool = values.barValue(barIndex, barOHLC) > values.barValue(comparableList, comparableIndex, comparableOHLC)
+                cachedBool = values.barValue(barIndex, barOHLC) > values.barValue(
+                    comparableList,
+                    comparableIndex,
+                    comparableOHLC
+                )
 
                 crossOver(
                     comparableList,
@@ -194,7 +197,7 @@ abstract class BaseConditions(
         comparableOHLC: OHLC,
         barOHLC: OHLC,
 
-    ): Boolean = check {
+        ): Boolean = check {
 //        val targetToCross = barSeries.getBar(barIndex).closePrice
 //
 //        /**

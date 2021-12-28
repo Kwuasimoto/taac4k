@@ -3,4 +3,4 @@ package lib.taac4k.analysis.ta.conditions
 import lib.taac4k.analysis.ta.BaseConditions
 import lib.taac4k.markets.data.MarketData
 
-class WilliamRConditions(marketDataList: MutableList<MarketData>) : BaseConditions(marketDataList)
+class OBVConditions(marketDataList: MutableList<MarketData>) : lib.taac4k.analysis.ta.BaseConditions(marketDataList)

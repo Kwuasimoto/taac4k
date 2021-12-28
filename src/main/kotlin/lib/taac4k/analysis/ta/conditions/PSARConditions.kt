@@ -3,4 +3,4 @@ package lib.taac4k.analysis.ta.conditions
 import lib.taac4k.analysis.ta.BaseConditions
 import lib.taac4k.markets.data.MarketData
 
-class SuperTrendConditions(marketDataList: MutableList<MarketData>) : BaseConditions(marketDataList)
+class PSARConditions(marketDataList: MutableList<MarketData>) : lib.taac4k.analysis.ta.BaseConditions(marketDataList)

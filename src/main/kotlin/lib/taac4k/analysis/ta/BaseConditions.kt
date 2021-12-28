@@ -10,7 +10,7 @@ import lib.taac4k.markets.data.MarketData
 abstract class BaseConditions(
     override val marketDataList: MutableList<MarketData>
 
-) : ConditionsProvider {
+) : lib.taac4k.analysis.ta.ConditionsProvider {
 
     override val barCount: Int = marketDataList.size
     override var cachedBool: Boolean = false

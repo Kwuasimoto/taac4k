@@ -1,15 +1,15 @@
-package lib.dank.analysis.ta
+package lib.taac4k.analysis.ta
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.dank.analysis.ta.ta4j.Indicators
-import lib.dank.analysis.ta.ta4j.indicators.helpers.Close
-import lib.dank.markets.data.io.MarketDataIO
-import lib.dank.markets.data.MarketData
-import lib.dank.markets.data.adapter.BaseMarketDataAdapter
-import lib.dank.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
+import lib.taac4k.markets.data.io.MarketDataIO
+import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test

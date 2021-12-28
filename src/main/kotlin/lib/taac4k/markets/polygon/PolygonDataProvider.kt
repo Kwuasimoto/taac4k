@@ -1,10 +1,10 @@
-package lib.dank.markets.polygon
+package lib.taac4k.markets.polygon
 
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.dank.markets.data.MarketData
-import lib.dank.markets.data.MarketDataProvider
-import lib.dank.markets.data.adapter.BaseMarketDataAdapter
-import lib.dank.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.markets.MarketDataProvider
+import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 
 open class PolygonDataProvider(
 

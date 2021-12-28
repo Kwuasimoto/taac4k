@@ -1,9 +1,9 @@
-package lib.dank.analysis.ta
+package lib.taac4k.analysis.ta
 
-import lib.dank.analysis.ta.conditions.executor.ConditionsExecutor
-import lib.dank.analysis.ta.enums.OHLCV
-import lib.dank.markets.data.MarketData
-import lib.dank.markets.data.MarketDataValueSupplier
+import lib.taac4k.analysis.ta.conditions.executor.ConditionsExecutor
+import lib.taac4k.analysis.ta.enums.OHLCV
+import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.MarketDataValueSupplier
 
 /**
  * ### Default Condition Supplier
@@ -28,7 +28,7 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         leftBarOHLC: OHLCV = OHLCV.CLOSE,
         rightBarOHLC: OHLCV = OHLCV.CLOSE,
 
-    ): Boolean
+        ): Boolean
 
     fun isRising(
 

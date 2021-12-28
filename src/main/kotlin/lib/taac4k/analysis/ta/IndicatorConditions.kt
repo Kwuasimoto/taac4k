@@ -1,7 +1,7 @@
-package lib.dank.analysis.ta
+package lib.taac4k.analysis.ta
 
-import lib.dank.analysis.ta.conditions.executor.IndicatorConditionsExecutor
-import lib.dank.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.analysis.ta.conditions.executor.IndicatorConditionsExecutor
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.ta4j.core.Indicator
 import org.ta4j.core.num.Num
 

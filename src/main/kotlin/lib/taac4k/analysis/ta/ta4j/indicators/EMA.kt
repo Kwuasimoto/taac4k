@@ -1,10 +1,10 @@
-package lib.dank.analysis.ta.ta4j.indicators
+package lib.taac4k.analysis.ta.ta4j.indicators
 
-import lib.dank.analysis.ta.IndicatorConditions
-import lib.dank.analysis.ta.conditions.EMAConditions
-import lib.dank.analysis.ta.ta4j.indicators.helpers.Close
-import lib.dank.markets.data.adapter.BaseMarketDataAdapter
-import lib.dank.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.analysis.ta.IndicatorConditions
+import lib.taac4k.analysis.ta.conditions.EMAConditions
+import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.ta4j.core.indicators.EMAIndicator
 
 open class EMA(
@@ -15,4 +15,4 @@ open class EMA(
     override val conditions: EMAConditions = EMAConditions(close.marketDataList),
     override val rawIndicator: EMAIndicator = EMAIndicator(close.rawIndicator, barCount)
 
-) : IndicatorConditions<EMAIndicator, EMAConditions>
+) : IndicatorConditions<EMAConditions>

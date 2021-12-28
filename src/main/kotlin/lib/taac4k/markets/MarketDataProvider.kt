@@ -1,11 +1,13 @@
-package lib.taac4k.markets.data
+package lib.taac4k.markets
 
+import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
 interface MarketDataProvider {
-    val adapter: BaseMarketDataAdapter
+    val adapter: MarketDataAdapter
 
     fun getAggregates(
         multiplier: Long,
@@ -16,7 +18,7 @@ interface MarketDataProvider {
         limit: Long = 5000,
         // Providing polygonClient to polygonBarBuilder delegates hidden call to
         // Polygon bar builder
-        adapter: BaseMarketDataAdapter = this.adapter
+        adapter: MarketDataAdapter = this.adapter
     ): MutableList<MarketData>
 
 }

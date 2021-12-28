@@ -1,11 +1,11 @@
-package lib.dank.markets
+package lib.taac4k.markets
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import lib.dank.markets.data.adapter.BaseMarketDataAdapter
-import lib.dank.markets.polygon.Polygon
-import lib.dank.markets.polygon.PolygonClient
-import lib.dank.markets.polygon.PolygonDataProvider
+import lib.taac4k.markets.polygon.Polygon
+import lib.taac4k.markets.polygon.PolygonClient
+import lib.taac4k.markets.polygon.PolygonDataProvider
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

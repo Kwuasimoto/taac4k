@@ -1,6 +1,6 @@
-package lib.dank.markets.data
+package lib.taac4k.markets.data
 
-import lib.dank.markets.data.enums.TIMESPAN
+import lib.taac4k.markets.data.enums.TIMESPAN
 import java.time.Duration
 import java.time.ZonedDateTime
 

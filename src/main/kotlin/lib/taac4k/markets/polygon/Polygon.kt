@@ -1,8 +1,8 @@
-package lib.dank.markets.polygon
+package lib.taac4k.markets.polygon
 
-import lib.dank.markets.data.MarketDataProvider
-import lib.dank.markets.data.adapter.BaseMarketDataAdapter
-import lib.dank.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.markets.MarketDataProvider
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 
 class Polygon(
     val ticker: String = "AAPL",

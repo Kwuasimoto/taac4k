@@ -1,10 +1,10 @@
-package lib.dank.markets.data.io
+package lib.taac4k.markets.data.io
 
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.dank.analysis.ta.ta4j.IndicatorBarSeriesFactory
-import lib.dank.markets.data.MarketData
-import lib.dank.markets.data.adapter.MarketDataAdapter
-import lib.dank.markets.data.factory.BaseMarketDataFactory
+import lib.taac4k.analysis.ta.ta4j.IndicatorBarSeriesFactory
+import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.factory.BaseMarketDataFactory
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.json.JSONArray
 import org.ta4j.core.BarSeries
 import java.io.File

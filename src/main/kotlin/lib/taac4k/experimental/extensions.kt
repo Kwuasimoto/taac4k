@@ -1,4 +1,4 @@
-package lib.dank.experimental
+package lib.taac4k.experimental
 
 // Works :o
 // T::class.java.hasInterface();

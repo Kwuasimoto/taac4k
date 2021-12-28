@@ -1,9 +1,9 @@
-package lib.dank.analysis.ta.ta4j.indicators
+package lib.taac4k.analysis.ta.ta4j.indicators
 
-import lib.dank.analysis.ta.IndicatorConditions
-import lib.dank.analysis.ta.conditions.AroonConditions
-import lib.dank.analysis.ta.ta4j.indicators.helpers.Close
-import lib.dank.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.analysis.ta.IndicatorConditions
+import lib.taac4k.analysis.ta.conditions.AroonConditions
+import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.ta4j.core.indicators.AroonOscillatorIndicator
 
 open class Aroon(

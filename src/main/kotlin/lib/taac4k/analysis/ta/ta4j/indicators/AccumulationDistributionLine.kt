@@ -1,10 +1,9 @@
-package lib.dank.analysis.ta.ta4j.indicators
+package lib.taac4k.analysis.ta.ta4j.indicators
 
-import lib.dank.analysis.ta.IndicatorConditions
-import lib.dank.analysis.ta.conditions.ADLineConditions
-import lib.dank.markets.data.MarketData
-import lib.dank.markets.data.adapter.MarketDataAdapter
-import org.ta4j.core.indicators.RecursiveCachedIndicator
+import lib.taac4k.analysis.ta.IndicatorConditions
+import lib.taac4k.analysis.ta.conditions.ADLineConditions
+import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.ta4j.core.indicators.volume.AccumulationDistributionIndicator
 
 open class AccumulationDistributionLine(

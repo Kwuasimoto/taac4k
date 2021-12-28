@@ -1,6 +1,6 @@
-package lib.dank.markets
+package lib.taac4k.markets
 
-import lib.dank.markets.polygon.Polygon
+import lib.taac4k.markets.polygon.Polygon
 
 
 class Markets(

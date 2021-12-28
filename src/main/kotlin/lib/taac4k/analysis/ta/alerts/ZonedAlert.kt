@@ -1,4 +1,4 @@
-package lib.dank.analysis.ta.alerts
+package lib.taac4k.analysis.ta.alerts
 
 import java.time.ZonedDateTime
 import java.util.function.BooleanSupplier

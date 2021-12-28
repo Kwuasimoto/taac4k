@@ -1,7 +1,7 @@
-package lib.dank.analysis.ta.conditions
+package lib.taac4k.analysis.ta.conditions
 
-import lib.dank.analysis.ta.Conditions
-import lib.dank.markets.data.MarketData
+import lib.taac4k.analysis.ta.Conditions
+import lib.taac4k.markets.data.MarketData
 
 /**
  * Accumulation/Distribute Line Conditions

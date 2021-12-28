@@ -1,4 +1,4 @@
-package lib.dank.analysis.ta.conditions.executor
+package lib.taac4k.analysis.ta.conditions.executor
 
 import java.util.function.BooleanSupplier
 

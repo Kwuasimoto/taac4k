@@ -1,4 +1,4 @@
-package lib.dank.markets.http
+package lib.taac4k.markets.http
 
 import io.polygon.kotlin.sdk.DefaultJvmHttpClientProvider
 

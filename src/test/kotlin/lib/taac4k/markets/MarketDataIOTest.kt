@@ -1,13 +1,13 @@
-package lib.dank.markets
+package lib.taac4k.markets
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.dank.markets.data.MarketData
-import lib.dank.markets.data.adapter.BaseMarketDataAdapter
-import lib.dank.markets.data.io.MarketDataIO
-import lib.dank.markets.polygon.PolygonClient
-import lib.dank.markets.polygon.PolygonDataProvider
+import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.io.MarketDataIO
+import lib.taac4k.markets.polygon.PolygonClient
+import lib.taac4k.markets.polygon.PolygonDataProvider
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test

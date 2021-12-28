@@ -1,7 +1,7 @@
-package lib.dank.markets.data.factory
+package lib.taac4k.markets.data.factory
 
-import lib.dank.markets.data.MarketDateParser
-import lib.dank.markets.data.enums.TIMESPAN
+import lib.taac4k.markets.data.MarketDateParser
+import lib.taac4k.markets.data.enums.TIMESPAN
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId

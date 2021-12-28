@@ -1,7 +1,7 @@
-package lib.dank.analysis.ta
+package lib.taac4k.analysis.ta
 
-import lib.dank.analysis.ta.enums.OHLCV
-import lib.dank.markets.data.MarketData
+import lib.taac4k.analysis.ta.enums.OHLCV
+import lib.taac4k.markets.data.MarketData
 
 /**
  * To implement a diff TA Lib you'd have to switch out their *Indicator*

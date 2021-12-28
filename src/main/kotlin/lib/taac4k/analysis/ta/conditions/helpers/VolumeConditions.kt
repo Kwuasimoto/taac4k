@@ -1,6 +1,6 @@
-package lib.dank.analysis.ta.conditions.helpers
+package lib.taac4k.analysis.ta.conditions.helpers
 
-import lib.dank.analysis.ta.Conditions
-import lib.dank.markets.data.MarketData
+import lib.taac4k.analysis.ta.Conditions
+import lib.taac4k.markets.data.MarketData
 
 open class VolumeConditions(marketDataList: MutableList<MarketData>) : Conditions(marketDataList)

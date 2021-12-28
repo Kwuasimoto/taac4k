@@ -1,6 +1,6 @@
-package lib.dank.markets.data
+package lib.taac4k.markets.data
 
-import lib.dank.analysis.ta.enums.OHLCV
+import lib.taac4k.analysis.ta.enums.OHLCV
 import java.time.ZonedDateTime
 
 /**

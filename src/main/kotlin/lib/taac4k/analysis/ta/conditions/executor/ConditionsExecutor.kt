@@ -1,4 +1,4 @@
-package lib.dank.analysis.ta.conditions.executor
+package lib.taac4k.analysis.ta.conditions.executor
 
 /**
  * for checking the conditions' executed within the Conditions objects,

@@ -1,8 +1,8 @@
-package lib.dank.analysis.ta.ta4j
+package lib.taac4k.analysis.ta.ta4j
 
-import lib.dank.markets.data.MarketDateParser
-import lib.dank.markets.data.enums.TIMESPAN
-import lib.dank.markets.data.factory.BaseDateParser
+import lib.taac4k.markets.data.MarketDateParser
+import lib.taac4k.markets.data.enums.TIMESPAN
+import lib.taac4k.markets.data.factory.BaseDateParser
 import org.json.JSONArray
 import org.json.JSONObject
 import org.ta4j.core.BarSeries

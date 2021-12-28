@@ -1,4 +1,4 @@
-package lib.dank.markets.data.io
+package lib.taac4k.markets.data.io
 
 interface ResourceSupplier {
     fun getJSONResourcePath(fileName: String): String = "/json.market_data/$fileName"

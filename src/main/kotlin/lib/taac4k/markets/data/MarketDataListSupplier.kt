@@ -1,6 +1,4 @@
-package lib.dank.markets.data
-
-import lib.dank.markets.data.MarketData
+package lib.taac4k.markets.data
 
 interface MarketDataListSupplier {
     val newList: MutableList<MarketData> get() = mutableListOf()

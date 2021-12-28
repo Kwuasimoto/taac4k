@@ -1,4 +1,4 @@
-package lib.dank.markets.data.enums
+package lib.taac4k.markets.data.enums
 
 enum class TIMESPAN(s: String) {
     MINUTE("minute"),

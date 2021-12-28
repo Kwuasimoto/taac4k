@@ -2,9 +2,9 @@ package lib.taac4k.markets.data.adapter
 
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
+import lib.taac4k.markets.data.enums.TIMESPAN
 import lib.taac4k.analysis.ta.enums.OHLCV
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.enums.TIMESPAN
 import lib.taac4k.markets.data.factory.BaseMarketDataFactory
 import org.ta4j.core.BarSeries
 import org.ta4j.core.BaseBar

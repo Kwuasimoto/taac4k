@@ -4,10 +4,10 @@ import com.nhaarman.mockitokotlin2.mock
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
-import lib.taac4k.markets.data.io.MarketDataIO
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.markets.data.io.MarketDataIO
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -174,20 +174,26 @@ internal class CloseConditionsTest {
         assertEquals(false,
             tslaCloseIndicator.check {
                 tslaCloseIndicator.conditions.isUnder(appleDataList)
-            }.asBoolean)
+            }.asBoolean
+        )
         assertEquals(true,
             tslaCloseIndicator.check { // xD
                 // check if the apple data list is over tsla, not proper usage, but it exists lel
                 appleCloseIndicator.conditions.isUnder(tslaDataList)
-            }.asBoolean)
+            }.asBoolean
+        )
     }
 
+    /**
+     * Check Crossover conditions
+     */
     @Test
     fun crossOver() {
         assertEquals(false,
             tslaCloseIndicator.check {
                 tslaCloseIndicator.conditions.crossOver(tslaDataList)
-            }.asBoolean)
+            }.asBoolean
+        )
 
     }
 

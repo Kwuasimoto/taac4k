@@ -17,7 +17,6 @@ import org.ta4j.core.num.Num
  * All Indicators extend fooIndicator which implements Indicator<fooIndicator>
  */
 
-//@TestAnnotation(ClosePriceIndicator::class, CloseConditions::class)
 open class Close(
 
     val marketDataList: MutableList<MarketData>,

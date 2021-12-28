@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -47,7 +47,7 @@ internal class PolygonDataProviderTest {
 
     @Test
     fun getAdapter() {
-        assertEquals(polygonDataProvider.adapter::class.java, BaseMarketDataAdapter::class.java)
+        assertEquals(polygonDataProvider.adapter::class.java, MarketDataAdapter::class.java)
     }
 
     /**

@@ -4,10 +4,10 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import lib.taac4k.markets.data.io.MarketDataIO
 import lib.taac4k.markets.polygon.PolygonClient
 import lib.taac4k.markets.polygon.PolygonDataProvider
-import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -27,7 +27,7 @@ internal class MarketDataIOTest {
         "2021-01-01",
         true
     )
-    private val jsonFileName: String = "market_data_0ebb6f36-3c7e-4a43-9d2e-58cbf1848f24.json"
+    private val jsonFileName: String = "market_data_61840a89-bccf-4e14-8da7-2da23ea42a6c.json"
 
     private var mockMarketData: MutableList<MarketData> = mutableListOf()
     private val mockProvider: PolygonDataProvider = mock()
@@ -35,7 +35,7 @@ internal class MarketDataIOTest {
     @BeforeAll
     fun setup() {
         whenever(mockProvider.ticker).thenReturn("AAPL")
-        whenever(mockProvider.adapter).thenReturn(BaseMarketDataAdapter())
+        whenever(mockProvider.adapter).thenReturn(MarketDataAdapter())
         whenever(mockProvider.client).thenReturn(PolygonClient())
 
     }
@@ -52,7 +52,7 @@ internal class MarketDataIOTest {
     @Test
     fun read() {
         // To an Analysis Library [to conversions are compatible with analysis/indicators]
-        mockMarketData = MarketDataIO(jsonFileName = jsonFileName).read(aggregatesParams = mockParameters)
+        mockMarketData = MarketDataIO(jsonFileName = jsonFileName).read()
         assertEquals(5000, mockMarketData.size)
     }
 

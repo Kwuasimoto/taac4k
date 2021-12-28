@@ -2,10 +2,10 @@ package lib.taac4k.markets
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import lib.taac4k.markets.polygon.Polygon
 import lib.taac4k.markets.polygon.PolygonClient
 import lib.taac4k.markets.polygon.PolygonDataProvider
-import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -35,7 +35,7 @@ internal class MarketsTest {
         whenever(markets.polygon).thenReturn(Polygon())
         assertEquals(markets.polygon::class.java, Polygon::class.java)
         assertEquals(markets.polygon.client::class.java, PolygonClient::class.java)
-        assertEquals(markets.polygon.adapter::class.java, BaseMarketDataAdapter::class.java)
+        assertEquals(markets.polygon.adapter::class.java, MarketDataAdapter::class.java)
         //@See [PolygonDataProviderTest]
         assertEquals(markets.polygon.provider::class.java, PolygonDataProvider::class.java)
         assertEquals(markets.polygon.ticker, "AAPL")

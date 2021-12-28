@@ -1,15 +1,14 @@
 package lib.taac4k.analysis.ta
 
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.dank.analysis.ta.ta4j.Indicators
+import lib.taac4k.analysis.ta.conditions.helpers.CloseConditions
 import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
 import lib.taac4k.markets.data.io.MarketDataIO
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import lib.taac4k.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -30,59 +29,101 @@ internal class CloseConditionsTest {
      * - Market Data Raw
      */
     private val mockAggregates: AggregatesDTO = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
-    private val mockParameters: AggregatesParameters = mock()
-    private var mockIndicators: Indicators = mock()
+    private val mockIndicatorFactory: IndicatorFactory = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
 
-    private val adapter: MarketDataAdapter = BaseMarketDataAdapter()
-    private val marketDataIO = MarketDataIO(jsonFileName = "market_data_ff012a7d-d7c6-4afa-84aa-38a67e363bfb.json")
+    private val aggregatesParameters: AggregatesParameters = AggregatesParameters(
+        "AAPL",
+        1,
+        "minute",
+        "2019-01-01",
+        "2021-01-01",
+        true,
+    )
+
+    private val adapter: BaseMarketDataAdapter = MarketDataAdapter()
+    private val marketDataIO = MarketDataIO(jsonFileName = "market_data_61840a89-bccf-4e14-8da7-2da23ea42a6c.json")
     private var marketDataList: MutableList<MarketData> = mutableListOf()
+    private var close: Close = mock()
 
     @BeforeAll
     fun setUp() {
+        /**
+         * How to Use the taac4k Conditions Module.
+         * 1. Prep Data,
+         * 2. Use factory to create an indicator
+         * 3. Check Conditions,
+         * 4. Success!
+         */
 
-//        "AAPL",
-//        1,
-//        "minute",
-//        "2019-01-01",
-//        "2020-01-01",
-//        true
+        /**
+         * 1. Prepare [MutableList] of [MarketData]
+         */
+        marketDataList = marketDataIO.read()
+
+        /**
+         * 2. Use [MutableList] of [MarketData] with [IndicatorFactory] functions to make [Close]
+         */
+        close = IndicatorFactory().close(marketDataList)
 
 
+        /**
+         * 3. TESTS
+         */
+
+        /**
+         * 4. SOON
+         */
     }
 
     @Test
-    fun indicatorsInstantiation() {
-        val data = adapter.convert(
-            mockAggregates,
-            mockParameters
-        )
+    fun factoryFunctions() {
+        assertEquals(mockIndicatorFactory::class.java, IndicatorFactory::class.java)
+        assertEquals(mockIndicatorFactory.close(marketDataList)::class.java, Close::class.java)
+    }
 
-        assertEquals(mockIndicators.close::class.java, Close(data)::class.java)
+    /**
+     * Data Prep Tests
+     */
+    @Test
+    fun adaptMarketListToBarSeries() {
+        val marketDataList = marketDataIO.read()
+        val barSeries = adapter.convert(marketDataList)
+
+        assertEquals(5000, barSeries.barCount)
     }
 
     @Test
-    fun conditionsInstantiations() {
-        //assertEquals(mockIndicators.close.conditions::class.java, )
+    fun adaptBarSeriesToMarketList() {
+        val newSeries = marketDataIO.toBarSeries()
+        val marketDataList = adapter.convert(newSeries)
+
+        assertEquals(5000, marketDataList.size)
     }
 
+    /**
+     * Base Conditions Tests
+     */
     @Test
     fun isRising() {
-        val data = adapter.convert(
-            mockAggregates,
-            mockParameters
-        )
+//        println(close)
+//        assertEquals(true,
+//            close.check {
+//                close.conditions.isRising()
+//            }.asBoolean)
 
-        whenever(mockIndicators.close).thenReturn(Close(data))
+        assertEquals(false,
+            close.check {
+                close.conditions.isRising(leftBarIndex = 5)
+            }.asBoolean)
 
-        whenever(mockIndicators.close.check {
-            mockIndicators.close.conditions.isRising()
-        }).then {
-            "Mock called with arguments: " + it.arguments
-        }
     }
 
     @Test
     fun isFalling() {
+        assertEquals(false,
+            close.check{
+                close.conditions.isFalling() // && another indicators condition :D
+            }.asBoolean)
     }
 
     @Test

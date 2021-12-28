@@ -3,7 +3,6 @@ package lib.taac4k.analysis.ta
 import com.nhaarman.mockitokotlin2.mock
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.taac4k.analysis.ta.conditions.helpers.CloseConditions
 import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
 import lib.taac4k.markets.data.io.MarketDataIO
 import lib.taac4k.markets.data.MarketData
@@ -87,7 +86,7 @@ internal class CloseConditionsTest {
     @Test
     fun adaptMarketListToBarSeries() {
         val marketDataList = marketDataIO.read()
-        val barSeries = adapter.convert(marketDataList)
+        val barSeries = adapter.toBarSeries(marketDataList)
 
         assertEquals(5000, barSeries.barCount)
     }

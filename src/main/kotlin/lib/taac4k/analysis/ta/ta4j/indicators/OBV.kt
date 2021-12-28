@@ -11,7 +11,7 @@ open class OBV(
     open val close: Close,
 
     override val adapter: BaseMarketDataAdapter = MarketDataAdapter(),
-    override val rawIndicator: OnBalanceVolumeIndicator = OnBalanceVolumeIndicator(adapter.convert(close.marketDataList)),
+    override val rawIndicator: OnBalanceVolumeIndicator = OnBalanceVolumeIndicator(adapter.toBarSeries(close.marketDataList)),
     override val conditions: OBVConditions
 
 ) : IndicatorConditions<OBVConditions>

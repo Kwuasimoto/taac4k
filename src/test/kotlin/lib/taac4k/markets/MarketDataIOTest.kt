@@ -19,6 +19,9 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 internal class MarketDataIOTest {
 
+    private val jsonFileName: String = "market_data_61840a89-bccf-4e14-8da7-2da23ea42a6c.json"
+    private var mockMarketData: MutableList<MarketData> = mutableListOf()
+    private val mockProvider: PolygonDataProvider = mock()
     private val mockParameters: AggregatesParameters = AggregatesParameters(
         "AAPL",
         1,
@@ -27,41 +30,31 @@ internal class MarketDataIOTest {
         "2021-01-01",
         true
     )
-    private val jsonFileName: String = "market_data_61840a89-bccf-4e14-8da7-2da23ea42a6c.json"
-
-    private var mockMarketData: MutableList<MarketData> = mutableListOf()
-    private val mockProvider: PolygonDataProvider = mock()
 
     @BeforeAll
     fun setup() {
         whenever(mockProvider.ticker).thenReturn("AAPL")
         whenever(mockProvider.adapter).thenReturn(MarketDataAdapter())
         whenever(mockProvider.client).thenReturn(PolygonClient())
-
     }
 
     @Test
     fun write() {
-        val ioData =
+        val marketDataList =
             mockProvider.adapter.convert(mockProvider.client.rest.getAggregatesBlocking(mockParameters), mockParameters)
-        val io = MarketDataIO(ioData)
 
-        assertEquals(true, io.write())
+        assertEquals(true, MarketDataIO(marketDataList).write())
     }
 
     @Test
     fun read() {
-        // To an Analysis Library [to conversions are compatible with analysis/indicators]
         mockMarketData = MarketDataIO(jsonFileName = jsonFileName).read()
         assertEquals(5000, mockMarketData.size)
     }
 
 
     @Test
-    fun toBarSeries() {
-        /**
-         * .2 seconds :O
-         */
+    fun readToBarSeries() {
         assertEquals(5000, MarketDataIO(jsonFileName = jsonFileName).toBarSeries().barCount)
     }
 }

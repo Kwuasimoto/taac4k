@@ -30,7 +30,7 @@ internal class PolygonDataProviderTest {
     )
 
     private val aggregatesDTO: AggregatesDTO = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
-    private val MarketDataList: LinkedList<MarketData> = mock()
+    private val marketDataList: LinkedList<MarketData> = mock()
 
     @BeforeAll
     fun setUp() {}
@@ -64,9 +64,18 @@ internal class PolygonDataProviderTest {
      * Prepped data for Conditions
      */
     @Test
-    fun oneShotMarketDataList() {
-        val mockResult = polygonDataProvider.getAggregates(1, "minute", "2019-01-01", limit = 100)
-        assertEquals(100, mockResult.size)
-        assertEquals(MarketData::class.java, mockResult[0]::class.java)
+    fun getMarketDataList() {
+        val marketDataList = polygonDataProvider.getAggregates(1, "minute", "2019-01-01", limit = 100)
+        assertEquals(100, marketDataList.size)
+        assertEquals(MarketData::class.java, marketDataList[0]::class.java)
+    }
+
+    @Test
+    fun getAggregatesToBarSeries() {
+        val barSeries = polygonDataProvider.adapter.toBarSeries(
+            polygonDataProvider.getAggregates(1, "minute", "2019-01-01")
+        )
+
+        println(barSeries)
     }
 }

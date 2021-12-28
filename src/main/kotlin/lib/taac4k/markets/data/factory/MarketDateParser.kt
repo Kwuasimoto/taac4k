@@ -1,4 +1,4 @@
-package lib.taac4k.markets.data
+package lib.taac4k.markets.data.factory
 
 import lib.taac4k.markets.data.enums.TIMESPAN
 import java.time.Duration

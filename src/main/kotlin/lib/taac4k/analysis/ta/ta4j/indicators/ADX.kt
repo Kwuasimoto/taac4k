@@ -14,7 +14,7 @@ open class ADX(
     open val smoothing: Int = 7,
 
     override val adapter: BaseMarketDataAdapter = MarketDataAdapter(),
-    override val rawIndicator: ADXIndicator = ADXIndicator(adapter.convert(close.marketDataList), length, smoothing),
+    override val rawIndicator: ADXIndicator = ADXIndicator(adapter.toBarSeries(close.marketDataList), length, smoothing),
     override val conditions: ADXConditions = ADXConditions(close.marketDataList)
 
 ) : IndicatorConditions<ADXConditions>

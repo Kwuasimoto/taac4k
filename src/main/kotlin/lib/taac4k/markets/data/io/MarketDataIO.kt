@@ -3,7 +3,7 @@ package lib.taac4k.markets.data.io
 import lib.taac4k.analysis.ta.ta4j.BarSeriesFactory
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
-import lib.taac4k.markets.data.factory.BaseMarketDataFactory
+import lib.taac4k.markets.data.factory.MarketDataFactory
 import org.json.JSONArray
 import org.ta4j.core.BarSeries
 import java.io.File
@@ -35,7 +35,7 @@ open class MarketDataIO(
         .fromJSON(getJSONResourceAsString(getJSONResourcePath(jsonFileName!!)), name)
 
 
-    fun read(): MutableList<MarketData> = BaseMarketDataFactory()
+    fun read(): MutableList<MarketData> = MarketDataFactory()
         .fromJSON(getJSONResourceAsString(getJSONResourcePath(jsonFileName!!)))
 
 

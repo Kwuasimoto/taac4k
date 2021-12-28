@@ -10,7 +10,7 @@ open class AccumulationDistributionLine(
     open val marketDataList: MutableList<MarketData>,
 
     override val adapter: BaseMarketDataAdapter,
-    override val rawIndicator: AccumulationDistributionIndicator = AccumulationDistributionIndicator(adapter.convert(marketDataList)),
+    override val rawIndicator: AccumulationDistributionIndicator = AccumulationDistributionIndicator(adapter.toBarSeries(marketDataList)),
     override val conditions: ADLineConditions = ADLineConditions(marketDataList)
 
 ) : IndicatorConditions<ADLineConditions>

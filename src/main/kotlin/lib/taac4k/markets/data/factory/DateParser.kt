@@ -1,13 +1,12 @@
 package lib.taac4k.markets.data.factory
 
-import lib.taac4k.markets.data.MarketDateParser
 import lib.taac4k.markets.data.enums.TIMESPAN
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-open class BaseDateParser: MarketDateParser {
+open class DateParser: MarketDateParser {
     override fun toZonedDateTime(millis: Long?): ZonedDateTime {
         if(millis == null) throw IllegalArgumentException("millis null")
 

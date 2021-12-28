@@ -12,9 +12,14 @@ import org.ta4j.core.BaseBarSeries
  */
 interface BaseMarketDataAdapter : MarketDataListSupplier {
 
+    /**
+     * Individual technical analysis lib conversions
+     */
+    fun toBarSeries(from: MutableList<MarketData>, name: String = "Lunos"): BarSeries = BaseBarSeries()
+
+    /**
+     * toMarketData Overloads
+     */
     fun convert(from: BarSeries): MutableList<MarketData> = newList
-
-    fun convert(from: MutableList<MarketData>, name: String = "Lunos"): BarSeries = BaseBarSeries()
-
     fun convert(from: AggregatesDTO, params: AggregatesParameters): MutableList<MarketData> = newList
 }

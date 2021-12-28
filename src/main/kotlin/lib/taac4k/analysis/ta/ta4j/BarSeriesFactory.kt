@@ -1,8 +1,10 @@
 package lib.taac4k.analysis.ta.ta4j
 
-import lib.taac4k.markets.data.MarketDateParser
+import lib.taac4k.analysis.ta.enums.OHLC
+import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.factory.MarketDateParser
 import lib.taac4k.markets.data.enums.TIMESPAN
-import lib.taac4k.markets.data.factory.BaseDateParser
+import lib.taac4k.markets.data.factory.DateParser
 import org.json.JSONArray
 import org.json.JSONObject
 import org.ta4j.core.BarSeries
@@ -14,13 +16,40 @@ import org.ta4j.core.num.DecimalNum
  * Uses Builder
  */
 open class BarSeriesFactory(
-    open val dateParser: MarketDateParser = BaseDateParser()
+    open val dateParser: MarketDateParser = DateParser()
 ) {
-    open fun fromJSON(string: String, name: String = "JSON_DEFAULT", builder: BaseBarSeriesBuilder? = null): BarSeries {
+    open fun fromMarketDataList(marketDataList: MutableList<MarketData>, name: String = "Factory Default"): BarSeries =
+        if (marketDataList.size <= 0) throw IllegalArgumentException("marketDataJSONList is empty!, cant adapt")
+        else {
+            val barList = BaseBarSeriesBuilder()
+                .withName(name)
+                .withNumTypeOf(DecimalNum::class.java)
+                .build()
+
+            println("Can we get some data in the fucking console intellij?")
+            for (marketData in marketDataList) {
+                barList.addBar(
+                    BaseBar(
+                        dateParser.toDuration(TIMESPAN.valueOf(marketData.timespan), marketData.multiplier),
+                        dateParser.toZonedDateTime(marketData.endTime),
+                        DecimalNum.valueOf(marketData.ohlc[OHLC.OPEN]),
+                        DecimalNum.valueOf(marketData.ohlc[OHLC.HIGH]),
+                        DecimalNum.valueOf(marketData.ohlc[OHLC.LOW]),
+                        DecimalNum.valueOf(marketData.ohlc[OHLC.CLOSE]),
+                        DecimalNum.valueOf(marketData.volume),
+                        DecimalNum.valueOf(marketData.vwap)
+                    )
+                )
+            }
+
+            barList
+        }
+
+    open fun fromJSON(json: String, name: String = "JSON_DEFAULT", builder: BaseBarSeriesBuilder? = null): BarSeries {
         val newSeries = builder?.build()
             ?: BaseBarSeriesBuilder().withName(name).withNumTypeOf(DecimalNum::class.java).build()
 
-        for (jsonObject in JSONArray(string)) {
+        for (jsonObject in JSONArray(json)) {
             jsonObject as JSONObject
             val ohlc = jsonObject.getJSONObject("ohlc")
 

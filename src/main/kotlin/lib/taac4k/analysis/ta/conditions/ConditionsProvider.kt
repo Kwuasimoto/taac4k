@@ -1,4 +1,4 @@
-package lib.taac4k.analysis.ta
+package lib.taac4k.analysis.ta.conditions
 
 import lib.taac4k.analysis.ta.conditions.executor.ConditionsExecutor
 import lib.taac4k.analysis.ta.enums.OHLC

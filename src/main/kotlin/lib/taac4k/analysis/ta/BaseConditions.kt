@@ -2,15 +2,13 @@ package lib.taac4k.analysis.ta
 
 import lib.taac4k.analysis.ta.enums.OHLC
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.MarketDataValuesProvider
 
 /**
  * To implement a diff TA Lib you'd have to switch out their *Indicator*
  * interface here and re-implement the default methods,
  */
 abstract class BaseConditions(
-    val marketDataList: MutableList<MarketData>,
-    override val values: MarketDataValuesProvider = MarketDataValuesProvider(marketDataList)
+    open val marketDataMutableList: MutableList<MarketData>,
 ) : ConditionsProvider {
 
 //    override val barCount: Int = marketDataList.size

@@ -9,12 +9,12 @@ import org.ta4j.core.num.Num
 interface IndicatorConditions<ConditionsType> : IndicatorConditionsExecutor {
 
     // Convenience Properties
-    val values: MarketDataValuesProvider
     val adapter: BaseMarketDataAdapter
+    val values: MarketDataValuesProvider
 
     // Change out TA4J Here
     val rawIndicator: Indicator<Num>
 
-    // Required
+    // Conditions related to [this.rawIndicator]
     val conditions: ConditionsType
 }

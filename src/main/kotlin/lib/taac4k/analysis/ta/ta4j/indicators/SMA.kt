@@ -3,6 +3,8 @@ package lib.taac4k.analysis.ta.ta4j.indicators
 import lib.taac4k.analysis.ta.IndicatorConditions
 import lib.taac4k.analysis.ta.conditions.SMAConditions
 import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
+import lib.taac4k.markets.data.MarketDataValues
+import lib.taac4k.markets.data.MarketDataValuesProvider
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import org.ta4j.core.indicators.SMAIndicator
 
@@ -11,7 +13,9 @@ open class SMA(
     open val length: Int = 13,
 
     override val adapter: BaseMarketDataAdapter = close.adapter,
-    override val rawIndicator: SMAIndicator = SMAIndicator(close.rawIndicator , length),
-    override val conditions: SMAConditions = SMAConditions(close.marketDataList)
+    override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),
+
+    override val rawIndicator: SMAIndicator = SMAIndicator(close.rawIndicator, length),
+    override val conditions: SMAConditions = SMAConditions(close.marketDataList, values),
 
 ) : IndicatorConditions<SMAConditions>

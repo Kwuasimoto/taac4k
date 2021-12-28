@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lib.taac4k.analysis.ta.CloseConditionsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-28T18:09:39" hostname="DESKTOP-LSLE137" time="0.072">
+  <properties/>
+  <testcase name="isOverWithIndex()" classname="lib.taac4k.analysis.ta.CloseConditionsTest" time="0.072"/>
+  <system-out><![CDATA[Can we get some data in the fucking console intellij?
+Can we get some data in the fucking console intellij?
+]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+</testsuite>

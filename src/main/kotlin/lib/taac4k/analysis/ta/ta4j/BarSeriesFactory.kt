@@ -26,7 +26,6 @@ open class BarSeriesFactory(
                 .withNumTypeOf(DecimalNum::class.java)
                 .build()
 
-            println("Can we get some data in the fucking console intellij?")
             for (marketData in marketDataList) {
                 barList.addBar(
                     BaseBar(

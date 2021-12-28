@@ -19,11 +19,11 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 internal class MarketDataIOTest {
 
-    private val jsonFileName: String = "market_data_61840a89-bccf-4e14-8da7-2da23ea42a6c.json"
+    private val jsonFileName: String = "apple_data_2019.json"
     private var mockMarketData: MutableList<MarketData> = mutableListOf()
     private val mockProvider: PolygonDataProvider = mock()
     private val mockParameters: AggregatesParameters = AggregatesParameters(
-        "AAPL",
+        "TSLA",
         1,
         "minute",
         "2019-01-01",
@@ -33,7 +33,7 @@ internal class MarketDataIOTest {
 
     @BeforeAll
     fun setup() {
-        whenever(mockProvider.ticker).thenReturn("AAPL")
+        whenever(mockProvider.ticker).thenReturn("TSLA")
         whenever(mockProvider.adapter).thenReturn(MarketDataAdapter())
         whenever(mockProvider.client).thenReturn(PolygonClient())
     }

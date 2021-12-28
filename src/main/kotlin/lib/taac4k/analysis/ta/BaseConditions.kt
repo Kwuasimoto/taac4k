@@ -10,7 +10,7 @@ import lib.taac4k.markets.data.MarketData
 abstract class BaseConditions(
     override val marketDataList: MutableList<MarketData>
 
-) : lib.taac4k.analysis.ta.ConditionsProvider {
+) : ConditionsProvider {
 
     override val barCount: Int = marketDataList.size
     override var cachedBool: Boolean = false
@@ -33,6 +33,10 @@ abstract class BaseConditions(
 
     /**
      * This Indicator isRising?
+     * Define a leftBarIndex, and scan to rightBarIndex || barCount -1 (rightBarIndex default)
+     * Checks to make sure every bar is rising sequentially
+     *
+     * @TODO Add a grace period that allows the price to drop/rise for x bars before rising/falling again
      */
     override fun isRising(
 
@@ -48,13 +52,17 @@ abstract class BaseConditions(
         if (barGapLength > 1) {
             var result = true
 
-            for (i in 0 until barCount - barGapLength) {
+            for (i in 0 until barGapLength) {
                 if (!result) break
-                if (i == 0) continue
+                if (leftBarIndex >= rightBarIndex) break
 
-                result = barValue(barCount - i - rightBarIndex, rightBarOHLC) >
-                        barValue(barCount - (i + 1) - leftBarIndex, leftBarOHLC)
+                val trueLeftIndex = leftBarIndex + (i)
+                val trueRightIndex = rightBarIndex - (barGapLength - (i + 1))
 
+                val leftVal = barValue(trueLeftIndex, leftBarOHLC)
+                val rightVal = barValue(trueRightIndex, rightBarOHLC)
+
+                result = rightVal > leftVal
             }
 
             result
@@ -91,20 +99,27 @@ abstract class BaseConditions(
         period: Int
 
     ): Boolean = check {
+        if(comparableIndex < 0 || barIndex < 0 ) throw IllegalArgumentException("comparableIndex or barIndex cannot be 0!")
+
         if (comparableIndex == 0 && barIndex == 0)
             throw IllegalArgumentException("barIndex and targetIndex cannot be 0")
 
         // Is this closePrice greater than target price
         if (comparableIndex == 0)
-            barValue(barCount - 1, comparableOHLC) >
-                    barValue(comparableList, barIndex, barOHLC)
+            barValue(barIndex, barOHLC) >
+                    barValue(comparableList, barIndex, comparableOHLC)
 
         if (barIndex == 0)
             barValue(comparableIndex, comparableOHLC) >
                     barValue(comparableList, comparableIndex - 1, barOHLC)
-        else
-            barValue(comparableIndex, comparableOHLC) >
-                    barValue(comparableList, barIndex, barOHLC)
+        else {
+            val barVal = barValue(barIndex, barOHLC)
+            val comparableVal = barValue(comparableList, comparableIndex, comparableOHLC)
+
+            barVal > comparableVal
+        }
+
+
     }
 
     override fun isUnder(

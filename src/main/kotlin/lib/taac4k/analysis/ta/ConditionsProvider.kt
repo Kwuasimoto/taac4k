@@ -26,9 +26,9 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         rightBarIndex: Int = barCount - 1,
 
         leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE,
+        rightBarOHLC: OHLC = OHLC.CLOSE
 
-        ): Boolean
+    ): Boolean
 
     fun isRising(
 
@@ -36,9 +36,9 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         rightBarIndex: Int = barCount - 1,
 
         leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE,
+        rightBarOHLC: OHLC = OHLC.CLOSE
 
-        ): Boolean
+    ): Boolean
 
     fun isFalling(
 
@@ -46,16 +46,16 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         rightBarIndex: Int = barCount - 1,
 
         leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE,
+        rightBarOHLC: OHLC = OHLC.CLOSE
 
-        ): Boolean
+    ): Boolean
 
     fun isOver(
 
         comparableList: MutableList<MarketData>,
 
-        comparableIndex: Int = 0,
-        barIndex: Int = 1,
+        comparableIndex: Int = comparableList.size - 1,
+        barIndex: Int = barCount - 1,
 
         comparableOHLC: OHLC = OHLC.CLOSE,
         barOHLC: OHLC = OHLC.CLOSE,
@@ -68,8 +68,8 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
 
         comparableList: MutableList<MarketData>,
 
-        comparableIndex: Int = 0,
-        barIndex: Int = 0,
+        comparableIndex: Int = comparableList.size - 1,
+        barIndex: Int = barCount - 1,
 
         comparableOHLC: OHLC = OHLC.CLOSE,
         barOHLC: OHLC = OHLC.CLOSE,
@@ -86,9 +86,9 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         barIndex: Int = 0,
 
         comparableOHLC: OHLC = OHLC.CLOSE,
-        barOHLC: OHLC = OHLC.CLOSE,
+        barOHLC: OHLC = OHLC.CLOSE
 
-        ): Boolean
+    ): Boolean
 
 
     fun crossUnder(
@@ -99,7 +99,7 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         barIndex: Int = 0,
 
         comparableOHLC: OHLC = OHLC.CLOSE,
-        barOHLC: OHLC = OHLC.CLOSE,
+        barOHLC: OHLC = OHLC.CLOSE
 
     ): Boolean
 

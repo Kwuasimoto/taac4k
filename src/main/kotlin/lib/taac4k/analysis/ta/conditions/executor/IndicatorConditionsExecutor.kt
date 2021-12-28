@@ -3,7 +3,7 @@ package lib.taac4k.analysis.ta.conditions.executor
 import java.util.function.BooleanSupplier
 
 /**
- * for checking the conditions' property functions on the Indicator objects,
+ * for checking the functions of the conditions' property an IndicatorConditions object
  */
 @FunctionalInterface
 interface IndicatorConditionsExecutor {

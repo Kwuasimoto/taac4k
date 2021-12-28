@@ -1,5 +1,6 @@
 package lib.taac4k.analysis.ta.ta4j.indicators.helpers
 
+import lib.taac4k.analysis.ta.BaseConditions
 import lib.taac4k.analysis.ta.conditions.helpers.CloseConditions
 import lib.taac4k.analysis.ta.IndicatorConditions
 import lib.taac4k.markets.data.MarketData
@@ -23,6 +24,6 @@ open class Close(
     override val conditions: CloseConditions = CloseConditions(marketDataList),
     override val rawIndicator: Indicator<Num> = ClosePriceIndicator(adapter.toBarSeries(marketDataList))
 
-) : IndicatorConditions<CloseConditions>
+) : IndicatorConditions<BaseConditions>
 
 

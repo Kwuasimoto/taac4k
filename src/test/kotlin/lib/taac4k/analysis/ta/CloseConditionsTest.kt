@@ -40,9 +40,12 @@ internal class CloseConditionsTest {
     )
 
     private val adapter: BaseMarketDataAdapter = MarketDataAdapter()
-    private val marketDataIO = MarketDataIO(jsonFileName = "market_data_61840a89-bccf-4e14-8da7-2da23ea42a6c.json")
-    private var marketDataList: MutableList<MarketData> = mutableListOf()
-    private var close: Close = mock()
+    private val appleDataIO = MarketDataIO(jsonFileName = "apple_data_2019.json")
+    private val tslaDataIO = MarketDataIO(jsonFileName = "tsla_data_2019.json")
+    private var appleDataList: MutableList<MarketData> = mutableListOf()
+    private var tslaDataList: MutableList<MarketData> = mutableListOf()
+    private var appleCloseIndicator: Close = mock()
+    private var tslaCloseIndicator: Close = mock()
 
     @BeforeAll
     fun setUp() {
@@ -57,13 +60,14 @@ internal class CloseConditionsTest {
         /**
          * 1. Prepare [MutableList] of [MarketData]
          */
-        marketDataList = marketDataIO.read()
+        appleDataList = appleDataIO.read()
+        tslaDataList = tslaDataIO.read()
 
         /**
          * 2. Use [MutableList] of [MarketData] with [IndicatorFactory] functions to make [Close]
          */
-        close = IndicatorFactory().close(marketDataList)
-
+        appleCloseIndicator = IndicatorFactory().close(appleDataList)
+        tslaCloseIndicator = IndicatorFactory().close(tslaDataList)
 
         /**
          * 3. TESTS
@@ -77,7 +81,7 @@ internal class CloseConditionsTest {
     @Test
     fun factoryFunctions() {
         assertEquals(mockIndicatorFactory::class.java, IndicatorFactory::class.java)
-        assertEquals(mockIndicatorFactory.close(marketDataList)::class.java, Close::class.java)
+        assertEquals(mockIndicatorFactory.close(appleDataList)::class.java, Close::class.java)
     }
 
     /**
@@ -85,7 +89,7 @@ internal class CloseConditionsTest {
      */
     @Test
     fun adaptMarketListToBarSeries() {
-        val marketDataList = marketDataIO.read()
+        val marketDataList = appleDataIO.read()
         val barSeries = adapter.toBarSeries(marketDataList)
 
         assertEquals(5000, barSeries.barCount)
@@ -93,7 +97,7 @@ internal class CloseConditionsTest {
 
     @Test
     fun adaptBarSeriesToMarketList() {
-        val newSeries = marketDataIO.toBarSeries()
+        val newSeries = appleDataIO.toBarSeries()
         val marketDataList = adapter.convert(newSeries)
 
         assertEquals(5000, marketDataList.size)
@@ -105,36 +109,86 @@ internal class CloseConditionsTest {
     @Test
     fun isRising() {
 //        println(close)
-//        assertEquals(true,
-//            close.check {
-//                close.conditions.isRising()
-//            }.asBoolean)
-
+        assertEquals(true,
+            appleCloseIndicator.check {
+                appleCloseIndicator.conditions.isRising()
+            }.asBoolean)
         assertEquals(false,
-            close.check {
-                close.conditions.isRising(leftBarIndex = 5)
+            tslaCloseIndicator.check {
+                tslaCloseIndicator.conditions.isRising()
+            }.asBoolean)
+    }
+
+    @Test
+    fun isRisingWithIndex() {
+        assertEquals(false,
+            appleCloseIndicator.check {
+                // marketDataList.size - 5 == (5000 - 5 = 4995 (4th bar to the left), close = 303.19)
+                appleCloseIndicator.conditions.isRising(leftBarIndex = appleDataList.size - 5)
             }.asBoolean)
 
+        assertEquals(true,
+            appleCloseIndicator.check {
+                // marketDataList.size - 2 == (5000 - 2 = 4998 (1 bar to the left))
+                appleCloseIndicator.conditions.isRising(leftBarIndex = appleDataList.size - 2)
+            }.asBoolean)
     }
 
     @Test
     fun isFalling() {
         assertEquals(false,
-            close.check{
-                close.conditions.isFalling() // && another indicators condition :D
+            appleCloseIndicator.check{
+                appleCloseIndicator.conditions.isFalling() // && another indicators condition :D
             }.asBoolean)
     }
 
     @Test
     fun isOver() {
+        assertEquals(true,
+            tslaCloseIndicator.check {
+                tslaCloseIndicator.conditions.isOver(appleDataList)
+            }.asBoolean)
+        assertEquals(false,
+            tslaCloseIndicator.check { // xD
+                // check if the apple data list is over tsla, not proper usage, but it exists lel
+                appleCloseIndicator.conditions.isOver(tslaDataList)
+            }.asBoolean)
+    }
+
+
+    @Test
+    fun isOverWithIndex() {
+        /**
+         * Compare a list to itself,
+         */
+        assertEquals(true,
+            appleCloseIndicator.check {
+                appleCloseIndicator.conditions.isOver(
+                    appleDataList, comparableIndex = appleDataList.size - 10
+                )
+            }.asBoolean)
     }
 
     @Test
     fun isUnder() {
+        assertEquals(false,
+            tslaCloseIndicator.check {
+                tslaCloseIndicator.conditions.isUnder(appleDataList)
+            }.asBoolean)
+        assertEquals(true,
+            tslaCloseIndicator.check { // xD
+                // check if the apple data list is over tsla, not proper usage, but it exists lel
+                appleCloseIndicator.conditions.isUnder(tslaDataList)
+            }.asBoolean)
     }
 
     @Test
     fun crossOver() {
+//        assertEquals(false,
+//            tslaCloseIndicator.check {
+//
+//            }.asBoolean)
+
     }
 
     @Test

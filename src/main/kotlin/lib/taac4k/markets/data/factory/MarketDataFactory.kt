@@ -4,7 +4,7 @@ import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.analysis.ta.enums.OHLC
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.MarketDataListSupplier
+import lib.taac4k.markets.data.MarketDataMutableListSupplier
 import org.json.JSONArray
 import org.json.JSONObject
 import org.ta4j.core.BarSeries
@@ -13,7 +13,7 @@ import java.util.*
 open class MarketDataFactory(
     open val builder: BaseMarketDataBuilder = MarketDataBuilder(),
     open val date: MarketDateParser = DateParser()
-    ) : MarketDataListSupplier {
+    ) : MarketDataMutableListSupplier {
 
     open fun fromBarSeries(barSeries: BarSeries): MutableList<MarketData> {
         val returnList = newList

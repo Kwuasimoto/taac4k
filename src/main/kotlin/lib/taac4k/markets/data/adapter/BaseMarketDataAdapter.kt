@@ -3,14 +3,14 @@ package lib.taac4k.markets.data.adapter
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.MarketDataListSupplier
+import lib.taac4k.markets.data.MarketDataMutableListSupplier
 import org.ta4j.core.BarSeries
 import org.ta4j.core.BaseBarSeries
 
 /**
  * 2-way adapter
  */
-interface BaseMarketDataAdapter : MarketDataListSupplier {
+interface BaseMarketDataAdapter : MarketDataMutableListSupplier {
 
     /**
      * Individual technical analysis lib conversions

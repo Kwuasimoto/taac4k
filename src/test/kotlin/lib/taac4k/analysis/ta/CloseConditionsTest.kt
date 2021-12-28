@@ -88,7 +88,7 @@ internal class CloseConditionsTest {
      * Data Prep Tests
      */
     @Test
-    fun adaptMarketListToBarSeries() {
+    fun convertMarketListToBarSeries() {
         val marketDataList = appleDataIO.read()
         val barSeries = adapter.toBarSeries(marketDataList)
 
@@ -96,7 +96,7 @@ internal class CloseConditionsTest {
     }
 
     @Test
-    fun adaptBarSeriesToMarketList() {
+    fun convertBarSeriesToMarketList() {
         val newSeries = appleDataIO.toBarSeries()
         val marketDataList = adapter.convert(newSeries)
 
@@ -184,10 +184,10 @@ internal class CloseConditionsTest {
 
     @Test
     fun crossOver() {
-//        assertEquals(false,
-//            tslaCloseIndicator.check {
-//
-//            }.asBoolean)
+        assertEquals(false,
+            tslaCloseIndicator.check {
+                tslaCloseIndicator.conditions.crossOver(tslaDataList)
+            }.asBoolean)
 
     }
 

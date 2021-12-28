@@ -3,13 +3,13 @@ package lib.taac4k.analysis.ta
 import lib.taac4k.analysis.ta.conditions.executor.ConditionsExecutor
 import lib.taac4k.analysis.ta.enums.OHLC
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.MarketDataValueSupplier
+import lib.taac4k.markets.data.MarketDataValuesProvider
 
 /**
  * ### Default Condition Supplier
  */
 
-interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
+interface ConditionsProvider : ConditionsExecutor {
 //    /**
 //     *
 //     */
@@ -17,13 +17,14 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
 
     var cachedBool: Boolean
     var cachedBarsLeft: Int;
+    val values: MarketDataValuesProvider
 
     fun percentChanged(
 
         change: Float,
 
-        leftBarIndex: Int = barCount - 2,
-        rightBarIndex: Int = barCount - 1,
+        leftBarIndex: Int = values.barCount - 2,
+        rightBarIndex: Int = values.barCount - 1,
 
         leftBarOHLC: OHLC = OHLC.CLOSE,
         rightBarOHLC: OHLC = OHLC.CLOSE
@@ -32,8 +33,8 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
 
     fun isRising(
 
-        leftBarIndex: Int = barCount - 2,
-        rightBarIndex: Int = barCount - 1,
+        leftBarIndex: Int = values.barCount - 2,
+        rightBarIndex: Int = values.barCount - 1,
 
         leftBarOHLC: OHLC = OHLC.CLOSE,
         rightBarOHLC: OHLC = OHLC.CLOSE
@@ -42,8 +43,8 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
 
     fun isFalling(
 
-        leftBarIndex: Int = barCount - 2,
-        rightBarIndex: Int = barCount - 1,
+        leftBarIndex: Int = values.barCount - 2,
+        rightBarIndex: Int = values.barCount - 1,
 
         leftBarOHLC: OHLC = OHLC.CLOSE,
         rightBarOHLC: OHLC = OHLC.CLOSE
@@ -55,7 +56,7 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         comparableList: MutableList<MarketData>,
 
         comparableIndex: Int = comparableList.size - 1,
-        barIndex: Int = barCount - 1,
+        barIndex: Int = values.barCount - 1,
 
         comparableOHLC: OHLC = OHLC.CLOSE,
         barOHLC: OHLC = OHLC.CLOSE,
@@ -69,7 +70,7 @@ interface ConditionsProvider : MarketDataValueSupplier, ConditionsExecutor {
         comparableList: MutableList<MarketData>,
 
         comparableIndex: Int = comparableList.size - 1,
-        barIndex: Int = barCount - 1,
+        barIndex: Int = values.barCount - 1,
 
         comparableOHLC: OHLC = OHLC.CLOSE,
         barOHLC: OHLC = OHLC.CLOSE,

@@ -2,17 +2,18 @@ package lib.taac4k.analysis.ta
 
 import lib.taac4k.analysis.ta.enums.OHLC
 import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.MarketDataValuesProvider
 
 /**
  * To implement a diff TA Lib you'd have to switch out their *Indicator*
  * interface here and re-implement the default methods,
  */
 abstract class BaseConditions(
-    override val marketDataList: MutableList<MarketData>
-
+    val marketDataList: MutableList<MarketData>,
+    override val values: MarketDataValuesProvider = MarketDataValuesProvider(marketDataList)
 ) : ConditionsProvider {
 
-    override val barCount: Int = marketDataList.size
+//    override val barCount: Int = marketDataList.size
     override var cachedBool: Boolean = false
     override var cachedBarsLeft: Int = 0
 
@@ -59,14 +60,14 @@ abstract class BaseConditions(
                 val trueLeftIndex = leftBarIndex + (i)
                 val trueRightIndex = rightBarIndex - (barGapLength - (i + 1))
 
-                val leftVal = barValue(trueLeftIndex, leftBarOHLC)
-                val rightVal = barValue(trueRightIndex, rightBarOHLC)
+                val leftVal = values.barValue(trueLeftIndex, leftBarOHLC)
+                val rightVal = values.barValue(trueRightIndex, rightBarOHLC)
 
                 result = rightVal > leftVal
             }
 
             result
-        } else barValue(rightBarIndex, rightBarOHLC) > barValue(leftBarIndex, leftBarOHLC)
+        } else values.barValue(rightBarIndex, rightBarOHLC) > values.barValue(leftBarIndex, leftBarOHLC)
 
     }
 
@@ -106,15 +107,15 @@ abstract class BaseConditions(
 
         // Is this closePrice greater than target price
         if (comparableIndex == 0)
-            barValue(barIndex, barOHLC) >
-                    barValue(comparableList, barIndex, comparableOHLC)
+            values.barValue(barIndex, barOHLC) >
+                    values.barValue(comparableList, barIndex, comparableOHLC)
 
         if (barIndex == 0)
-            barValue(comparableIndex, comparableOHLC) >
-                    barValue(comparableList, comparableIndex - 1, barOHLC)
+            values.barValue(comparableIndex, comparableOHLC) >
+                    values.barValue(comparableList, comparableIndex - 1, barOHLC)
         else {
-            val barVal = barValue(barIndex, barOHLC)
-            val comparableVal = barValue(comparableList, comparableIndex, comparableOHLC)
+            val barVal = values.barValue(barIndex, barOHLC)
+            val comparableVal = values.barValue(comparableList, comparableIndex, comparableOHLC)
 
             barVal > comparableVal
         }
@@ -167,13 +168,13 @@ abstract class BaseConditions(
 
                 }
 
-                if (barValue(barIndex, barOHLC) > barValue(comparableList, comparableIndex, comparableOHLC)) {
+                if (values.barValue(barIndex, barOHLC) > values.barValue(comparableList, comparableIndex, comparableOHLC)) {
 
                 }
 
                 TODO("")
             } else {
-                cachedBool = barValue(barIndex, barOHLC) > barValue(comparableList, comparableIndex, comparableOHLC)
+                cachedBool = values.barValue(barIndex, barOHLC) > values.barValue(comparableList, comparableIndex, comparableOHLC)
 
                 crossOver(
                     comparableList,

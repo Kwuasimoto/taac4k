@@ -1,5 +1,5 @@
 package lib.taac4k.markets.data
 
-interface MarketDataListSupplier {
+interface MarketDataMutableListSupplier {
     val newList: MutableList<MarketData> get() = mutableListOf()
 }

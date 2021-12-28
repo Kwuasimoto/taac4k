@@ -12,8 +12,8 @@ abstract class BaseConditions(
 ) : ConditionsProvider {
 
 //    override val barCount: Int = marketDataList.size
-    override var cachedBool: Boolean = false
-    override var cachedBarsLeft: Int = 0
+    private var cachedBool: Boolean = false
+    private var cachedBarsLeft: Int = 0
 
     /**
      * Period not integrated, will be today :)
@@ -70,8 +70,6 @@ abstract class BaseConditions(
     }
 
     /**
-     * @param indicator barSeries isFalling
-     * @param period barSeries isFalling for period
      */
     override fun isFalling(
 
@@ -117,8 +115,6 @@ abstract class BaseConditions(
 
             barVal > comparableVal
         }
-
-
     }
 
     override fun isUnder(
@@ -167,10 +163,11 @@ abstract class BaseConditions(
                 }
 
                 if (values.barValue(barIndex, barOHLC) > values.barValue(comparableList, comparableIndex, comparableOHLC)) {
+                    TODO("")
 
                 }
-
                 TODO("")
+
             } else {
                 cachedBool = values.barValue(barIndex, barOHLC) > values.barValue(comparableList, comparableIndex, comparableOHLC)
 

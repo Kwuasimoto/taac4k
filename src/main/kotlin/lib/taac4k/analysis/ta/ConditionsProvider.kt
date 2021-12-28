@@ -15,8 +15,6 @@ interface ConditionsProvider : ConditionsExecutor {
 //     */
 //    fun barsSince condition: () -> ConditionAlertSupplier, length: Int): ConditionAlertSupplier
 
-    var cachedBool: Boolean
-    var cachedBarsLeft: Int;
     val values: MarketDataValuesProvider
 
     fun percentChanged(

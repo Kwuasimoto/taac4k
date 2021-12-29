@@ -16,6 +16,6 @@ open class Aroon(
     override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),
 
     override val rawIndicator: AroonOscillatorIndicator = AroonOscillatorIndicator(adapter.toBarSeries(close.marketDataList), length),
-    override val conditions: AroonConditions = AroonConditions(close.marketDataList)
+    override val conditions: AroonConditions = AroonConditions(close.marketDataList, values)
 
     ) : IndicatorConditions<AroonConditions>

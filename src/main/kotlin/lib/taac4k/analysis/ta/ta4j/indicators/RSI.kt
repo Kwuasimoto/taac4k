@@ -16,6 +16,6 @@ open class RSI(
     override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),
 
     override val rawIndicator: RSIIndicator = RSIIndicator(close.rawIndicator, barCount),
-    override val conditions: RSIConditions = RSIConditions(close.marketDataList),
+    override val conditions: RSIConditions = RSIConditions(close.marketDataList, values),
 
     ) : IndicatorConditions<RSIConditions>

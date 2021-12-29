@@ -17,6 +17,6 @@ open class OBV(
 
     override val rawIndicator: OnBalanceVolumeIndicator =
         OnBalanceVolumeIndicator(adapter.toBarSeries(close.marketDataList)),
-    override val conditions: OBVConditions = OBVConditions(close.marketDataList)
+    override val conditions: OBVConditions = OBVConditions(close.marketDataList, values)
 
 ) : IndicatorConditions<OBVConditions>

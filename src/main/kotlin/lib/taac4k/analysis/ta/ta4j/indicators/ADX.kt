@@ -23,6 +23,6 @@ open class ADX(
         length,
         smoothing
     ),
-    override val conditions: ADXConditions = ADXConditions(close.marketDataList)
+    override val conditions: ADXConditions = ADXConditions(close.marketDataList, values)
 
 ) : IndicatorConditions<ADXConditions>

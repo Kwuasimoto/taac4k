@@ -19,6 +19,6 @@ open class Volume(
     override val values: MarketDataValuesProvider = MarketDataValues(marketDataList),
 
     override val rawIndicator: VolumeIndicator = VolumeIndicator(adapter.toBarSeries(marketDataList), length),
-    override val conditions: VolumeConditions = VolumeConditions(marketDataList)
+    override val conditions: VolumeConditions = VolumeConditions(marketDataList, values)
 
 ) : IndicatorConditions<BaseConditionsProvider>

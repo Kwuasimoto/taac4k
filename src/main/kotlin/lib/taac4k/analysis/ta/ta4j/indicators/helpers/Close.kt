@@ -25,7 +25,7 @@ open class Close(
     override val values: MarketDataValuesProvider = MarketDataValues(marketDataList),
 
     override val rawIndicator: Indicator<Num> = ClosePriceIndicator(adapter.toBarSeries(marketDataList)),
-    override val conditions: CloseConditions = CloseConditions(marketDataList)
+    override val conditions: CloseConditions = CloseConditions(marketDataList, values)
 
 ) : IndicatorConditions<BaseConditionsProvider>
 

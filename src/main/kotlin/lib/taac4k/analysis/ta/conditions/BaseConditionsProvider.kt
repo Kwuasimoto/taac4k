@@ -8,9 +8,8 @@ import lib.taac4k.markets.data.MarketData
  * interface here and re-implement the default methods,
  */
 abstract class BaseConditionsProvider(
-    open val marketDataMutableList: MutableList<MarketData>,
+    open val marketDataMutableList: MutableList<MarketData>
 ) : ConditionsProvider {
-
     // PSEUDO CACHE,
     // Didn't think itd be necessary for a class to handle these values.
     private var boolCache: Boolean = false

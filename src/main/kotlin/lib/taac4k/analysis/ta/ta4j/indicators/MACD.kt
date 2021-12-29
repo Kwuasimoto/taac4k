@@ -16,7 +16,7 @@ open class MACD(
     open val longBarCount: Int = 26,
 
 
-    override val adapter: BaseMarketDataAdapter,
+    override val adapter: BaseMarketDataAdapter = close.adapter,
     override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),
     override val rawIndicator: MACDIndicator = MACDIndicator(close.rawIndicator, shortBarCount, longBarCount),
     override val conditions: MACDConditions = MACDConditions(close.marketDataList, values)

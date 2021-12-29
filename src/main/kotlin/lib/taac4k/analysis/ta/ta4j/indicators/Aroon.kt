@@ -12,7 +12,7 @@ open class Aroon(
     open val close: Close,
     open val length: Int = 13,
 
-    override val adapter: BaseMarketDataAdapter,
+    override val adapter: BaseMarketDataAdapter = close.adapter,
     override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),
 
     override val rawIndicator: AroonOscillatorIndicator = AroonOscillatorIndicator(adapter.toBarSeries(close.marketDataList), length),

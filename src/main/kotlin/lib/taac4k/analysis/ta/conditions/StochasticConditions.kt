@@ -8,4 +8,4 @@ open class StochasticConditions(
     override val marketDataMutableList: MutableList<MarketData>,
 
     override val values: MarketDataValuesProvider = MarketDataValues(marketDataMutableList)
-) : BaseConditionsProvider(marketDataMutableList)
+) : BaseConditions(marketDataMutableList)

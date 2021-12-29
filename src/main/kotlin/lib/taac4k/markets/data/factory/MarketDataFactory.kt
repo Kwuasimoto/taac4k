@@ -1,6 +1,6 @@
 package lib.taac4k.markets.data.factory
 
-import io.polygon.kotlin.sdk.rest.AggregateDTO
+import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.analysis.ta.enums.OHLCV
 import lib.taac4k.markets.data.MarketData
@@ -37,20 +37,25 @@ open class MarketDataFactory(
     /**
      * @DATALOSS - beginTime
      */
-    open fun fromAggregate(dto: AggregateDTO, aggregateParams: AggregatesParameters): MarketData =
-        builder
-            .ticker(aggregateParams.ticker)
-            .open(dto.open!!)
-            .high(dto.high!!)
-            .low(dto.low!!)
-            .close(dto.close!!)
-            .volume(dto.volume!!)
-            .vwap(dto.volumeWeightedAveragePrice!!)
-            .endTime(dto.timestampMillis!!)
-            .timespan(aggregateParams.timespan.uppercase(Locale.getDefault()))
-            .multiplier(aggregateParams.multiplier)
-            .build()
+    open fun fromAggregates(aggregates: AggregatesDTO, aggregateParams: AggregatesParameters): MutableList<MarketData> {
+        val returnList = newList
 
+        for(dto in aggregates.results)
+            returnList.add(builder
+                .ticker(aggregateParams.ticker)
+                .open(dto.open!!)
+                .high(dto.high!!)
+                .low(dto.low!!)
+                .close(dto.close!!)
+                .volume(dto.volume!!)
+                .vwap(dto.volumeWeightedAveragePrice!!)
+                .endTime(dto.timestampMillis!!)
+                .timespan(aggregateParams.timespan.uppercase(Locale.getDefault()))
+                .multiplier(aggregateParams.multiplier)
+                .build())
+
+        return returnList
+    }
 
     open fun fromJSON(rawJson: String): MutableList<MarketData> {
         val returnList = newList
@@ -77,9 +82,4 @@ open class MarketDataFactory(
 
         return returnList
     }
-
 }
-
-
-//            returnList
-//                .add(builder(jsonArray))

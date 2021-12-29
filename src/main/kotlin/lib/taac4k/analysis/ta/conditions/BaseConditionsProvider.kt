@@ -2,190 +2,151 @@ package lib.taac4k.analysis.ta.conditions
 
 import lib.taac4k.analysis.ta.enums.OHLCV
 import lib.taac4k.markets.data.MarketData
+import lib.taac4k.markets.data.MarketDataValuesProvider
 
 /**
- * To implement a diff TA Lib you'd have to switch out their *Indicator*
- * interface here and re-implement the default methods,
+ * ### Default Condition Supplier
  */
-abstract class BaseConditionsProvider(
-    open val marketDataMutableList: MutableList<MarketData>
-) : ConditionsProvider {
-    // PSEUDO CACHE,
-    // Didn't think itd be necessary for a class to handle these values.
-    private var boolCache: Boolean = false
-    private var barsLeftCache: Int = 0
 
-    private fun resetCache(cachedBool: Boolean): Boolean {
-        this.boolCache = false
-        this.barsLeftCache = 0
-        return cachedBool
-    }
+interface BaseConditionsProvider {
+//    /**
+//     *
+//     */
+//    fun barsSince condition: () -> ConditionAlertSupplier, length: Int): ConditionAlertSupplier
 
-    /**
-     * Period not integrated, will be today :)
-     */
-    override fun percentChanged(
+    val values: MarketDataValuesProvider
+
+    fun percentChanged(
+
         change: Float,
-        leftBarIndex: Int,
-        rightBarIndex: Int,
-        leftBarOHLCV: OHLCV,
-        rightBarOHLCV: OHLCV
-    ): Boolean = true
 
-    /**
-     * This Indicator isRising?
-     * Define a leftBarIndex, and scan to rightBarIndex || barCount -1 (rightBarIndex default)
-     * Checks to make sure every bar is rising sequentially
-     *
-     * @TODO Add a grace period that allows the price to drop/rise for x bars before rising/falling again
-     */
-    override fun isRising(leftBarIndex: Int, rightBarIndex: Int, leftBarOHLCV: OHLCV, rightBarOHLCV: OHLCV): Boolean {
-        val barGapLength = rightBarIndex - leftBarIndex
+        leftBarIndex: Int = values.barCount - 2,
+        rightBarIndex: Int = values.barCount - 1,
 
-        if (barGapLength == 0)
-            throw IllegalArgumentException("Cannot check if a single bar is rising, maybe in the future on live charts :)")
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
 
-        return if (barGapLength >= 2) {
-            for (i in 0 until barGapLength) {
-                if (!boolCache) break
-                if (leftBarIndex >= rightBarIndex) break
+    ): Boolean
 
-                val trueLeftIndex = leftBarIndex + (i)
-                val trueRightIndex = rightBarIndex - (barGapLength - (i + 1))
+    fun isRising(
 
-                val leftVal = values.barValue(trueLeftIndex, leftBarOHLCV)
-                val rightVal = values.barValue(trueRightIndex, rightBarOHLCV)
+        leftBarIndex: Int = values.barCount - 2,
+        rightBarIndex: Int = values.barCount - 1,
 
-                boolCache = rightVal > leftVal
-            }
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
 
-             resetCache(boolCache)
-        } else values.barValue(rightBarIndex, rightBarOHLCV) > values.barValue(leftBarIndex, leftBarOHLCV)
-    }
+    ): Boolean
 
-    /**
-     */
-    override fun isFalling(leftBarIndex: Int, rightBarIndex: Int, leftBarOHLCV: OHLCV, rightBarOHLCV: OHLCV): Boolean =
-        !isRising(leftBarIndex, rightBarIndex, leftBarOHLCV, rightBarOHLCV)
+    fun isFalling(
 
-    override fun isOver(
+        leftBarIndex: Int = values.barCount - 2,
+        rightBarIndex: Int = values.barCount - 1,
+
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
+
+    fun isOver(
+
         comparableList: MutableList<MarketData>,
-        comparableIndex: Int,
-        index: Int,
-        comparableOHLCV: OHLCV,
-        ohlcv: OHLCV,
-        period: Int
-    ): Boolean {
-        if (comparableIndex < 0 || index < 0) throw IllegalArgumentException("comparableIndex or barIndex cannot be less than 0!")
-        else {
-            val value = values.barValue(index, ohlcv)
-            val comparableValue = values.barValue(comparableList, comparableIndex, comparableOHLCV)
 
-            return value > comparableValue
-        }
-    }
+        comparableValueIndex: Int = comparableList.size - 1,
+        startValueIndex: Int = values.barCount - 1,
 
-    override fun isUnder(
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
+
+    fun isUnder(
+
         comparableList: MutableList<MarketData>,
-        comparableIndex: Int,
-        index: Int,
-        comparableOHLCV: OHLCV,
-        ohlcv: OHLCV,
-        period: Int
-    ): Boolean = !isOver(comparableList, comparableIndex, index, comparableOHLCV, ohlcv, period)
 
-    /**
-     *
-     * Starts at comparableIndex,
-     *
-     * Check if barVal crosses over comparableVal at any point and returns true
-     */
-    override fun crossOver(
+        comparableValueIndex: Int = comparableList.size - 1,
+        startValueIndex: Int = values.barCount - 1,
+
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
+
+    fun crossOver(
+
         comparableList: MutableList<MarketData>,
-        comparableIndex: Int,
-        index: Int,
-        comparableOHLCV: OHLCV,
-        ohlcv: OHLCV
-    ): Boolean {
-        // Check if value is above or below target on first iteration, return false if so,
-        if (isOver(comparableList, comparableIndex, index, comparableOHLCV, ohlcv))
-            return boolCache
 
-        for (i in 1 until marketDataMutableList.size) {
-            if (boolCache) break
-            if (isOver(comparableList, comparableIndex, index + i, comparableOHLCV, ohlcv))
-                boolCache = true
-        }
+        comparableValueIndex: Int = comparableList.size - 1,
+        startValueIndex: Int = values.barCount - 2,
 
-        return resetCache(boolCache)
-    }
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE
 
+    ): Boolean
 
-    override fun crossOver(
+    fun crossOver(
         target: Double,
-        barsBack: Int,
-        ohlcv: OHLCV
 
-    ): Boolean {
-        if (barsBack <= 0) throw IllegalArgumentException("barsBack must be greater than 0")
-        if (values.barValue(values.barCount - 1 - barsBack) > target) return false
+        barsBack: Int = 1,
+        ohlcv: OHLCV = OHLCV.CLOSE
+    ): Boolean
 
-        for (i in 0 until barsBack + 1) {
-            if(boolCache) break
+    fun crossUnder(
 
-            val trueIndex = (values.barCount - 1) - (barsBack - i)
-            val barVal = values.barValue(trueIndex, ohlcv)
-
-            boolCache = barVal > target
-        }
-
-        return resetCache(boolCache)
-    }
-
-
-    override fun crossUnder(
         comparableList: MutableList<MarketData>,
-        comparableIndex: Int,
-        index: Int,
-        comparableOHLCV: OHLCV,
-        ohlcv: OHLCV,
-    ): Boolean {
-//        val targetToCross = barSeries.getBar(barIndex).closePrice
-//
-//        /**
-//         * Check if left bar is under target, and right bar is over,
-//         */
-//
-//        if (barIndex == 0) {
-//            close(barCount - 1) < targetToCross &&
-//                    close(barCount - 2) >= targetToCross
-//        } else {
-//            close(barIndex) < targetToCross &&
-//                    close(barIndex - 1) >= targetToCross
-//        }
-        TODO("")
-    }
 
-    override fun crossUnder(rightBarIndex: Int, leftBarIndex: Int, rightBarOHLCV: OHLCV, leftBarOHLCV: OHLCV): Boolean {
-        TODO("Not yet implemented")
-    }
+        comparableValueIndex: Int = comparableList.size - 1,
+        startValueIndex: Int = values.barCount - 2,
 
-    override fun pivotUp(
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
+
+    fun crossUnder(
+
+        target: Double,
+
+        barsBack: Int = 1,
+        ohlcv: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
+
+    fun highest(
         leftBarIndex: Int,
         rightBarIndex: Int,
-        leftBarOHLCV: OHLCV,
-        rightBarOHLCV: OHLCV
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
+    ): Boolean
 
-    override fun pivotDown(
+    fun lowest(
         leftBarIndex: Int,
-        rightBarIndex: Int,
-        leftBarOHLCV: OHLCV,
-        rightBarOHLCV: OHLCV
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
+        rightBarIndex: Int
+    ): Boolean
+
+    fun pivotUp(
+
+        leftBarIndex: Int = 0,
+        rightBarIndex: Int = 0,
+
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
+
+
+    fun pivotDown(
+
+        leftBarIndex: Int = 0,
+        rightBarIndex: Int = 0,
+
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
+
+//
+//    fun bullishDivergence(indicator: T): ConditionAlertSupplier
+//    fun hiddenBullishDivergence(indicator: T): ConditionAlertSupplier
+//
+//    fun bearishDivergence(indicator: T): ConditionAlertSupplier
+//    fun hiddenBearishDivergence(indicator: T): ConditionAlertSupplier
 }
-

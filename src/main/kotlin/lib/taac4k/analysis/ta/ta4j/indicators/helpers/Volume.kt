@@ -1,7 +1,7 @@
 package lib.taac4k.analysis.ta.ta4j.indicators.helpers
 
 import lib.taac4k.analysis.ta.IndicatorConditions
-import lib.taac4k.analysis.ta.conditions.BaseConditionsProvider
+import lib.taac4k.analysis.ta.conditions.BaseConditions
 import lib.taac4k.analysis.ta.conditions.helpers.VolumeConditions
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.MarketDataValues
@@ -21,4 +21,4 @@ open class Volume(
     override val rawIndicator: VolumeIndicator = VolumeIndicator(adapter.toBarSeries(marketDataList), length),
     override val conditions: VolumeConditions = VolumeConditions(marketDataList, values)
 
-) : IndicatorConditions<BaseConditionsProvider>
+) : IndicatorConditions<BaseConditions>

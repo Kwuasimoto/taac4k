@@ -1,4 +1,4 @@
-package lib.taac4k.markets.providers
+package lib.taac4k.markets
 
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter

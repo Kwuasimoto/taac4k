@@ -4,7 +4,7 @@ import lib.taac4k.markets.data.MarketData
 import java.time.ZonedDateTime
 
 interface BaseMarketDataBuilder {
-    fun ticker(ticker: kotlin.String): BaseMarketDataBuilder
+    fun ticker(ticker: String): BaseMarketDataBuilder
     fun open(open: Double): BaseMarketDataBuilder
     fun high(high: Double): BaseMarketDataBuilder
     fun low(low: Double): BaseMarketDataBuilder

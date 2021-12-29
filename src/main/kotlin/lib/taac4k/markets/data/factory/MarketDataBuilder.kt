@@ -17,7 +17,7 @@ class MarketDataBuilder(
         return temp
     }
 
-    override fun ticker(ticker: kotlin.String): BaseMarketDataBuilder {
+    override fun ticker(ticker: String): BaseMarketDataBuilder {
         marketDatum.ticker = ticker
         return this
     }

@@ -18,13 +18,6 @@ open class MarketDataAdapter(
     override fun toBarSeries(from: MutableList<MarketData>, name: String): BarSeries =
         barSeriesFactory.fromMarketDataList(from)
 
-    override fun convert(from: AggregatesDTO, params: AggregatesParameters): MutableList<MarketData> {
-        val newMarketDataList = newList
-
-        for (aggregate in from.results)
-            newMarketDataList.add(marketDataFactory.fromAggregate(aggregate, params))
-
-        return newMarketDataList
-    }
-
+    override fun convert(from: AggregatesDTO, params: AggregatesParameters): MutableList<MarketData> =
+        marketDataFactory.fromAggregates(from, params)
 }

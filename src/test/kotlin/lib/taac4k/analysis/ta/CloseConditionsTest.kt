@@ -142,7 +142,7 @@ internal class CloseConditionsTest {
             appleCloseIndicator.check {
                 appleCloseIndicator.conditions.isOver(
                     appleDataList,
-                    comparableIndex = appleDataList.size - 10
+                    comparableValueIndex = appleDataList.size - 10
                 )
             }.asBoolean
         )
@@ -166,26 +166,16 @@ internal class CloseConditionsTest {
             fakeDataList.add(MarketDataFactory().builder.close(494.99).build())
 
         // Bar is not above target
-        assertEquals(
-            true,
+        assertEquals(true,
             tslaCloseIndicator.check {
-                tslaCloseIndicator.conditions.crossOver(
-                    fakeDataList,
-                    index = tslaDataList.size - 21
-                )
-            }.asBoolean
-        )
+                tslaCloseIndicator.conditions.crossOver(fakeDataList, startValueIndex = tslaDataList.size - 21)
+            }.asBoolean)
 
         // Bar is already above target
-        assertEquals(
-            false,
+        assertEquals(false,
             tslaCloseIndicator.check {
-                tslaCloseIndicator.conditions.crossOver(
-                    fakeDataList,
-                    index = tslaDataList.size - 15
-                )
-            }.asBoolean
-        )
+                tslaCloseIndicator.conditions.crossOver(fakeDataList, startValueIndex = tslaDataList.size - 15)
+            }.asBoolean)
 
         fakeDataList = mutableListOf()
     }
@@ -196,6 +186,41 @@ internal class CloseConditionsTest {
             tslaCloseIndicator.check { tslaCloseIndicator.conditions.crossOver(494.99, 10) }.asBoolean)
         assertEquals(false,
             tslaCloseIndicator.check { tslaCloseIndicator.conditions.crossOver(494.99, 4) }.asBoolean)
+    }
+
+    @Test
+    fun crossUnderOtherData() {
+        // Create a line to cross
+        for (i in 0 until 100)
+            fakeDataList.add(MarketDataFactory().builder.close(303.24).build())
+
+        // Bar is not above target
+        assertEquals(true,
+            appleCloseIndicator.check {
+                appleCloseIndicator.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9)
+            }.asBoolean)
+
+        // Bar is already under comparable value
+        assertEquals(false,
+            appleCloseIndicator.check {
+                appleCloseIndicator.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 2)
+            }.asBoolean)
+
+        fakeDataList = mutableListOf()
+    }
+
+    @Test
+    fun crossUnderTarget() {
+        // Bar already above target
+        assertEquals(false,
+            appleCloseIndicator.check {
+                appleCloseIndicator.conditions.crossUnder(303.24, 10)
+            }.asBoolean)
+        // Has a crossover
+        assertEquals(true,
+            appleCloseIndicator.check {
+                appleCloseIndicator.conditions.crossUnder(303.24, 9)
+            }.asBoolean)
     }
 
     @Test

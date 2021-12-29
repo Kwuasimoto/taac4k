@@ -1,4 +1,4 @@
-package lib.taac4k.markets.providers.http
+package lib.taac4k.markets
 
 interface RestClientSupplier<RestClient>  {
     val rest: RestClient

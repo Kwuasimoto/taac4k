@@ -2,7 +2,7 @@ package lib.taac4k.markets.providers.polygon
 
 import io.polygon.kotlin.sdk.DefaultOkHttpClientProvider
 import io.polygon.kotlin.sdk.rest.PolygonRestClient
-import lib.taac4k.markets.providers.http.RestClientSupplier
+import lib.taac4k.markets.RestClientSupplier
 import okhttp3.Interceptor
 import okhttp3.Response
 

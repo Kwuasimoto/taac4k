@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
-internal class MarketDataIOTest {
+internal class MarketDataIOTests {
 
     private val jsonFileName: String = "apple_data_2019.json"
     private var mockMarketData: MutableList<MarketData> = mutableListOf()

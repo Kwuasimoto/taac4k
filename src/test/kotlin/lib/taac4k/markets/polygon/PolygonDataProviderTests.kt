@@ -4,6 +4,8 @@ import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
+import lib.taac4k.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.markets.data.io.MarketDataIO
 import lib.taac4k.markets.providers.polygon.PolygonClient
 import lib.taac4k.markets.providers.polygon.PolygonDataProvider
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -15,8 +17,10 @@ import org.mockito.junit.jupiter.MockitoExtension
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
-internal class PolygonDataProviderTest {
+internal class PolygonDataProviderTests {
 
+    private val appleDataIO = MarketDataIO(jsonFileName = "apple_data_2019.json")
+    private val adapter: MarketDataAdapter = BaseMarketDataAdapter()
     private val polygonDataProvider: PolygonDataProvider = PolygonDataProvider()
     private val aggregatesParameters: AggregatesParameters = AggregatesParameters(
         "AAPL",
@@ -72,5 +76,21 @@ internal class PolygonDataProviderTest {
         )
 
         println(barSeries)
+    }
+
+    @Test
+    fun convertMarketListToBarSeries() {
+        val marketDataList = appleDataIO.read()
+        val barSeries = adapter.toBarSeries(marketDataList)
+
+        assertEquals(5000, barSeries.barCount)
+    }
+
+    @Test
+    fun convertBarSeriesToMarketList() {
+        val newSeries = appleDataIO.toBarSeries()
+        val marketDataList = adapter.convert(newSeries)
+
+        assertEquals(5000, marketDataList.size)
     }
 }

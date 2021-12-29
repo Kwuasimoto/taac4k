@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension
  *  Success :)
  */
 @ExtendWith(MockitoExtension::class)
-internal class MarketsTest {
+internal class MarketsTests {
 
     private val markets: Markets = mock()
 

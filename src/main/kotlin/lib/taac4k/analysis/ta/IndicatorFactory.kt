@@ -21,7 +21,7 @@ import lib.taac4k.markets.data.MarketData
  * 8. On-Balance Volume
  */
 
-open class BaseConditionalIndicatorFactory : ConditionalIndicatorFactory {
+open class IndicatorFactory : ConditionalIndicatorFactory {
     override fun close(marketDataList: MutableList<MarketData>): Close = Close(marketDataList)
 }
 

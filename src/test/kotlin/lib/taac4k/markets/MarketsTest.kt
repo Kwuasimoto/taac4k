@@ -3,12 +3,11 @@ package lib.taac4k.markets
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import lib.taac4k.markets.data.adapter.MarketDataAdapter
-import lib.taac4k.markets.polygon.Polygon
-import lib.taac4k.markets.polygon.PolygonClient
-import lib.taac4k.markets.polygon.PolygonDataProvider
+import lib.taac4k.markets.providers.polygon.Polygon
+import lib.taac4k.markets.providers.polygon.PolygonClient
+import lib.taac4k.markets.providers.polygon.PolygonDataProvider
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
 

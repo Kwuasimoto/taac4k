@@ -2,7 +2,7 @@ package lib.taac4k.markets.data.factory
 
 import io.polygon.kotlin.sdk.rest.AggregateDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.taac4k.analysis.ta.enums.OHLC
+import lib.taac4k.analysis.ta.enums.OHLCV
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.MarketDataMutableListSupplier
 import org.json.JSONArray
@@ -11,16 +11,15 @@ import org.ta4j.core.BarSeries
 import java.util.*
 
 open class MarketDataFactory(
-    open val builder: BaseMarketDataBuilder = MarketDataBuilder(),
-    open val date: MarketDateParser = DateParser()
-    ) : MarketDataMutableListSupplier {
+    open val builder: BaseMarketDataBuilder = MarketDataBuilder()
+) : MarketDataMutableListSupplier {
 
     open fun fromBarSeries(barSeries: BarSeries): MutableList<MarketData> {
         val returnList = newList
 
         for(bar in barSeries.barData){
             returnList.add(builder
-                .ticker(barSeries.name) // ?
+                .ticker(barSeries.name)
                 .open(bar.openPrice.doubleValue())
                 .high(bar.highPrice.doubleValue())
                 .low(bar.lowPrice.doubleValue())
@@ -58,17 +57,17 @@ open class MarketDataFactory(
 
         for(jsonObject in JSONArray(rawJson)) {
             jsonObject as JSONObject
-            val ohlc = jsonObject.getJSONObject("ohlc")
+            val ohlcv = jsonObject.getJSONObject("ohlcv")
 
             returnList.add(
                 builder
                     .ticker(jsonObject.getString("ticker"))
-                    .open(ohlc.getDouble(OHLC.OPEN.name))
-                    .high(ohlc.getDouble(OHLC.HIGH.name))
-                    .low(ohlc.getDouble(OHLC.LOW.name))
-                    .close(ohlc.getDouble(OHLC.CLOSE.name))
+                    .open(ohlcv.getDouble(OHLCV.OPEN.name))
+                    .high(ohlcv.getDouble(OHLCV.HIGH.name))
+                    .low(ohlcv.getDouble(OHLCV.LOW.name))
+                    .close(ohlcv.getDouble(OHLCV.CLOSE.name))
+                    .vwap(ohlcv.getDouble(OHLCV.VWAP.name))
                     .volume(jsonObject.getDouble("volume"))
-                    .vwap(jsonObject.getDouble("vwap"))
                     .endTime(jsonObject.getLong("endTime"))
                     .timespan(jsonObject.getString("timespan"))
                     .multiplier(jsonObject.getLong("multiplier"))

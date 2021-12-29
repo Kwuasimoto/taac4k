@@ -1,6 +1,6 @@
 package lib.taac4k.markets.data
 
-import lib.taac4k.analysis.ta.enums.OHLC
+import lib.taac4k.analysis.ta.enums.OHLCV
 import java.time.ZonedDateTime
 
 /**
@@ -15,9 +15,8 @@ open class MarketData(
     /**
      * Important Stuff
      */
-    open var ohlc: MutableMap<OHLC, Double> = mutableMapOf(),
+    open var ohlcv: MutableMap<OHLCV, Double> = mutableMapOf(),
     open var volume: Double = 0.0,
-    open var vwap: Double = 0.0,
 
     /**
      * Timestamps on bar

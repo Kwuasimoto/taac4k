@@ -6,8 +6,8 @@ import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import lib.taac4k.markets.data.io.MarketDataIO
-import lib.taac4k.markets.polygon.PolygonClient
-import lib.taac4k.markets.polygon.PolygonDataProvider
+import lib.taac4k.markets.providers.polygon.PolygonClient
+import lib.taac4k.markets.providers.polygon.PolygonDataProvider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test

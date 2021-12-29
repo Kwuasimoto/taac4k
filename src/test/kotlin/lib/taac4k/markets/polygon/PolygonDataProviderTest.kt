@@ -1,25 +1,23 @@
 package lib.taac4k.markets.polygon
 
-import com.nhaarman.mockitokotlin2.mock
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.markets.providers.polygon.PolygonClient
+import lib.taac4k.markets.providers.polygon.PolygonDataProvider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
-import java.util.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
 internal class PolygonDataProviderTest {
 
     private val polygonDataProvider: PolygonDataProvider = PolygonDataProvider()
-
     private val aggregatesParameters: AggregatesParameters = AggregatesParameters(
         "AAPL",
         1,
@@ -28,9 +26,6 @@ internal class PolygonDataProviderTest {
         "2021-01-01",
         true,
     )
-
-    private val aggregatesDTO: AggregatesDTO = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
-    private val marketDataList: LinkedList<MarketData> = mock()
 
     @BeforeAll
     fun setUp() {}

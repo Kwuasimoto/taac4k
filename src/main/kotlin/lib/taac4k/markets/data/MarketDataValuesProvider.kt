@@ -1,6 +1,6 @@
 package lib.taac4k.markets.data
 
-import lib.taac4k.analysis.ta.enums.OHLC
+import lib.taac4k.analysis.ta.enums.OHLCV
 
 /**
  * *Assistant* interface for ConditionsProvider,
@@ -15,18 +15,17 @@ interface MarketDataValuesProvider {
     fun timespan(barIndex: Int): String
 
     fun volume(barIndex: Int): Double
-    fun vwap(barIndex: Int): Double
 
     fun barValue(
         marketSeries: MutableList<MarketData>,
         barIndex: Int,
-        ohlc: OHLC = OHLC.CLOSE
+        ohlcv: OHLCV = OHLCV.CLOSE
 
     ): Double
 
     fun barValue(
         barIndex: Int,
-        ohlc: OHLC = OHLC.CLOSE
+        ohlcv: OHLCV = OHLCV.CLOSE
 
     ): Double
 

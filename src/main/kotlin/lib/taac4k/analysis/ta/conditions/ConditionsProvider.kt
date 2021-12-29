@@ -1,7 +1,6 @@
 package lib.taac4k.analysis.ta.conditions
 
-import lib.taac4k.analysis.ta.conditions.executor.ConditionsExecutor
-import lib.taac4k.analysis.ta.enums.OHLC
+import lib.taac4k.analysis.ta.enums.OHLCV
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.MarketDataValuesProvider
 
@@ -9,7 +8,7 @@ import lib.taac4k.markets.data.MarketDataValuesProvider
  * ### Default Condition Supplier
  */
 
-interface ConditionsProvider : ConditionsExecutor {
+interface ConditionsProvider {
 //    /**
 //     *
 //     */
@@ -24,8 +23,8 @@ interface ConditionsProvider : ConditionsExecutor {
         leftBarIndex: Int = values.barCount - 2,
         rightBarIndex: Int = values.barCount - 1,
 
-        leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
 
     ): Boolean
 
@@ -34,8 +33,8 @@ interface ConditionsProvider : ConditionsExecutor {
         leftBarIndex: Int = values.barCount - 2,
         rightBarIndex: Int = values.barCount - 1,
 
-        leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
 
     ): Boolean
 
@@ -44,8 +43,8 @@ interface ConditionsProvider : ConditionsExecutor {
         leftBarIndex: Int = values.barCount - 2,
         rightBarIndex: Int = values.barCount - 1,
 
-        leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
 
     ): Boolean
 
@@ -54,10 +53,10 @@ interface ConditionsProvider : ConditionsExecutor {
         comparableList: MutableList<MarketData>,
 
         comparableIndex: Int = comparableList.size - 1,
-        barIndex: Int = values.barCount - 1,
+        index: Int = values.barCount - 1,
 
-        comparableOHLC: OHLC = OHLC.CLOSE,
-        barOHLC: OHLC = OHLC.CLOSE,
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE,
 
         period: Int = 0
 
@@ -68,10 +67,10 @@ interface ConditionsProvider : ConditionsExecutor {
         comparableList: MutableList<MarketData>,
 
         comparableIndex: Int = comparableList.size - 1,
-        barIndex: Int = values.barCount - 1,
+        index: Int = values.barCount - 1,
 
-        comparableOHLC: OHLC = OHLC.CLOSE,
-        barOHLC: OHLC = OHLC.CLOSE,
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE,
 
         period: Int = 0
 
@@ -81,50 +80,63 @@ interface ConditionsProvider : ConditionsExecutor {
 
         comparableList: MutableList<MarketData>,
 
-        comparableIndex: Int = 0,
-        barIndex: Int = 0,
+        comparableIndex: Int = comparableList.size - 1,
+        index: Int = values.barCount - 2,
 
-        comparableOHLC: OHLC = OHLC.CLOSE,
-        barOHLC: OHLC = OHLC.CLOSE
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE
 
     ): Boolean
 
+    fun crossOver(
+        target: Double,
+
+        barsBack: Int = 1,
+        ohlcv: OHLCV = OHLCV.CLOSE,
+    ): Boolean
+
+
+    fun crossUnder(
+
+        rightBarIndex: Int = 0,
+        leftBarIndex: Int = 0,
+
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE,
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE
+
+    ): Boolean
 
     fun crossUnder(
 
         comparableList: MutableList<MarketData>,
 
         comparableIndex: Int = 0,
-        barIndex: Int = 0,
+        index: Int = 0,
 
-        comparableOHLC: OHLC = OHLC.CLOSE,
-        barOHLC: OHLC = OHLC.CLOSE
+        comparableOHLCV: OHLCV = OHLCV.CLOSE,
+        ohlcv: OHLCV = OHLCV.CLOSE
 
     ): Boolean
 
 
     fun pivotUp(
 
-        period: Int = 0,
-
         leftBarIndex: Int = 0,
         rightBarIndex: Int = 0,
 
-        leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
 
     ): Boolean
 
 
     fun pivotDown(
 
-        period: Int = 0,
-
         leftBarIndex: Int = 0,
         rightBarIndex: Int = 0,
 
-        leftBarOHLC: OHLC = OHLC.CLOSE,
-        rightBarOHLC: OHLC = OHLC.CLOSE
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
 
     ): Boolean
 

@@ -1,6 +1,6 @@
 package lib.taac4k.analysis.ta.conditions
 
-import lib.taac4k.analysis.ta.enums.OHLC
+import lib.taac4k.analysis.ta.enums.OHLCV
 import lib.taac4k.markets.data.MarketData
 
 /**
@@ -11,24 +11,27 @@ abstract class BaseConditionsProvider(
     open val marketDataMutableList: MutableList<MarketData>,
 ) : ConditionsProvider {
 
-    //    override val barCount: Int = marketDataList.size
-    private var cachedBool: Boolean = false
-    private var cachedBarsLeft: Int = 0
+    // PSEUDO CACHE,
+    // Didn't think itd be necessary for a class to handle these values.
+    private var boolCache: Boolean = false
+    private var barsLeftCache: Int = 0
+
+    private fun resetCache(cachedBool: Boolean): Boolean {
+        this.boolCache = false
+        this.barsLeftCache = 0
+        return cachedBool
+    }
 
     /**
      * Period not integrated, will be today :)
      */
     override fun percentChanged(
-
         change: Float,
-
         leftBarIndex: Int,
         rightBarIndex: Int,
-
-        leftBarOHLC: OHLC,
-        rightBarOHLC: OHLC
-
-    ): Boolean = check { true }
+        leftBarOHLCV: OHLCV,
+        rightBarOHLCV: OHLCV
+    ): Boolean = true
 
     /**
      * This Indicator isRising?
@@ -37,167 +40,117 @@ abstract class BaseConditionsProvider(
      *
      * @TODO Add a grace period that allows the price to drop/rise for x bars before rising/falling again
      */
-    override fun isRising(
-
-        leftBarIndex: Int,
-        rightBarIndex: Int,
-
-        leftBarOHLC: OHLC,
-        rightBarOHLC: OHLC
-
-    ): Boolean = check {
+    override fun isRising(leftBarIndex: Int, rightBarIndex: Int, leftBarOHLCV: OHLCV, rightBarOHLCV: OHLCV): Boolean {
         val barGapLength = rightBarIndex - leftBarIndex
 
         if (barGapLength == 0)
             throw IllegalArgumentException("Cannot check if a single bar is rising, maybe in the future on live charts :)")
 
-        if (barGapLength >= 2) {
-            var result = true
-
+        return if (barGapLength >= 2) {
             for (i in 0 until barGapLength) {
-                if (!result) break
+                if (!boolCache) break
                 if (leftBarIndex >= rightBarIndex) break
 
                 val trueLeftIndex = leftBarIndex + (i)
                 val trueRightIndex = rightBarIndex - (barGapLength - (i + 1))
 
-                val leftVal = values.barValue(trueLeftIndex, leftBarOHLC)
-                val rightVal = values.barValue(trueRightIndex, rightBarOHLC)
+                val leftVal = values.barValue(trueLeftIndex, leftBarOHLCV)
+                val rightVal = values.barValue(trueRightIndex, rightBarOHLCV)
 
-                result = rightVal > leftVal
+                boolCache = rightVal > leftVal
             }
 
-            result
-        } else values.barValue(rightBarIndex, rightBarOHLC) > values.barValue(leftBarIndex, leftBarOHLC)
-
+             resetCache(boolCache)
+        } else values.barValue(rightBarIndex, rightBarOHLCV) > values.barValue(leftBarIndex, leftBarOHLCV)
     }
 
     /**
      */
-    override fun isFalling(
-
-        leftBarIndex: Int,
-        rightBarIndex: Int,
-
-        leftBarOHLC: OHLC,
-        rightBarOHLC: OHLC
-
-    ): Boolean = check {
-        !isRising(leftBarIndex, rightBarIndex, leftBarOHLC, rightBarOHLC)
-    }
+    override fun isFalling(leftBarIndex: Int, rightBarIndex: Int, leftBarOHLCV: OHLCV, rightBarOHLCV: OHLCV): Boolean =
+        !isRising(leftBarIndex, rightBarIndex, leftBarOHLCV, rightBarOHLCV)
 
     override fun isOver(
-
         comparableList: MutableList<MarketData>,
-
         comparableIndex: Int,
-        barIndex: Int,
-
-        comparableOHLC: OHLC,
-        barOHLC: OHLC,
-
+        index: Int,
+        comparableOHLCV: OHLCV,
+        ohlcv: OHLCV,
         period: Int
-
-    ): Boolean = check {
-        if (comparableIndex < 0 || barIndex < 0) throw IllegalArgumentException("comparableIndex or barIndex cannot be less than 0!")
+    ): Boolean {
+        if (comparableIndex < 0 || index < 0) throw IllegalArgumentException("comparableIndex or barIndex cannot be less than 0!")
         else {
-            val barVal = values.barValue(barIndex, barOHLC)
-            val comparableVal = values.barValue(comparableList, comparableIndex, comparableOHLC)
+            val value = values.barValue(index, ohlcv)
+            val comparableValue = values.barValue(comparableList, comparableIndex, comparableOHLCV)
 
-            barVal > comparableVal
+            return value > comparableValue
         }
     }
 
     override fun isUnder(
-
         comparableList: MutableList<MarketData>,
-
         comparableIndex: Int,
-        barIndex: Int,
-
-        comparableOHLC: OHLC,
-        barOHLC: OHLC,
-
+        index: Int,
+        comparableOHLCV: OHLCV,
+        ohlcv: OHLCV,
         period: Int
-
-
-    ): Boolean = check {
-        !isOver(comparableList, comparableIndex, barIndex, comparableOHLC, barOHLC, period)
-    }
+    ): Boolean = !isOver(comparableList, comparableIndex, index, comparableOHLCV, ohlcv, period)
 
     /**
      *
      * Starts at comparableIndex,
      *
-     * Check if barVal crosses over comparableVal,
-     *   and if barVal remains above comparableVal for (barGapLength =
+     * Check if barVal crosses over comparableVal at any point and returns true
      */
     override fun crossOver(
-
         comparableList: MutableList<MarketData>,
-
         comparableIndex: Int,
-        barIndex: Int,
-
-        comparableOHLC: OHLC,
-        barOHLC: OHLC
-
+        index: Int,
+        comparableOHLCV: OHLCV,
+        ohlcv: OHLCV
     ): Boolean {
-        val barGap = barIndex - comparableIndex
+        // Check if value is above or below target on first iteration, return false if so,
+        if (isOver(comparableList, comparableIndex, index, comparableOHLCV, ohlcv))
+            return boolCache
 
-        val resultBool = check {
-            if (cachedBool) cachedBool
-            if (comparableIndex < barIndex) throw IllegalArgumentException("Bar Index [Right bar] must be greater than Target Index [Left Bar]")
-
-            if (barGap > 1) {
-
-                for (i in 0 until barGap) {
-                    if (cachedBool) break
-
-                }
-
-                if (values.barValue(barIndex, barOHLC) > values.barValue(
-                        comparableList,
-                        comparableIndex,
-                        comparableOHLC
-                    )
-                ) {
-                    TODO("")
-
-                }
-                TODO("")
-
-            } else {
-                cachedBool = values.barValue(barIndex, barOHLC) > values.barValue(
-                    comparableList,
-                    comparableIndex,
-                    comparableOHLC
-                )
-
-                crossOver(
-                    comparableList,
-                    barIndex,
-                    comparableIndex,
-                    comparableOHLC,
-                    barOHLC
-                )
-            }
+        for (i in 1 until marketDataMutableList.size) {
+            if (boolCache) break
+            if (isOver(comparableList, comparableIndex, index + i, comparableOHLCV, ohlcv))
+                boolCache = true
         }
-        cachedBool = false
-        return resultBool
+
+        return resetCache(boolCache)
     }
 
+
+    override fun crossOver(
+        target: Double,
+        barsBack: Int,
+        ohlcv: OHLCV
+
+    ): Boolean {
+        if (barsBack <= 0) throw IllegalArgumentException("barsBack must be greater than 0")
+        if (values.barValue(values.barCount - 1 - barsBack) > target) return false
+
+        for (i in 0 until barsBack + 1) {
+            if(boolCache) break
+
+            val trueIndex = (values.barCount - 1) - (barsBack - i)
+            val barVal = values.barValue(trueIndex, ohlcv)
+
+            boolCache = barVal > target
+        }
+
+        return resetCache(boolCache)
+    }
+
+
     override fun crossUnder(
-
         comparableList: MutableList<MarketData>,
-
         comparableIndex: Int,
-        barIndex: Int,
-
-        comparableOHLC: OHLC,
-        barOHLC: OHLC,
-
-        ): Boolean = check {
+        index: Int,
+        comparableOHLCV: OHLCV,
+        ohlcv: OHLCV,
+    ): Boolean {
 //        val targetToCross = barSeries.getBar(barIndex).closePrice
 //
 //        /**
@@ -214,31 +167,25 @@ abstract class BaseConditionsProvider(
         TODO("")
     }
 
+    override fun crossUnder(rightBarIndex: Int, leftBarIndex: Int, rightBarOHLCV: OHLCV, leftBarOHLCV: OHLCV): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun pivotUp(
-
-        period: Int,
-
         leftBarIndex: Int,
         rightBarIndex: Int,
-
-        leftBarOHLC: OHLC,
-        rightBarOHLC: OHLC
-
-    ): Boolean = check {
+        leftBarOHLCV: OHLCV,
+        rightBarOHLCV: OHLCV
+    ): Boolean {
         TODO("Not yet implemented")
     }
 
     override fun pivotDown(
-
-        period: Int,
-
         leftBarIndex: Int,
         rightBarIndex: Int,
-
-        leftBarOHLC: OHLC,
-        rightBarOHLC: OHLC
-
-    ): Boolean = check {
+        leftBarOHLCV: OHLCV,
+        rightBarOHLCV: OHLCV
+    ): Boolean {
         TODO("Not yet implemented")
     }
 }

@@ -8,7 +8,7 @@ class Polygon(
     val ticker: String = "AAPL",
 
     val client: PolygonClient = PolygonClient(),
-    val adapter: BaseMarketDataAdapter = MarketDataAdapter(),
+    val adapter: MarketDataAdapter = BaseMarketDataAdapter(),
 
     val provider: MarketDataProvider = PolygonDataProvider(client, adapter, ticker = ticker),
 )

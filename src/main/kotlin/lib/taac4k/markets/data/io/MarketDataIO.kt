@@ -1,8 +1,8 @@
 package lib.taac4k.markets.data.io
 
-import lib.taac4k.analysis.ta.ta4j.BarSeriesFactory
+import lib.taac4k.analysis.ta.ta4j.BaseBarSeriesFactory
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.factory.MarketDataFactory
+import lib.taac4k.markets.data.factory.BaseMarketDataFactory
 import org.json.JSONArray
 import org.ta4j.core.BarSeries
 import java.io.File
@@ -29,10 +29,10 @@ open class MarketDataIO(
             else "market_data_${UUID.randomUUID()}.json"
 
 
-    override fun toBarSeries(name: String): BarSeries = BarSeriesFactory()
+    override fun toBarSeries(name: String): BarSeries = BaseBarSeriesFactory()
         .fromJSON(getJSONResourceAsString(getJSONResourcePath(jsonFileName!!)), name)
 
-    override fun read(): MutableList<MarketData> = MarketDataFactory()
+    override fun read(): MutableList<MarketData> = BaseMarketDataFactory()
         .fromJSON(getJSONResourceAsString(getJSONResourcePath(jsonFileName!!)))
 
     override fun write(inMarketDataList: MutableList<MarketData>?): Boolean =

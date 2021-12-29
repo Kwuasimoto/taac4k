@@ -2,22 +2,24 @@ package lib.taac4k.markets.data.adapter
 
 import io.polygon.kotlin.sdk.rest.AggregatesDTO
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
-import lib.taac4k.analysis.ta.ta4j.BarSeriesFactory
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.factory.MarketDataFactory
+import lib.taac4k.markets.data.MarketDataMutableListSupplier
 import org.ta4j.core.BarSeries
+import org.ta4j.core.BaseBarSeries
 
-open class MarketDataAdapter(
-    open val marketDataFactory: MarketDataFactory = MarketDataFactory(),
-    open val barSeriesFactory: BarSeriesFactory = BarSeriesFactory()
-) : BaseMarketDataAdapter {
+/**
+ * 2-way adapter
+ */
+interface MarketDataAdapter : MarketDataMutableListSupplier {
 
-    override fun convert(from: BarSeries): MutableList<MarketData> =
-        marketDataFactory.fromBarSeries(from)
+    /**
+     * Individual technical analysis lib conversions
+     */
+    fun toBarSeries(from: MutableList<MarketData>, name: String = "Lunos"): BarSeries = BaseBarSeries()
 
-    override fun toBarSeries(from: MutableList<MarketData>, name: String): BarSeries =
-        barSeriesFactory.fromMarketDataList(from)
-
-    override fun convert(from: AggregatesDTO, params: AggregatesParameters): MutableList<MarketData> =
-        marketDataFactory.fromAggregates(from, params)
+    /**
+     * toMarketData Overloads
+     */
+    fun convert(from: BarSeries): MutableList<MarketData> = newList
+    fun convert(from: AggregatesDTO, params: AggregatesParameters): MutableList<MarketData> = newList
 }

@@ -9,7 +9,7 @@ import lib.taac4k.markets.data.adapter.MarketDataAdapter
 open class PolygonDataProvider(
 
     open val client: PolygonClient = PolygonClient(),
-    override val adapter: BaseMarketDataAdapter = MarketDataAdapter(),
+    override val adapter: MarketDataAdapter = BaseMarketDataAdapter(),
 
     open val ticker: String = "AAPL",
 
@@ -24,7 +24,7 @@ open class PolygonDataProvider(
         limit: Long,
         // Providing polygonClient to polygonBarBuilder delegates hidden call to
         // Polygon bar builder
-        adapter: BaseMarketDataAdapter
+        adapter: MarketDataAdapter
     ): MutableList<MarketData> {
         val params = AggregatesParameters(
             ticker = this.ticker,

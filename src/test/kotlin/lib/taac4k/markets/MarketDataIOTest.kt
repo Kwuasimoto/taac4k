@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.polygon.kotlin.sdk.rest.AggregatesParameters
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.adapter.MarketDataAdapter
+import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import lib.taac4k.markets.data.io.MarketDataIO
 import lib.taac4k.markets.providers.polygon.PolygonClient
 import lib.taac4k.markets.providers.polygon.PolygonDataProvider
@@ -34,7 +34,7 @@ internal class MarketDataIOTest {
     @BeforeAll
     fun setup() {
         whenever(mockProvider.ticker).thenReturn("TSLA")
-        whenever(mockProvider.adapter).thenReturn(MarketDataAdapter())
+        whenever(mockProvider.adapter).thenReturn(BaseMarketDataAdapter())
         whenever(mockProvider.client).thenReturn(PolygonClient())
     }
 

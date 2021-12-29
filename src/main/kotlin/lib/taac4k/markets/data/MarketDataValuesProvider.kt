@@ -29,4 +29,20 @@ interface MarketDataValuesProvider {
 
     ): Double
 
+    fun highest(
+        leftBarIndex: Int,
+        rightBarIndex: Int,
+
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
+    ): Double
+
+    fun lowest(
+        leftBarIndex: Int,
+        rightBarIndex: Int,
+
+        leftBarOHLCV: OHLCV = OHLCV.CLOSE,
+        rightBarOHLCV: OHLCV = OHLCV.CLOSE
+    ): Double
+
 }

@@ -5,7 +5,7 @@ import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import lib.taac4k.markets.data.adapter.MarketDataAdapter
-import lib.taac4k.markets.data.factory.MarketDataFactory
+import lib.taac4k.markets.data.factory.BaseMarketDataFactory
 import lib.taac4k.markets.data.io.MarketDataIO
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
@@ -27,8 +27,8 @@ internal class CloseConditionsTest {
      * - Market Data Raw
      */
 
-    private val mockIndicatorFactory: IndicatorFactory = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
-    private val adapter: BaseMarketDataAdapter = MarketDataAdapter()
+    private val mockIndicatorFactory: BaseConditionalIndicatorFactory = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
+    private val adapter: MarketDataAdapter = BaseMarketDataAdapter()
     private val appleDataIO = MarketDataIO(jsonFileName = "apple_data_2019.json")
     private val tslaDataIO = MarketDataIO(jsonFileName = "tsla_data_2019.json")
     private var appleDataList: MutableList<MarketData> = mutableListOf()
@@ -54,10 +54,10 @@ internal class CloseConditionsTest {
         tslaDataList = tslaDataIO.read()
 
         /**
-         * 2. Use [MutableList] of [MarketData] with [IndicatorFactory] functions to make [Close]
+         * 2. Use [MutableList] of [MarketData] with [BaseConditionalIndicatorFactory] functions to make [Close]
          */
-        appleCloseIndicator = IndicatorFactory().close(appleDataList)
-        tslaCloseIndicator = IndicatorFactory().close(tslaDataList)
+        appleCloseIndicator = BaseConditionalIndicatorFactory().close(appleDataList)
+        tslaCloseIndicator = BaseConditionalIndicatorFactory().close(tslaDataList)
 
         /**
          * 3. TESTS
@@ -70,7 +70,7 @@ internal class CloseConditionsTest {
 
     @Test
     fun factoryFunctions() {
-        assertEquals(mockIndicatorFactory::class.java, IndicatorFactory::class.java)
+        assertEquals(mockIndicatorFactory::class.java, BaseConditionalIndicatorFactory::class.java)
         assertEquals(mockIndicatorFactory.close(appleDataList)::class.java, Close::class.java)
     }
 
@@ -163,7 +163,7 @@ internal class CloseConditionsTest {
     fun crossOverOtherData() {
         // Create a line to cross
         for (i in 0 until 100)
-            fakeDataList.add(MarketDataFactory().builder.close(494.99).build())
+            fakeDataList.add(BaseMarketDataFactory().builder.close(494.99).build())
 
         // Bar is not above target
         assertEquals(true,
@@ -192,7 +192,7 @@ internal class CloseConditionsTest {
     fun crossUnderOtherData() {
         // Create a line to cross
         for (i in 0 until 100)
-            fakeDataList.add(MarketDataFactory().builder.close(303.24).build())
+            fakeDataList.add(BaseMarketDataFactory().builder.close(303.24).build())
 
         // Bar is not above target
         assertEquals(true,

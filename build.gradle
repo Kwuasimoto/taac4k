@@ -32,7 +32,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-tasks.dokkaHtml.configure {
-//    outputDirectory.set(buildDir.resolve("dokka"))
-}

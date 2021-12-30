@@ -6,12 +6,20 @@ import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import lib.taac4k.markets.data.adapter.MarketDataAdapter
 
+/**
+ * @version 0.0.1
+ *
+ * @param client a PolygonClient for accessing endpoints
+ * @param ticker the ticker for the PolygonClient to fetch data for.
+ *
+ * @param
+ */
 open class PolygonDataProvider(
 
-    open val client: PolygonClient = PolygonClient(),
-    override val adapter: MarketDataAdapter = BaseMarketDataAdapter(),
+    val client: PolygonClient = PolygonClient(),
+    val ticker: String = "AAPL",
 
-    open val ticker: String = "AAPL",
+    override val adapter: MarketDataAdapter = BaseMarketDataAdapter()
 
     ) : MarketDataProvider {
 

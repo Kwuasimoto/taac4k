@@ -37,7 +37,6 @@ val aaplMarketData: MutableList<MarketData> =
 ```
 
 2. Create a ConditionalIndicator with the fetched data.<br>
-
 ```kotlin
 // RSI() or Close()
 val aaplClose: Close = Close(aaplDataList)
@@ -45,7 +44,6 @@ val aaplClose: Close = Close(aaplDataList)
 
 3. Use the check(): BooleanSupplier lambda <br>
 to check the result of condition functions.
-
 ```kotlin
 // Better Examples coming soon, check tests for most stuff.
 
@@ -60,7 +58,7 @@ aaplClose.check { aaplClose.conditions.isRising(leftBarIndex = appleDataList.siz
 
 // ---------------------------------------------------------------------------------------
 
-/**
+/** 
  * Compare data against another MutableList<MarketData>.
  */
 

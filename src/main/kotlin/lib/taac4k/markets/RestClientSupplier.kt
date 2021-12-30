@@ -1,7 +1,10 @@
 package lib.taac4k.markets
 
-interface RestClientSupplier<RestClient>  {
-    val rest: RestClient
+/**
+ * Supply a type T Rest client to a market data rest api.
+ */
+interface RestClientSupplier<T>  {
+    val rest: T
 }
 
 

@@ -24,8 +24,6 @@ internal class ValueConditionsTests {
     /**
      * - Market Data Raw
      */
-
-    private val mockIndicatorFactory: IndicatorFactory = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
     private var appleDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "aapl_data_2019.json").read()
     private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").read()
     private var aaplClose: Close = mock()
@@ -49,12 +47,6 @@ internal class ValueConditionsTests {
         /**
          * 3. TESTS
          */
-    }
-
-    @Test
-    fun factoryFunctions() {
-        assertEquals(mockIndicatorFactory::class.java, IndicatorFactory::class.java)
-        assertEquals(mockIndicatorFactory.close(appleDataList)::class.java, Close::class.java)
     }
 
     @Test

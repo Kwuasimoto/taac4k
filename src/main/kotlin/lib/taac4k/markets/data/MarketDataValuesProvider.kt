@@ -3,8 +3,8 @@ package lib.taac4k.markets.data
 import lib.taac4k.analysis.ta.enums.OHLCV
 
 /**
- * *Assistant* interface for ConditionsProvider,
- * makes getting bar values from a MarketDataList easier.
+ * Interface for helping provide data values from indices in a MutableList<MarketData>
+ * @version 0.0.1
  */
 interface MarketDataValuesProvider {
     val marketDataList: MutableList<MarketData>

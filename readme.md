@@ -9,7 +9,7 @@
 Utilizes market data providers to supply transformed data that is compatible with <br>
 technical analysis indicators and their respective conditions.
 
-Dokka docs: @Coming Soon!<br>
+Dokka docs: https://www.taac4k.org/<br>
 Custom docs: @Mayyybe? 📝
 
 ---

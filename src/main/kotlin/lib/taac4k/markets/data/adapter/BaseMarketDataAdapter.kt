@@ -7,6 +7,10 @@ import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.factory.BaseMarketDataFactory
 import org.ta4j.core.BarSeries
 
+/**
+ * Primary market data adapter for converting data from a provider type to an analysis type.
+ * @version 0.0.1
+ */
 open class BaseMarketDataAdapter(
     open val marketDataFactory: BaseMarketDataFactory = BaseMarketDataFactory(),
     open val barSeriesFactory: BaseBarSeriesFactory = BaseBarSeriesFactory()

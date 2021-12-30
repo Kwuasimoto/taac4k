@@ -10,12 +10,11 @@ import okhttp3.Response
  * Polygon rest client wrapper
  * @version 0.0.1
  *
- * @param apiKey the apiKey [This is a public key, it will likely get banned after being spammed]
+ * @param apiKey the apiKey for the polygon client
  * @param apiDomain overridable polygon api domain
  */
 class PolygonClient(apiKey: String = "ZgFx6ebkngGhMAgS7jM8pJobC4NouCye", apiDomain: String = "api.polygon.io") :
     RestClientSupplier<PolygonRestClient> {
-
     /**
      * Polygon rest client
      *

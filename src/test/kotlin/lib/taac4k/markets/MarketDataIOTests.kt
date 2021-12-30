@@ -43,12 +43,12 @@ internal class MarketDataIOTests {
         val marketDataList =
             mockProvider.adapter.convert(mockProvider.client.rest.getAggregatesBlocking(mockParameters), mockParameters)
 
-        assertEquals(true, MarketDataIO(marketDataList).write())
+        assertEquals(true, MarketDataIO(marketDataList).writeJSON())
     }
 
     @Test
     fun read() {
-        mockMarketData = MarketDataIO(jsonFileName = jsonFileName).read()
+        mockMarketData = MarketDataIO(jsonFileName = jsonFileName).readJSON()
         assertEquals(5000, mockMarketData.size)
     }
 

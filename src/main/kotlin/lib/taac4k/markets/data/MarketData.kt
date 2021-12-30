@@ -19,19 +19,16 @@ open class MarketData(
      * Bar Ticker
      */
     open var ticker: String = "AAPL",
-
     /**
      * Important Stuff
      */
     open var ohlcv: MutableMap<OHLCV, Double> = mutableMapOf(),
     open var volume: Double = 0.0,
-
     /**
      * Timestamps on bar
      */
     open var endTime: Long = ZonedDateTime.now().toEpochSecond(),
     open var beginTime: Long = endTime - 60000,
-
     /**
      * "minute" | "hour" | "day" | "month"
      */

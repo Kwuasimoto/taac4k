@@ -13,10 +13,10 @@ import org.mockito.junit.jupiter.MockitoExtension
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
-class SentimentConditionsTests {
+class BaseSentimentConditionsTests {
 
-    private var aaplDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "aapl_data_2019.json").read()
-    private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").read()
+    private var aaplDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "aapl_data_2019.json").readJSON()
+    private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").readJSON()
     private var aaplRSI: RSI = mock()
     private var tslaRSI: RSI = mock()
 
@@ -49,12 +49,12 @@ class SentimentConditionsTests {
             val tslaRSIVal = tslaRSI.rawIndicator.getValue(tslaRSI.values.barCount - (i + 1)).intValue()
             println(
                 "Is aaplRSI Overbought? val:${aaplRSIVal}:${
-                    aaplRSI.check { aaplRSI.conditions.isOverbought(aaplRSIVal) }.asBoolean
+                    aaplRSI.conditions.isOverbought(aaplRSIVal)
                 }"
             )
             println(
                 "Is tslaRSI Overbought? val:${tslaRSIVal}:${
-                    tslaRSI.check { tslaRSI.conditions.isOverbought(tslaRSIVal) }.asBoolean
+                    tslaRSI.conditions.isOverbought(tslaRSIVal)
                 }"
             )
         }
@@ -65,16 +65,9 @@ class SentimentConditionsTests {
         for (i in 0 until 100) {
             val aaplRSIVal = aaplRSI.rawIndicator.getValue(aaplRSI.values.barCount - (i + 1)).intValue()
             val tslaRSIVal = tslaRSI.rawIndicator.getValue(tslaRSI.values.barCount - (i + 1)).intValue()
-            println(
-                "Is aaplRSI Overbought? val:${aaplRSIVal}:${
-                    aaplRSI.check { aaplRSI.conditions.isOversold(aaplRSIVal) }.asBoolean
-                }"
-            )
-            println(
-                "Is tslaRSI Overbought? val:${tslaRSIVal}:${
-                    tslaRSI.check { tslaRSI.conditions.isOversold(tslaRSIVal) }.asBoolean
-                }"
-            )
+
+            println("Is aaplRSI Oversold? val:${aaplRSIVal}:${aaplRSI.conditions.isOversold(aaplRSIVal)}")
+            println("Is tslaRSI Oversold? val:${tslaRSIVal}:${tslaRSI.conditions.isOversold(tslaRSIVal)}")
         }
     }
 
@@ -85,12 +78,12 @@ class SentimentConditionsTests {
             val tslaRSIVal = tslaRSI.rawIndicator.getValue(tslaRSI.values.barCount - (i + 1)).intValue()
             println(
                 "Is aaplRSI overThreshold? val:${aaplRSIVal}:${
-                    aaplRSI.check { aaplRSI.conditions.isOverThreshold(aaplRSIVal) }.asBoolean
+                    aaplRSI.conditions.isOverThreshold(aaplRSIVal)
                 }"
             )
             println(
                 "Is tslaRSI overThreshold? val:${tslaRSIVal}:${
-                    tslaRSI.check { tslaRSI.conditions.isOverThreshold(tslaRSIVal) }.asBoolean
+                    tslaRSI.conditions.isOverThreshold(tslaRSIVal)
                 }"
             )
         }

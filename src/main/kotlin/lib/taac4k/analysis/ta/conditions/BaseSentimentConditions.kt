@@ -3,6 +3,7 @@ package lib.taac4k.analysis.ta.conditions
 import lib.taac4k.markets.data.MarketData
 import lib.taac4k.markets.data.MarketDataValuesProvider
 
+
 /**
  * Checks for conditions like overBought, overSold and overThreshold
  */

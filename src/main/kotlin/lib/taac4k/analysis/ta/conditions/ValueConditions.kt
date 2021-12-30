@@ -31,8 +31,6 @@ interface ValueConditions : ConditionsSupplier {
 
     ): Boolean
 
-
-
     fun isRising(
 
         leftBarIndex: Int = values.barCount - 2,

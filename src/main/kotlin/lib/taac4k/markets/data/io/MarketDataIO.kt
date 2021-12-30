@@ -28,14 +28,13 @@ open class MarketDataIO(
             if (jsonFileName !== null) jsonFileName
             else "market_data_${UUID.randomUUID()}.json"
 
-
     override fun toBarSeries(name: String): BarSeries = BaseBarSeriesFactory()
         .fromJSON(getJSONResourceAsString(getJSONResourcePath(jsonFileName!!)), name)
 
-    override fun read(): MutableList<MarketData> = BaseMarketDataFactory()
+    override fun readJSON(): MutableList<MarketData> = BaseMarketDataFactory()
         .fromJSON(getJSONResourceAsString(getJSONResourcePath(jsonFileName!!)))
 
-    override fun write(inMarketDataList: MutableList<MarketData>?): Boolean =
+    override fun writeJSON(inMarketDataList: MutableList<MarketData>?): Boolean =
         getFile().writer(Charsets.UTF_8).use {
             it.write(JSONArray(inMarketDataList ?: marketDataList).toString())
             it.flush()

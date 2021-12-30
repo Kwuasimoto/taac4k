@@ -38,18 +38,19 @@ open class BasePositionalConditions(
         comparableOHLCV: OHLCV,
         ohlcv: OHLCV,
     ): Boolean {
+        // If initial check shows price is already over comparableList value at comparableValueIndex, return false
         if (isOver(comparableList, comparableValueIndex, startValueIndex, comparableOHLCV, ohlcv))
             return cache.boolCache
 
-        for (i in 1 until marketDataMutableList.size){
-            if (cache.boolCache) break
+        //
+        for (i in 1 until marketDataMutableList.size) {
+            if (cache.boolCache || i + startValueIndex == marketDataMutableList.size) break
             if (isOver(comparableList, comparableValueIndex, startValueIndex + i, comparableOHLCV, ohlcv))
                 cache.boolCache = true
         }
 
         return cache.reset()
     }
-
 
     override fun crossUnder(
         comparableList: MutableList<MarketData>,
@@ -59,17 +60,15 @@ open class BasePositionalConditions(
         ohlcv: OHLCV
 
     ): Boolean {
-
         // Check if value is above or below target on first iteration, return false if so,
         if (isUnder(comparableList, comparableValueIndex, startValueIndex, comparableOHLCV, ohlcv))
             return cache.boolCache
 
         for (i in 1 until marketDataMutableList.size){
-            if (cache.boolCache) break
+            if (cache.boolCache || i + startValueIndex == marketDataMutableList.size) break
             if (isUnder(comparableList, comparableValueIndex, startValueIndex + i, comparableOHLCV, ohlcv))
                 cache.boolCache = true
         }
-
 
         return cache.reset()
     }

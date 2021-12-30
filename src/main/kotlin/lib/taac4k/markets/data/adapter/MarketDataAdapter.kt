@@ -8,18 +8,23 @@ import org.ta4j.core.BarSeries
 import org.ta4j.core.BaseBarSeries
 
 /**
- * 2-way adapter
+ * 2-way adapter for converting Provider data to Analysis data
+ * @version 0.0.1
  */
 interface MarketDataAdapter : MarketDataMutableListSupplier {
 
     /**
-     * Individual technical analysis lib conversions
+     * Convert a [MutableList]<[MarketData]> to a [BarSeries]
      */
     fun toBarSeries(from: MutableList<MarketData>, name: String = "Lunos"): BarSeries = BaseBarSeries()
 
     /**
-     * toMarketData Overloads
+     * Convert a [BarSeries] to a [MutableList]<[MarketData]>
      */
     fun convert(from: BarSeries): MutableList<MarketData> = newList
+
+    /**
+     * Convert [AggregatesDTO] from polygon to a [MutableList]<[MarketData]>
+     */
     fun convert(from: AggregatesDTO, params: AggregatesParameters): MutableList<MarketData> = newList
 }

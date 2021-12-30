@@ -33,8 +33,6 @@ interface MarketDataProvider {
         toDate: String = SimpleDateFormat("yyyy-MM-dd").format(Date()),
         unadjusted: Boolean = true,
         limit: Long = 5000,
-        // Providing polygonClient to polygonBarBuilder delegates hidden call to
-        // Polygon bar builder
         adapter: MarketDataAdapter = this.adapter
     ): MutableList<MarketData>
 }

@@ -10,4 +10,4 @@ import org.mockito.junit.jupiter.MockitoExtension
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
-class ComplexConditionsTests
+class BaseComplexConditionsTests

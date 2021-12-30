@@ -80,7 +80,7 @@ internal class PolygonDataProviderTests {
 
     @Test
     fun convertMarketListToBarSeries() {
-        val marketDataList = appleDataIO.read()
+        val marketDataList = appleDataIO.readJSON()
         val barSeries = adapter.toBarSeries(marketDataList)
 
         assertEquals(5000, barSeries.barCount)

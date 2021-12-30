@@ -51,10 +51,10 @@ to check the result of condition functions.
  * Compare data against itself.
  */
 // Check if the immediate candles are rising.
-aaplClose.check { aaplClose.conditions.isRising() }
+aaplClose.conditions.isRising()
 
 // Check if x number of candles in a range are rising.
-aaplClose.check { aaplClose.conditions.isRising(leftBarIndex = appleDataList.size - 5) }
+aaplClose.conditions.isRising(leftBarIndex = appleDataList.size - 5)
 
 // ---------------------------------------------------------------------------------------
 
@@ -70,9 +70,7 @@ val builder: MarketDataBuilder = BaseMarketDataBuilder()
 for (i in 0 until 100)
     fakeDataList.add(builder.close(303.24).build())
 
-aaplClose.check { 
-    aaplClose.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9)
-}
+aaplClose.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9)
 ```
 
 

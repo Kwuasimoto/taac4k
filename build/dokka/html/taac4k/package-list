@@ -15,11 +15,6 @@ $dokka.location:lib.taac4k.analysis.ta.conditions.cache/ConditionsCache///Pointi
 $dokka.location:lib.taac4k.analysis.ta.conditions.cache/ConditionsCache/barsLeftCache/#/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.cache/-conditions-cache/bars-left-cache.html
 $dokka.location:lib.taac4k.analysis.ta.conditions.cache/ConditionsCache/boolCache/#/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.cache/-conditions-cache/bool-cache.html
 $dokka.location:lib.taac4k.analysis.ta.conditions.cache/ConditionsCache/reset/#/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.cache/-conditions-cache/reset.html
-$dokka.location:lib.taac4k.analysis.ta.conditions.executor////PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.executor/index.html
-$dokka.location:lib.taac4k.analysis.ta.conditions.executor/ConditionsExecutor///PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.executor/-conditions-executor/index.html
-$dokka.location:lib.taac4k.analysis.ta.conditions.executor/ConditionsExecutor/check/#kotlin.Function0[kotlin.Boolean]/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.executor/-conditions-executor/check.html
-$dokka.location:lib.taac4k.analysis.ta.conditions.executor/ZonedConditionsExecutor///PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.executor/-zoned-conditions-executor/index.html
-$dokka.location:lib.taac4k.analysis.ta.conditions.executor/ZonedConditionsExecutor/checkZoned/#kotlin.Function0[kotlin.Boolean]/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions.executor/-zoned-conditions-executor/check-zoned.html
 $dokka.location:lib.taac4k.analysis.ta.conditions////PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions/index.html
 $dokka.location:lib.taac4k.analysis.ta.conditions/BaseComplexConditions///PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions/-base-complex-conditions/index.html
 $dokka.location:lib.taac4k.analysis.ta.conditions/BaseComplexConditions/BaseComplexConditions/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]#lib.taac4k.markets.data.MarketDataValuesProvider/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.conditions/-base-complex-conditions/-base-complex-conditions.html
@@ -292,17 +287,17 @@ $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/getFile/#/PointingToDecl
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/getFilePath/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/get-file-path.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/jsonFileName/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/json-file-name.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/marketDataList/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/market-data-list.html
-$dokka.location:lib.taac4k.markets.data.io/MarketDataIO/read/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/read.html
+$dokka.location:lib.taac4k.markets.data.io/MarketDataIO/readJSON/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/read-j-s-o-n.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/testResourcePath/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/test-resource-path.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/toBarSeries/#kotlin.String/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/to-bar-series.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/useTestResources/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/use-test-resources.html
-$dokka.location:lib.taac4k.markets.data.io/MarketDataIO/write/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]?/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/write.html
+$dokka.location:lib.taac4k.markets.data.io/MarketDataIO/writeJSON/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]?/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/write-j-s-o-n.html
 $dokka.location:lib.taac4k.markets.data.io/ResourceProvider///PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/index.html
 $dokka.location:lib.taac4k.markets.data.io/ResourceProvider/getFile/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/get-file.html
 $dokka.location:lib.taac4k.markets.data.io/ResourceProvider/getFilePath/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/get-file-path.html
-$dokka.location:lib.taac4k.markets.data.io/ResourceProvider/read/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/read.html
+$dokka.location:lib.taac4k.markets.data.io/ResourceProvider/readJSON/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/read-j-s-o-n.html
 $dokka.location:lib.taac4k.markets.data.io/ResourceProvider/toBarSeries/#kotlin.String/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/to-bar-series.html
-$dokka.location:lib.taac4k.markets.data.io/ResourceProvider/write/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]?/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/write.html
+$dokka.location:lib.taac4k.markets.data.io/ResourceProvider/writeJSON/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]?/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-provider/write-j-s-o-n.html
 $dokka.location:lib.taac4k.markets.data.io/ResourceSupplier///PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-supplier/index.html
 $dokka.location:lib.taac4k.markets.data.io/ResourceSupplier/getJSONResourceAsString/#kotlin.String/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-supplier/get-j-s-o-n-resource-as-string.html
 $dokka.location:lib.taac4k.markets.data.io/ResourceSupplier/getJSONResourcePath/#kotlin.String/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-resource-supplier/get-j-s-o-n-resource-path.html
@@ -370,7 +365,6 @@ lib.taac4k.analysis.ta
 lib.taac4k.analysis.ta.alerts
 lib.taac4k.analysis.ta.conditions
 lib.taac4k.analysis.ta.conditions.cache
-lib.taac4k.analysis.ta.conditions.executor
 lib.taac4k.analysis.ta.enums
 lib.taac4k.analysis.ta.ta4j
 lib.taac4k.analysis.ta.ta4j.indicators

@@ -67,9 +67,10 @@ aaplClose.check { aaplClose.conditions.isRising(leftBarIndex = appleDataList.siz
 // Create a line to cross 
 // (Could be any list of values, all searches default to the close value of a bar of data)
 val fakeDataList: MutableList<MarketData> = mutableListOf()
+val builder: MarketDataBuilder = BaseMarketDataBuilder()
 
 for (i in 0 until 100)
-    fakeDataList.add(BaseMarketDataFactory().builder.close(303.24).build())
+    fakeDataList.add(builder.close(303.24).build())
 
 aaplClose.check { 
     aaplClose.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9)

@@ -3,7 +3,7 @@ package lib.taac4k.analysis.ta.conditions
 import com.nhaarman.mockitokotlin2.mock
 import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
 import lib.taac4k.markets.data.MarketData
-import lib.taac4k.markets.data.factory.BaseMarketDataFactory
+import lib.taac4k.markets.data.factory.BaseMarketDataBuilder
 import lib.taac4k.markets.data.io.MarketDataIO
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
@@ -48,9 +48,11 @@ class PositionalConditionsTests {
      */
     @Test
     fun crossOverOtherDataWithIndex() {
+        val builder = BaseMarketDataBuilder()
+
         // Create a line to cross
         for (i in 0 until 100)
-            fakeDataList.add(BaseMarketDataFactory().builder.close(494.99).build())
+            fakeDataList.add(builder.close(494.99).build())
 
         // Bar is not above target
         Assertions.assertEquals(
@@ -75,8 +77,10 @@ class PositionalConditionsTests {
     @Test
     fun crossUnderOtherData() {
         // Create a line to cross
+        val builder = BaseMarketDataBuilder()
+
         for (i in 0 until 100)
-            fakeDataList.add(BaseMarketDataFactory().builder.close(303.24).build())
+            fakeDataList.add(builder.close(303.24).build())
 
         // Bar is not above target
         Assertions.assertEquals(

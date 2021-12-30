@@ -22,25 +22,30 @@ Bitcoin Wallet: ...
 ### Basic Usage
 
 
-
+1. Instantiate a data provider to fetch a MutableList of MarketData
 ```kotlin
-// NOTE: Apple stock data is fetched by default if the ticker is not overriden in the constructor.
 // PolygonDataProvider() OR Polygon()
+// NOTE: Apple stock data is fetched by default 
+// if the ticker is not overriden in the constructor.
 
 // instantiate a provider
 val polygonDataProvider: PolygonDataProvider = PolygonDataProvider()
 
-// get data prepared for a technical analysis library.
-val aaplMarketData: MutableList<MarketData> = polygonDataProvider.getAggregates(1, "minute", "2019-01-01")
+// get data prepared for conditions.
+val aaplMarketData: MutableList<MarketData> = 
+    polygonDataProvider.getAggregates(1, "minute", "2019-01-01")
 ```
 
 2. Create a ConditionalIndicator with the fetched data.<br>
+
 ```kotlin
 // RSI() or Close()
 val aaplClose: Close = Close(aaplDataList)
 ```
 
-3. Use the check(): BooleanSupplier lambda to check the result of condition functions.
+3. Use the check(): BooleanSupplier lambda <br>
+to check the result of condition functions.
+
 ```kotlin
 // Better Examples coming soon, check tests for most stuff.
 
@@ -66,7 +71,9 @@ val fakeDataList: MutableList<MarketData> = mutableListOf()
 for (i in 0 until 100)
     fakeDataList.add(BaseMarketDataFactory().builder.close(303.24).build())
 
-aaplClose.check { aaplClose.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9) }
+aaplClose.check { 
+    aaplClose.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9)
+}
 ```
 
 

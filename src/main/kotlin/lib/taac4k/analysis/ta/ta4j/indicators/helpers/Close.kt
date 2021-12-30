@@ -10,11 +10,12 @@ import lib.taac4k.markets.data.adapter.BaseMarketDataAdapter
 import lib.taac4k.markets.data.adapter.MarketDataAdapter
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 
-
 /**
- * All Indicators extend fooIndicator which implements Indicator<fooIndicator>
+ * @param marketDataList The MarketDataList to be associated with this [ConditionalIndicator]
+ * @param adapter helper variable for converting [MarketData]
+ * @param rawIndicator raw [TA4J] indicator
+ * @param conditions
  */
-
 open class Close(
 
     val marketDataList: MutableList<MarketData>,

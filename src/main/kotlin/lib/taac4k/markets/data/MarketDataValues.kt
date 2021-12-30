@@ -3,8 +3,7 @@ package lib.taac4k.markets.data
 import lib.taac4k.analysis.ta.enums.OHLCV
 
 class MarketDataValues(
-    override val marketDataList: MutableList<MarketData>
-
+    override val marketDataList: MutableList<MarketData>,
 ) : MarketDataValuesProvider {
 
     override fun beginTime(barIndex: Int): Long = marketDataList[barIndex].beginTime

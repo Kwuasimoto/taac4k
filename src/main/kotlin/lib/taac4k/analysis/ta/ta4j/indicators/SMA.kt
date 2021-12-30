@@ -10,12 +10,12 @@ import org.ta4j.core.indicators.SMAIndicator
 
 open class SMA(
     open val close: Close,
-    open val length: Int = 13,
+    open val smaLength: Int = 13,
 
     override val adapter: MarketDataAdapter = close.adapter,
     override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),
 
-    override val rawIndicator: SMAIndicator = SMAIndicator(close.rawIndicator, length),
+    override val rawIndicator: SMAIndicator = SMAIndicator(close.rawIndicator, smaLength),
     override val conditions: PositionalConditions = BasePositionalConditions(close.marketDataList, values)
 
 ) : ConditionalIndicator

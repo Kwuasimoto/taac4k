@@ -16,7 +16,7 @@ open class BaseMarketDataAdapter(
         marketDataFactory.fromBarSeries(from)
 
     override fun toBarSeries(from: MutableList<MarketData>, name: String): BarSeries =
-        barSeriesFactory.fromMarketDataList(from)
+        barSeriesFactory.fromMarketDataList(from, name)
 
     override fun convert(from: AggregatesDTO, params: AggregatesParameters): MutableList<MarketData> =
         marketDataFactory.fromAggregates(from, params)

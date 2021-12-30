@@ -6,6 +6,6 @@ import java.util.function.BooleanSupplier
  * for checking the functions of the conditions' property an IndicatorConditions object
  */
 @FunctionalInterface
-interface IndicatorConditionsExecutor {
+interface ConditionsExecutor {
     fun check(condition: () -> Boolean): BooleanSupplier = BooleanSupplier { condition ( ) }
 }

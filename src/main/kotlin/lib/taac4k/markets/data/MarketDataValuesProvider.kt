@@ -8,6 +8,7 @@ import lib.taac4k.analysis.ta.enums.OHLCV
  */
 interface MarketDataValuesProvider {
     val marketDataList: MutableList<MarketData>
+    val barCount: Int get() = marketDataList.size
 
     fun beginTime(barIndex: Int): Long
     fun endTime(barIndex: Int): Long

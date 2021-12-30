@@ -4,7 +4,15 @@ import lib.taac4k.analysis.ta.enums.OHLCV
 import java.time.ZonedDateTime
 
 /**
- * @MarketDataJSON
+ * ## MarketData
+ *
+ * @param ticker The ticker associated to this piece of market data
+ * @param ohlcv open, high, low, close, vwap, values
+ * @param volume amount of volume between [endTime] and [beginTime]
+ * @param endTime defaults to now()
+ * @param beginTime defaults to now() - 60000 (minute bars)
+ * @param timespan timespan of the bar, "minute" | "hour" | "day" | "week"
+ * @param multiplier [timespan]*[multiplier] where multiplier == 3 will result in 3 minute bars.
  */
 open class MarketData(
     /**

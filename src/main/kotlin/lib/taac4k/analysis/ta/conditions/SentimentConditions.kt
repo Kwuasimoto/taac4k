@@ -4,13 +4,13 @@ import lib.taac4k.markets.data.MarketData
 
 interface SentimentConditions : PositionalConditions {
 
-    val overBought: Int get() = 30
-    val overSold: Int get() = 70
+    val overbought: Int get() = 30
+    val oversold: Int get() = 70
     val threshold: Int get() = 50
 
-    fun isOverBought(index: Int): Boolean
-    fun isOverSold(index: Int): Boolean
-    fun overThreshold(index: Int): Boolean
+    fun isOverbought(rsiValue: Int): Boolean
+    fun isOversold(rsiValue: Int): Boolean
+    fun isOverThreshold(rsiValue: Int): Boolean
     fun sentimentCrossOver(
         positionDataList: MutableList<MarketData>,
         negativeDataList: MutableList<MarketData>

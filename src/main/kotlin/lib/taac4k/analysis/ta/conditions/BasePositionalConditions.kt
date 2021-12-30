@@ -16,10 +16,11 @@ open class BasePositionalConditions(
         comparableOHLCV: OHLCV,
         ohlcv: OHLCV
     ): Boolean =
-        if (comparableValueIndex < 0 || startValueIndex < 0) throw IllegalArgumentException("comparableIndex or barIndex cannot be less than 0!")
+        if (comparableValueIndex < 0 || startValueIndex < 0)
+            throw IllegalArgumentException("comparableIndex or barIndex cannot be less than 0!")
         else
             values.barValue(startValueIndex, ohlcv) >
-                    values.barValue(comparableList, comparableValueIndex, comparableOHLCV)
+            values.barValue(comparableList, comparableValueIndex, comparableOHLCV)
 
     override fun isUnder(
         comparableList: MutableList<MarketData>,
@@ -40,10 +41,11 @@ open class BasePositionalConditions(
         if (isOver(comparableList, comparableValueIndex, startValueIndex, comparableOHLCV, ohlcv))
             return cache.boolCache
 
-        for (i in 1 until marketDataMutableList.size)
+        for (i in 1 until marketDataMutableList.size){
             if (cache.boolCache) break
-            else if (isOver(comparableList, comparableValueIndex, startValueIndex + i, comparableOHLCV, ohlcv))
+            if (isOver(comparableList, comparableValueIndex, startValueIndex + i, comparableOHLCV, ohlcv))
                 cache.boolCache = true
+        }
 
         return cache.reset()
     }
@@ -62,10 +64,12 @@ open class BasePositionalConditions(
         if (isUnder(comparableList, comparableValueIndex, startValueIndex, comparableOHLCV, ohlcv))
             return cache.boolCache
 
-        for (i in 1 until marketDataMutableList.size)
+        for (i in 1 until marketDataMutableList.size){
             if (cache.boolCache) break
-            else if (isUnder(comparableList, comparableValueIndex, startValueIndex + i, comparableOHLCV, ohlcv))
+            if (isUnder(comparableList, comparableValueIndex, startValueIndex + i, comparableOHLCV, ohlcv))
                 cache.boolCache = true
+        }
+
 
         return cache.reset()
     }

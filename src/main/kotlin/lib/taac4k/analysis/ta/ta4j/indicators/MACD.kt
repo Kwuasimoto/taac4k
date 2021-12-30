@@ -11,10 +11,8 @@ import org.ta4j.core.indicators.MACDIndicator
 open class MACD(
 
     open val close: Close,
-
     open val shortBarCount: Int = 12,
     open val longBarCount: Int = 26,
-
 
     override val adapter: MarketDataAdapter = close.adapter,
     override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),

@@ -10,29 +10,33 @@ open class BaseSentimentConditions(
     override val marketDataMutableList: MutableList<MarketData>,
     override val values: MarketDataValuesProvider,
 
-    override val overBought: Int,
-    override val overSold: Int,
-    override val threshold: Int
+    override val overbought: Int,
+    override val oversold: Int,
+    override val threshold: Int,
 
 ) : BasePositionalConditions(marketDataMutableList, values), SentimentConditions {
 
-    /**
-     * Checks if this conditions marketDataList objects value at [index] is over
-     * the [overBought] threshold
-     */
-    override fun isOverBought(index: Int): Boolean { TODO() }
+
 
     /**
-     * Checks if this conditions marketDataList objects value at [index] is under
-     * the [overSold] threshold
-     */
-    override fun isOverSold(index: Int): Boolean { TODO() }
-
-    /**
-     * Checks if this conditions marketDataList objects value at [index] is over
+     * Checks if this conditions marketDataList objects value at [rsiValue] is over
      * the [threshold]
      */
-    override fun overThreshold(index: Int): Boolean { TODO() }
+    override fun isOverThreshold(rsiValue: Int): Boolean = rsiValue > threshold
+
+
+    /**
+     * Checks if this conditions marketDataList objects value at [rsiValue] is over
+     * the [overbought] threshold
+     */
+    override fun isOverbought(rsiValue: Int): Boolean = rsiValue <= overbought
+
+    /**
+     * Checks if this conditions marketDataList objects value at [rsiValue] is under
+     * the [oversold] threshold
+     */
+    override fun isOversold(rsiValue: Int): Boolean = rsiValue >= oversold
+
 
     override fun sentimentCrossOver(
         positionDataList: MutableList<MarketData>,

@@ -9,12 +9,12 @@ import org.ta4j.core.indicators.RSIIndicator
 
 open class RSI(
     open val close: Close,
-    open val barCount: Int = 12,
+    open val rsiLength: Int = 12,
 
     override val adapter: MarketDataAdapter = close.adapter,
     override val values: MarketDataValuesProvider = MarketDataValues(close.marketDataList),
 
-    override val rawIndicator: RSIIndicator = RSIIndicator(close.rawIndicator, barCount),
+    override val rawIndicator: RSIIndicator = RSIIndicator(close.rawIndicator, rsiLength),
     override val conditions: BaseSentimentConditions = BaseSentimentConditions(
         close.marketDataList,
         values, 28, 72, 49

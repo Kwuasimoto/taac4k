@@ -1,4 +1,4 @@
-package lib.taac4k.analysis.ta
+package lib.taac4k.analysis.ta.conditions
 
 import com.nhaarman.mockitokotlin2.mock
 import lib.taac4k.analysis.ta.ta4j.indicators.helpers.Close
@@ -20,8 +20,8 @@ class PositionalConditionsTests {
     private var appleDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "apple_data_2019.json").read()
     private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").read()
     private var fakeDataList: MutableList<MarketData> = mutableListOf()
-    private var appleCloseIndicator: Close = mock()
-    private var tslaCloseIndicator: Close = mock()
+    private var aaplClose: Close = mock()
+    private var tslaClose: Close = mock()
 
     @BeforeAll
     fun setUp() {
@@ -29,22 +29,17 @@ class PositionalConditionsTests {
          * How to Use the taac4k Conditions Module.
          * 1. Prep Data,
          * 2. Use factory to create an indicator
-         * 3. Check Conditions,
-         * 4. Success!
+         * 3. Check Conditions
          */
 
         /**
-         * 2. Use [MutableList] of [MarketData] with [IndicatorFactory] functions to make [Close]
+         * 2. Use [MutableList] of [MarketData]
          */
-        appleCloseIndicator = IndicatorFactory().close(appleDataList)
-        tslaCloseIndicator = IndicatorFactory().close(tslaDataList)
+        aaplClose = Close(appleDataList)
+        tslaClose = Close(tslaDataList)
 
         /**
          * 3. TESTS
-         */
-
-        /**
-         * 4. SOON
          */
     }
 
@@ -60,16 +55,16 @@ class PositionalConditionsTests {
         // Bar is not above target
         Assertions.assertEquals(
             true,
-            tslaCloseIndicator.check {
-                tslaCloseIndicator.conditions.crossOver(fakeDataList, startValueIndex = tslaDataList.size - 21)
+            tslaClose.check {
+                tslaClose.conditions.crossOver(fakeDataList, startValueIndex = tslaDataList.size - 21)
             }.asBoolean
         )
 
         // Bar is already above target
         Assertions.assertEquals(
             false,
-            tslaCloseIndicator.check {
-                tslaCloseIndicator.conditions.crossOver(fakeDataList, startValueIndex = tslaDataList.size - 15)
+            tslaClose.check {
+                tslaClose.conditions.crossOver(fakeDataList, startValueIndex = tslaDataList.size - 15)
             }.asBoolean
         )
 
@@ -86,16 +81,16 @@ class PositionalConditionsTests {
         // Bar is not above target
         Assertions.assertEquals(
             true,
-            appleCloseIndicator.check {
-                appleCloseIndicator.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9)
+            aaplClose.check {
+                aaplClose.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 9)
             }.asBoolean
         )
 
         // Bar is already under comparable value
         Assertions.assertEquals(
             false,
-            appleCloseIndicator.check {
-                appleCloseIndicator.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 2)
+            aaplClose.check {
+                aaplClose.conditions.crossUnder(fakeDataList, startValueIndex = appleDataList.size - 2)
             }.asBoolean
         )
 
@@ -106,11 +101,15 @@ class PositionalConditionsTests {
     fun isOverOtherData() {
         Assertions.assertEquals(
             true,
-            tslaCloseIndicator.check { tslaCloseIndicator.conditions.isOver(appleDataList) }.asBoolean
+            tslaClose.check {
+                tslaClose.conditions.isOver(appleDataList)
+            }.asBoolean
         )
         Assertions.assertEquals(
             false,
-            tslaCloseIndicator.check { appleCloseIndicator.conditions.isOver(tslaDataList) }.asBoolean
+            tslaClose.check {
+                aaplClose.conditions.isOver(tslaDataList)
+            }.asBoolean
         )
     }
 
@@ -119,8 +118,8 @@ class PositionalConditionsTests {
     fun isOverOtherDataWithIndex() {
         Assertions.assertEquals(
             true,
-            appleCloseIndicator.check {
-                appleCloseIndicator.conditions.isOver(
+            aaplClose.check {
+                aaplClose.conditions.isOver(
                     appleDataList,
                     comparableValueIndex = appleDataList.size - 10
                 )
@@ -132,12 +131,15 @@ class PositionalConditionsTests {
     fun isUnderOtherData() {
         Assertions.assertEquals(
             false,
-            tslaCloseIndicator.check { tslaCloseIndicator.conditions.isUnder(appleDataList) }.asBoolean
+            tslaClose.check {
+                tslaClose.conditions.isUnder(appleDataList)
+            }.asBoolean
         )
         Assertions.assertEquals(
             true,
-            tslaCloseIndicator.check { appleCloseIndicator.conditions.isUnder(tslaDataList) }.asBoolean
+            tslaClose.check {
+                aaplClose.conditions.isUnder(tslaDataList)
+            }.asBoolean
         )
     }
-
 }

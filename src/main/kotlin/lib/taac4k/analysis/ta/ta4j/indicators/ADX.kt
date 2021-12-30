@@ -24,7 +24,7 @@ open class ADX(
     ),
     override val conditions: SentimentConditions = BaseSentimentConditions(
         close.marketDataList,
-        values, overBought = 55, overSold = 55, threshold = 21
+        values, overbought = 55, oversold = 55, threshold = 21
     )
 
 ) : ConditionalIndicator

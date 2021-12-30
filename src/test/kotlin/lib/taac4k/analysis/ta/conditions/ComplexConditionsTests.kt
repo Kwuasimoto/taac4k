@@ -1,4 +1,4 @@
-package lib.taac4k.analysis.ta
+package lib.taac4k.analysis.ta.conditions
 
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith

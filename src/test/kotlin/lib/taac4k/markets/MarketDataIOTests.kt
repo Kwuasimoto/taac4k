@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 internal class MarketDataIOTests {
 
-    private val jsonFileName: String = "apple_data_2019.json"
+    private val jsonFileName: String = "aapl_data_2019.json"
     private var mockMarketData: MutableList<MarketData> = mutableListOf()
     private val mockProvider: PolygonDataProvider = mock()
     private val mockParameters: AggregatesParameters = AggregatesParameters(

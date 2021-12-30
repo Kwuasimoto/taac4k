@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 class PositionalConditionsTests {
 
-    private var appleDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "apple_data_2019.json").read()
+    private var appleDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "aapl_data_2019.json").read()
     private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").read()
     private var fakeDataList: MutableList<MarketData> = mutableListOf()
     private var aaplClose: Close = mock()

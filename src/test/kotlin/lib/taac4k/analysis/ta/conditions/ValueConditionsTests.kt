@@ -26,7 +26,7 @@ internal class ValueConditionsTests {
      */
 
     private val mockIndicatorFactory: IndicatorFactory = mock(defaultAnswer = Mockito.RETURNS_DEEP_STUBS)
-    private var appleDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "apple_data_2019.json").read()
+    private var appleDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "aapl_data_2019.json").read()
     private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").read()
     private var aaplClose: Close = mock()
     private var tslaClose: Close = mock()

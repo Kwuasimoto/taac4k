@@ -1,4 +1,5 @@
 plugins {
+    id 'org.jetbrains.dokka' version '1.6.0'
     id 'org.jetbrains.kotlin.jvm' version '1.6.0'
     id 'java'
 }
@@ -8,28 +9,30 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    mavenCentral()
-
     maven { url "https://jitpack.io" }
 }
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
+    implementation 'org.jetbrains.dokka:dokka-gradle-plugin:1.6.0'
+    implementation 'org.json:json:20210307'
     implementation 'org.ta4j:ta4j-core:0.14'
     implementation 'com.github.polygon-io:client-jvm:v2.0.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-    implementation 'org.json:json:20210307'
-    implementation "io.ktor:ktor-client-core:1.6.7"
-    implementation "io.ktor:ktor-client-cio:1.6.7"
+    implementation 'io.ktor:ktor-client-core:1.6.7'
+    implementation 'io.ktor:ktor-client-cio:1.6.7'
 
-
-    testImplementation  'org.junit.jupiter:junit-jupiter-api:5.7.2'
     testRuntimeOnly     'org.junit.jupiter:junit-jupiter-engine:5.7.2'
-    testImplementation  'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+    testImplementation  'org.junit.jupiter:junit-jupiter-api:5.7.2'
     testImplementation  'org.mockito:mockito-junit-jupiter:2.28.2'
     testImplementation  'org.mockito:mockito-inline:3.12.4'
+    testImplementation  'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+tasks.dokkaHtml.configure {
+//    outputDirectory.set(buildDir.resolve("dokka"))
 }

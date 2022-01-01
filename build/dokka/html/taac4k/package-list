@@ -210,14 +210,8 @@ $dokka.location:lib.taac4k.analysis.ta.ta4j////PointingToDeclaration/taac4k/lib
 $dokka.location:lib.taac4k.analysis.ta.ta4j/BaseBarSeriesFactory///PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.ta4j/-base-bar-series-factory/index.html
 $dokka.location:lib.taac4k.analysis.ta.ta4j/BaseBarSeriesFactory/BaseBarSeriesFactory/#lib.taac4k.markets.data.factory.MarketDateParser/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.ta4j/-base-bar-series-factory/-base-bar-series-factory.html
 $dokka.location:lib.taac4k.analysis.ta.ta4j/BaseBarSeriesFactory/dateParser/#/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.ta4j/-base-bar-series-factory/date-parser.html
-$dokka.location:lib.taac4k.analysis.ta.ta4j/BaseBarSeriesFactory/fromJSON/#kotlin.String#kotlin.String#org.ta4j.core.BaseBarSeriesBuilder?/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.ta4j/-base-bar-series-factory/from-j-s-o-n.html
+$dokka.location:lib.taac4k.analysis.ta.ta4j/BaseBarSeriesFactory/fromJSON/#kotlin.String#kotlin.String/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.ta4j/-base-bar-series-factory/from-j-s-o-n.html
 $dokka.location:lib.taac4k.analysis.ta.ta4j/BaseBarSeriesFactory/fromMarketDataList/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]#kotlin.String/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta.ta4j/-base-bar-series-factory/from-market-data-list.html
-$dokka.location:lib.taac4k.analysis.ta////PointingToDeclaration/taac4k/lib.taac4k.analysis.ta/index.html
-$dokka.location:lib.taac4k.analysis.ta/ConditionalIndicatorFactory///PointingToDeclaration/taac4k/lib.taac4k.analysis.ta/-conditional-indicator-factory/index.html
-$dokka.location:lib.taac4k.analysis.ta/ConditionalIndicatorFactory/close/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta/-conditional-indicator-factory/close.html
-$dokka.location:lib.taac4k.analysis.ta/IndicatorFactory///PointingToDeclaration/taac4k/lib.taac4k.analysis.ta/-indicator-factory/index.html
-$dokka.location:lib.taac4k.analysis.ta/IndicatorFactory/IndicatorFactory/#/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta/-indicator-factory/-indicator-factory.html
-$dokka.location:lib.taac4k.analysis.ta/IndicatorFactory/close/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]/PointingToDeclaration/taac4k/lib.taac4k.analysis.ta/-indicator-factory/close.html
 $dokka.location:lib.taac4k.experimental////PointingToDeclaration/taac4k/lib.taac4k.experimental/index.html
 $dokka.location:lib.taac4k.experimental//hasInterface/java.lang.Class[TypeParam(bounds=[kotlin.Any?])]#java.lang.Class[*]/PointingToDeclaration/taac4k/lib.taac4k.experimental/has-interface.html
 $dokka.location:lib.taac4k.markets.data.adapter////PointingToDeclaration/taac4k/lib.taac4k.markets.data.adapter/index.html
@@ -283,9 +277,9 @@ $dokka.location:lib.taac4k.markets.data.io////PointingToDeclaration/taac4k/lib.
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO///PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/index.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/MarketDataIO/#kotlin.collections.MutableList[lib.taac4k.markets.data.MarketData]#kotlin.String?#kotlin.String#kotlin.Boolean#kotlin.String/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/-market-data-i-o.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/basePath/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/base-path.html
+$dokka.location:lib.taac4k.markets.data.io/MarketDataIO/fileName/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/file-name.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/getFile/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/get-file.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/getFilePath/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/get-file-path.html
-$dokka.location:lib.taac4k.markets.data.io/MarketDataIO/jsonFileName/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/json-file-name.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/marketDataList/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/market-data-list.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/readJSON/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/read-j-s-o-n.html
 $dokka.location:lib.taac4k.markets.data.io/MarketDataIO/testResourcePath/#/PointingToDeclaration/taac4k/lib.taac4k.markets.data.io/-market-data-i-o/test-resource-path.html
@@ -361,7 +355,6 @@ $dokka.location:lib.taac4k.markets/Markets/polygon/#/PointingToDeclaration/taac
 $dokka.location:lib.taac4k.markets/Markets/ticker/#/PointingToDeclaration/taac4k/lib.taac4k.markets/-markets/ticker.html
 $dokka.location:lib.taac4k.markets/RestClientSupplier///PointingToDeclaration/taac4k/lib.taac4k.markets/-rest-client-supplier/index.html
 $dokka.location:lib.taac4k.markets/RestClientSupplier/rest/#/PointingToDeclaration/taac4k/lib.taac4k.markets/-rest-client-supplier/rest.html
-lib.taac4k.analysis.ta
 lib.taac4k.analysis.ta.alerts
 lib.taac4k.analysis.ta.conditions
 lib.taac4k.analysis.ta.conditions.cache

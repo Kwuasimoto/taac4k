@@ -14,7 +14,8 @@ Dokka docs: https://www.taac4k.org/<br>
 ---
 
 *Help motivate me, and allow me to integrate paid services and survive off of coffee*☕.<br>
-Bitcoin Wallet: ...
+Wallet Chain: BTC
+Bitcoin Wallet: 19PK3apvaQ54MP62nYULtYXH6SWenv81a9
 
 ---
 
@@ -41,8 +42,7 @@ val aaplMarketData: MutableList<MarketData> =
 val aaplClose: Close = Close(aaplDataList)
 ```
 
-3. Use the check(): BooleanSupplier lambda <br>
-to check the result of condition functions.
+3. Compare the booleans returned from conditions methods
 ```kotlin
 // Better Examples coming soon, check tests for most stuff.
 

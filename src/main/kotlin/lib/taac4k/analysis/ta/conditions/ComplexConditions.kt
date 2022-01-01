@@ -2,6 +2,10 @@ package lib.taac4k.analysis.ta.conditions
 
 import lib.taac4k.analysis.ta.enums.OHLCV
 
+/**
+ * ## ComplexConditions
+ * Not Implemented Yet
+ */
 interface ComplexConditions : ValueConditions {
 
     fun pivotUp(

@@ -5,10 +5,20 @@ import java.time.Duration
 import java.time.ZonedDateTime
 
 /**
- * I think kotlin allows default implementations of interfaces,
- * which only saves you from writing one class
+ * ## MarketDateParser Interface
+ * provides methods for finding [Date] values from [Long]'s and [TIMESPAN].
  */
 interface MarketDateParser {
+    /**
+     * ## toZonedDateTime
+     * @param millis millis values
+     * @return [ZonedDateTime]
+     */
     fun toZonedDateTime(millis: Long?): ZonedDateTime
+    /**
+     * ## toDuration
+     * @param timespan "minute" | "hour" | "day"
+     * @param multiplier number multiplier to find Duration {.ofDays(multiplier)}
+     */
     fun toDuration(timespan: TIMESPAN, multiplier: Long): Duration
 }

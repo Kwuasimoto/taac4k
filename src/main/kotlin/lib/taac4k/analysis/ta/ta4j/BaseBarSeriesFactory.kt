@@ -13,11 +13,20 @@ import org.ta4j.core.BaseBarSeriesBuilder
 import org.ta4j.core.num.DecimalNum
 
 /**
- * Uses Builder
+ * ## BaseBarSeriesFactory
+ * Class for providing oneshot methods for turning data from Type T to [BarSeries]
+ *
+ * @param dateParser [MarketDateParser]
  */
 open class BaseBarSeriesFactory(
     open val dateParser: MarketDateParser = BaseDateParser()
 ) {
+    /**
+     * ## fromMarketDataList
+     * @param marketDataList list of Market Data
+     * @param name name to give new BarSeries
+     * @return [BarSeries]
+     */
     open fun fromMarketDataList(marketDataList: MutableList<MarketData>, name: String = "Factory Default"): BarSeries =
         if (marketDataList.size <= 0) throw IllegalArgumentException("marketDataJSONList is empty!, cant adapt")
         else {
@@ -43,9 +52,14 @@ open class BaseBarSeriesFactory(
 
             barList
         }
-
-    open fun fromJSON(json: String, name: String = "JSON_DEFAULT", builder: BaseBarSeriesBuilder? = null): BarSeries {
-        val newSeries = builder?.build()
+    /**
+     * ## fromJSON
+     * @param json the json of [MutableList]<[MarketData]> to convert to [BarSeries]
+     * @param name name of the new BarSeries
+     * @return [BarSeries]
+     */
+    open fun fromJSON(json: String, name: String = "JSON_DEFAULT"): BarSeries {
+        val newSeries = BaseBarSeriesBuilder().build()
             ?: BaseBarSeriesBuilder().withName(name).withNumTypeOf(DecimalNum::class.java).build()
 
         for (jsonObject in JSONArray(json)) {

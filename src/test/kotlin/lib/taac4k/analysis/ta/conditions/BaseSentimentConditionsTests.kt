@@ -15,8 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 class BaseSentimentConditionsTests {
 
-    private var aaplDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "aapl_data_2019.json").readJSON()
-    private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").readJSON()
+    private var aaplDataList: MutableList<MarketData> = MarketDataIO(fileName = "aapl_data_2019.json").readJSON()
+    private var tslaDataList: MutableList<MarketData> = MarketDataIO(fileName = "tsla_data_2019.json").readJSON()
     private var aaplRSI: RSI = mock()
     private var tslaRSI: RSI = mock()
 

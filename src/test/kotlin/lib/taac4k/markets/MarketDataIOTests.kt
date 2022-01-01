@@ -48,13 +48,13 @@ internal class MarketDataIOTests {
 
     @Test
     fun read() {
-        mockMarketData = MarketDataIO(jsonFileName = jsonFileName).readJSON()
+        mockMarketData = MarketDataIO(fileName = jsonFileName).readJSON()
         assertEquals(5000, mockMarketData.size)
     }
 
 
     @Test
     fun readToBarSeries() {
-        assertEquals(5000, MarketDataIO(jsonFileName = jsonFileName).toBarSeries().barCount)
+        assertEquals(5000, MarketDataIO(fileName = jsonFileName).toBarSeries().barCount)
     }
 }

@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 internal class PolygonDataProviderTests {
 
-    private val appleDataIO = MarketDataIO(jsonFileName = "aapl_data_2019.json")
+    private val appleDataIO = MarketDataIO(fileName = "aapl_data_2019.json")
     private val adapter: MarketDataAdapter = BaseMarketDataAdapter()
     private val polygonDataProvider: PolygonDataProvider = PolygonDataProvider()
     private val aggregatesParameters: AggregatesParameters = AggregatesParameters(

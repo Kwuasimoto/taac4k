@@ -6,6 +6,10 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
+/**
+ * ## BaseDateParser
+ * @see [MarketDateParser]
+ */
 open class BaseDateParser: MarketDateParser {
     override fun toZonedDateTime(millis: Long?): ZonedDateTime {
         if(millis == null) throw IllegalArgumentException("millis null")

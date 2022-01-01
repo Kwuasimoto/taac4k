@@ -4,7 +4,6 @@ import lib.taac4k.analysis.ta.enums.OHLCV
 
 /**
  * ## MarketDataValues
- * Concrete Class that extends [MarketDataValuesProvider]
  *
  * Provides concrete functions for getting values from a [MutableList]<[MarketData]>
  *

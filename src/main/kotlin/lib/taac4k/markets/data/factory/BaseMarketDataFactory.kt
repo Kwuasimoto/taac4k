@@ -10,6 +10,10 @@ import org.json.JSONObject
 import org.ta4j.core.BarSeries
 import java.util.*
 
+/**
+ * ## BaseMarketDataFactory
+ * utilizes one shot methods to transcribe data from T to [MutableList]<[MarketData]>
+ */
 open class BaseMarketDataFactory(
     open val builder: MarketDataBuilder = BaseMarketDataBuilder()
 ) : MarketDataMutableListSupplier {

@@ -16,6 +16,8 @@ interface MarketDataProvider {
     val adapter: MarketDataAdapter
 
     /**
+     * Get AggregatesDTO to MutableList<MarketData>
+     *
      * [timespan] * [multiplier] == period for bars
      *
      * @param multiplier the number multiplier for [timespan]

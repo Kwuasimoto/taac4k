@@ -3,6 +3,12 @@ package lib.taac4k.markets.data.factory
 import lib.taac4k.markets.data.MarketData
 import java.time.ZonedDateTime
 
+/**
+ * ## MarketDataBuilder
+ *
+ * builds a piece of MarketData and returns it using the build method
+ * @see MarketData
+ */
 interface MarketDataBuilder {
     fun ticker(ticker: String): MarketDataBuilder
     fun open(open: Double): MarketDataBuilder

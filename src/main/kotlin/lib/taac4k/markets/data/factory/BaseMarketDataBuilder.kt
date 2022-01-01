@@ -4,7 +4,8 @@ import lib.taac4k.analysis.ta.enums.OHLCV
 import lib.taac4k.markets.data.MarketData
 
 /**
- * Needs Builder
+ * ## BaseMarketDataBuilder
+ * @see [MarketDataBuilder]
  */
 class BaseMarketDataBuilder(
     val date: MarketDateParser = BaseDateParser()

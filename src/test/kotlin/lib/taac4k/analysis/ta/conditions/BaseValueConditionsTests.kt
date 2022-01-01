@@ -22,8 +22,8 @@ internal class BaseValueConditionsTests {
     /**
      * - Market Data Raw
      */
-    private var appleDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "aapl_data_2019.json").readJSON()
-    private var tslaDataList: MutableList<MarketData> = MarketDataIO(jsonFileName = "tsla_data_2019.json").readJSON()
+    private var appleDataList: MutableList<MarketData> = MarketDataIO(fileName = "aapl_data_2019.json").readJSON()
+    private var tslaDataList: MutableList<MarketData> = MarketDataIO(fileName = "tsla_data_2019.json").readJSON()
     private var aaplClose: Close = mock()
     private var tslaClose: Close = mock()
 

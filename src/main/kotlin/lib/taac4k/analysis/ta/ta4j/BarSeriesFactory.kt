@@ -18,7 +18,7 @@ import org.ta4j.core.num.DecimalNum
  *
  * @param dateParser [MarketDateParser]
  */
-open class BaseBarSeriesFactory(
+open class BarSeriesFactory(
     open val dateParser: MarketDateParser = BaseDateParser()
 ) {
     /**

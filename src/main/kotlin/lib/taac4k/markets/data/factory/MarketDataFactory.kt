@@ -14,7 +14,7 @@ import java.util.*
  * ## BaseMarketDataFactory
  * utilizes one shot methods to transcribe data from T to [MutableList]<[MarketData]>
  */
-open class BaseMarketDataFactory(
+open class MarketDataFactory(
     open val builder: MarketDataBuilder = BaseMarketDataBuilder()
 ) : MarketDataMutableListSupplier {
 

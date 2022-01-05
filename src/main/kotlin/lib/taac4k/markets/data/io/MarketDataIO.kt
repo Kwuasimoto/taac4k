@@ -15,7 +15,7 @@ import java.util.*
  * @param fileName the name of the json file to write data to.
  * @param testResourcePath path to test resources
  * @param useTestResources doing testing? check this to true.
- * @param basePath the path from resources to your json data file (ex: src/test/resources/json.market_Data/
+ * @param basePath the full path from root to your folder containing resources to be read (ex: src/test/resources/json.market_Data/)
  */
 open class MarketDataIO(
     open val marketDataList: MutableList<MarketData> = mutableListOf(),

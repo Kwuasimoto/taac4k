@@ -13,7 +13,7 @@ Dokka docs: https://www.taac4k.org/<br>
 
 ---
 
-*Help motivate me, and allow me to integrate paid services and survive off of coffee*☕.<br>
+*Help motivate me, and allow me to survive off of coffee*☕.<br>
 Wallet Chain: BTC <br>
 Bitcoin Wallet: 19PK3apvaQ54MP62nYULtYXH6SWenv81a9
 
